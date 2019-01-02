@@ -13,7 +13,7 @@ class MenuViewController: UIViewController {
     let collectionView: ExerciseCollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.minimumInteritemSpacing = 10
+        layout.minimumInteritemSpacing = 12
         
         let cv = ExerciseCollectionView(frame: .zero, collectionViewLayout: layout)
         
@@ -24,6 +24,9 @@ class MenuViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         
+        view.addSubview(collectionView)
+        collectionView.anchor(top: nil, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, size: CGSize(width: 0, height: 300))
+        collectionView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         
     }
 

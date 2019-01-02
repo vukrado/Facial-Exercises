@@ -9,15 +9,6 @@
 import Foundation
 import UIKit
 
-
-func DegreesToRadians (value:CGFloat) -> CGFloat {
-    return value * .pi / 180.0
-}
-
-func RadiansToDegrees (value:CGFloat) -> CGFloat {
-    return value * 180.0 / .pi
-}
-
 extension UIView {
     
     func anchor(top: NSLayoutYAxisAnchor?, leading: NSLayoutXAxisAnchor?, bottom: NSLayoutYAxisAnchor?, trailing: NSLayoutXAxisAnchor?, padding: UIEdgeInsets = .zero, size: CGSize = .zero) {

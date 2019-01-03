@@ -52,6 +52,9 @@ class MenuViewController: UIViewController {
     }
     
     @objc private func handleStart() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let navVc = storyboard.instantiateViewController(withIdentifier: "Excercise") as! ExcerciseViewController
+        self.present(navVc, animated: true, completion: nil)
         print("Start")
     }
     

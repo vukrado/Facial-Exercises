@@ -62,6 +62,16 @@ class MenuViewController: UIViewController {
         return label
     }()
     
+    let difficultySegmentedControl: UISegmentedControl = {
+        let sc = UISegmentedControl(items: ["Easy", "Medium", "Hard"])
+        sc.selectedSegmentIndex = 0
+        sc.tintColor = UIColor.rgb(red: 67, green: 206, blue: 162)
+        sc.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white], for: .selected)
+        sc.setTitleTextAttributes([NSAttributedString.Key.font: Appearance.appFont(style: .body, size: 12)], for: .normal)
+        
+        return sc
+    }()
+    
     let startButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Start", for: .normal)
@@ -76,7 +86,7 @@ class MenuViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.setGradientBackground(colors: [UIColor.rgb(red: 166, green: 255, blue: 203).cgColor, UIColor.rgb(red: 18, green: 216, blue: 250).cgColor, UIColor.rgb(red: 31, green: 162, blue: 255).cgColor], locations: [0.0, 0.5, 1.0], startPoint: CGPoint(x: 1, y: 0), endPoint: CGPoint(x: 0, y: 1))
+        view.setGradientBackground(colors: [UIColor.rgb(red: 67, green: 206, blue: 162).cgColor, UIColor.rgb(red: 24, green: 90, blue: 157).cgColor], locations: [0.0, 1.0], startPoint: CGPoint(x: 1, y: 0), endPoint: CGPoint(x: 0, y: 1))
         
         setupViews()
     }
@@ -117,6 +127,10 @@ class MenuViewController: UIViewController {
         
         view.addSubview(startButton)
         startButton.anchor(top: nil, leading: view.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.trailingAnchor, padding: .init(top: 0, left: 30, bottom: 24, right: 30), size: CGSize(width: 0, height: 50))
+        
+        view.addSubview(difficultySegmentedControl)
+        difficultySegmentedControl.anchor(top: nil, leading: nil, bottom: startButton.topAnchor, trailing: nil, padding: .init(top: 0, left: 0, bottom: 24, right: 0), size: CGSize(width: 200, height: 30))
+        difficultySegmentedControl.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
     }
 }
 

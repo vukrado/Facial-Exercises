@@ -52,6 +52,7 @@ class ExcerciseViewController: UIViewController {
     @IBOutlet weak var sceneView: ARSCNView! {
         didSet {
             sceneView.layer.cornerRadius = 10.0
+            sceneView.layer.masksToBounds = true
         }
     }
     @IBOutlet weak var progressView: UIProgressView!

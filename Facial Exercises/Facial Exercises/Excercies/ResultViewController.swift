@@ -87,8 +87,6 @@ class ResultViewController: UIViewController {
     // MARK: - Configuration
     
     private func setupViews() {
-        view.addSubview(blurEffect)
-        blurEffect.fillSuperview()
         
         view.addSubview(headerView)
         headerView.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: UIEdgeInsets(top: 50, left: sidePadding, bottom: 0, right: sidePadding), size: CGSize(width: 0, height: 150))
@@ -177,7 +175,7 @@ private class HeaderResultsView: UIView {
     
 }
 
-private class ExerciseResultsCollectionView: UICollectionView {
+private class ExerciseResultsCollectionView: UICollectionView, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     static private var cellId = "ExerciseResultCell"
     
@@ -200,9 +198,6 @@ private class ExerciseResultsCollectionView: UICollectionView {
         fatalError("init(coder:) has not been implemented")
     }
     
-}
-
-extension ExerciseResultsCollectionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 4
     }
@@ -212,14 +207,12 @@ extension ExerciseResultsCollectionView: UICollectionViewDataSource {
         cell.exerciseName = "Brow challenge"
         return cell
     }
-}
-
-extension ExerciseResultsCollectionView: UICollectionViewDelegateFlowLayout {
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: self.frame.width, height: 80)
     }
+    
 }
-
 
 private class ExerciseResultCell: UICollectionViewCell {
     
@@ -230,7 +223,7 @@ private class ExerciseResultCell: UICollectionViewCell {
     }
     
     private let blurEffect: UIVisualEffectView = {
-        let frost = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffect.Style.regular))
+        let frost = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
         frost.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         frost.layer.cornerRadius = 8
         frost.layer.masksToBounds = true

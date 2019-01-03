@@ -19,6 +19,8 @@
 		BF7E0EF021DD77A8004D278C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF7E0EEE21DD77A8004D278C /* Main.storyboard */; };
 		BF7E0EF221DD77A9004D278C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BF7E0EF121DD77A9004D278C /* Assets.xcassets */; };
 		BF7E0EF521DD77A9004D278C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF7E0EF321DD77A9004D278C /* LaunchScreen.storyboard */; };
+		BF7E0F0021DDC64A004D278C /* ExcercisesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7E0EFF21DDC64A004D278C /* ExcercisesViewController.swift */; };
+		BF7E0F0321DDE2C2004D278C /* ExcerciseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7E0F0221DDE2C2004D278C /* ExcerciseViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +38,8 @@
 		BF7E0EF121DD77A9004D278C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BF7E0EF421DD77A9004D278C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BF7E0EF621DD77A9004D278C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BF7E0EFF21DDC64A004D278C /* ExcercisesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExcercisesViewController.swift; sourceTree = "<group>"; };
+		BF7E0F0221DDE2C2004D278C /* ExcerciseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExcerciseViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,10 +115,20 @@
 			isa = PBXGroup;
 			children = (
 				AC251F4621DD799E00A62718 /* Menu */,
+				BF7E0F0121DDCF3E004D278C /* Excercies */,
 				AC251F4721DD79A200A62718 /* Utils */,
 				AC251F4821DD79A600A62718 /* Resources */,
 			);
 			path = "Facial Exercises";
+			sourceTree = "<group>";
+		};
+		BF7E0F0121DDCF3E004D278C /* Excercies */ = {
+			isa = PBXGroup;
+			children = (
+				BF7E0F0221DDE2C2004D278C /* ExcerciseViewController.swift */,
+				BF7E0EFF21DDC64A004D278C /* ExcercisesViewController.swift */,
+			);
+			path = Excercies;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -193,8 +207,10 @@
 			files = (
 				AC251F4221DD798E00A62718 /* MenuViewController.swift in Sources */,
 				AC251F4321DD798E00A62718 /* ExerciseCollectionView.swift in Sources */,
+				BF7E0F0321DDE2C2004D278C /* ExcerciseViewController.swift in Sources */,
 				AC251F4521DD799B00A62718 /* AutoLayout.swift in Sources */,
 				AC251F5321DD81AA00A62718 /* UIColor+Theme.swift in Sources */,
+				BF7E0F0021DDC64A004D278C /* ExcercisesViewController.swift in Sources */,
 				AC251F4C21DD7B0D00A62718 /* ExerciseCell.swift in Sources */,
 				BF7E0EEB21DD77A8004D278C /* AppDelegate.swift in Sources */,
 			);
@@ -343,13 +359,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 84AK8SAYG2;
+				DEVELOPMENT_TEAM = NB32394B2A;
 				INFOPLIST_FILE = "$(SRCROOT)/Facial Exercises/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.vuk.Facial-Exercises";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.vukr.Facial-Exercises";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -361,13 +377,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 84AK8SAYG2;
+				DEVELOPMENT_TEAM = NB32394B2A;
 				INFOPLIST_FILE = "$(SRCROOT)/Facial Exercises/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.vuk.Facial-Exercises";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.vukr.Facial-Exercises";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";

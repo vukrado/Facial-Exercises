@@ -8,6 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		2271C8CF21DE2C3700764C5E /* FacialExercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2271C8CE21DE2C3700764C5E /* FacialExercise.swift */; };
+		2271C8D721DE308900764C5E /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2271C8D321DE308800764C5E /* CoreDataStack.swift */; };
+		2271C8D821DE308900764C5E /* Exercise+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2271C8D421DE308800764C5E /* Exercise+Convenience.swift */; };
+		2271C8D921DE308900764C5E /* Exercise.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2271C8D521DE308800764C5E /* Exercise.xcdatamodeld */; };
+		2271C8DB21DE30EF00764C5E /* ExerciseSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2271C8DA21DE30EF00764C5E /* ExerciseSession.swift */; };
+		2271C8DE21DE31AE00764C5E /* EyebrowRaise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2271C8DD21DE31AE00764C5E /* EyebrowRaise.swift */; };
+		2271C8E221DE322200764C5E /* JawForward.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2271C8E121DE322200764C5E /* JawForward.swift */; };
+		2271C8E421DE34A200764C5E /* EyeWink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2271C8E321DE34A200764C5E /* EyeWink.swift */; };
+		2271C8E621DE3A5A00764C5E /* TongueExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2271C8E521DE3A5A00764C5E /* TongueExtension.swift */; };
 		AC251F4221DD798E00A62718 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC251F4021DD798D00A62718 /* MenuViewController.swift */; };
 		AC251F4321DD798E00A62718 /* ExerciseCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC251F4121DD798D00A62718 /* ExerciseCollectionView.swift */; };
 		AC251F4521DD799B00A62718 /* AutoLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC251F4421DD799B00A62718 /* AutoLayout.swift */; };
@@ -26,6 +34,14 @@
 
 /* Begin PBXFileReference section */
 		2271C8CE21DE2C3700764C5E /* FacialExercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacialExercise.swift; sourceTree = "<group>"; };
+		2271C8D321DE308800764C5E /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		2271C8D421DE308800764C5E /* Exercise+Convenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Exercise+Convenience.swift"; sourceTree = "<group>"; };
+		2271C8D621DE308900764C5E /* Exercise.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Exercise.xcdatamodel; sourceTree = "<group>"; };
+		2271C8DA21DE30EF00764C5E /* ExerciseSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseSession.swift; sourceTree = "<group>"; };
+		2271C8DD21DE31AE00764C5E /* EyebrowRaise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EyebrowRaise.swift; sourceTree = "<group>"; };
+		2271C8E121DE322200764C5E /* JawForward.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JawForward.swift; sourceTree = "<group>"; };
+		2271C8E321DE34A200764C5E /* EyeWink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EyeWink.swift; sourceTree = "<group>"; };
+		2271C8E521DE3A5A00764C5E /* TongueExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TongueExtension.swift; sourceTree = "<group>"; };
 		AC251F4021DD798D00A62718 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		AC251F4121DD798D00A62718 /* ExerciseCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExerciseCollectionView.swift; sourceTree = "<group>"; };
 		AC251F4421DD799B00A62718 /* AutoLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoLayout.swift; sourceTree = "<group>"; };
@@ -55,12 +71,35 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2271C8CD21DE2C1400764C5E /* Models and Controllers */ = {
+		2271C8CD21DE2C1400764C5E /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				2271C8CE21DE2C3700764C5E /* FacialExercise.swift */,
+				2271C8DC21DE319E00764C5E /* Exercises */,
+				2271C8DA21DE30EF00764C5E /* ExerciseSession.swift */,
 			);
-			path = "Models and Controllers";
+			path = Models;
+			sourceTree = "<group>";
+		};
+		2271C8D221DE308800764C5E /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				2271C8D321DE308800764C5E /* CoreDataStack.swift */,
+				2271C8D421DE308800764C5E /* Exercise+Convenience.swift */,
+				2271C8D521DE308800764C5E /* Exercise.xcdatamodeld */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		2271C8DC21DE319E00764C5E /* Exercises */ = {
+			isa = PBXGroup;
+			children = (
+				2271C8DD21DE31AE00764C5E /* EyebrowRaise.swift */,
+				2271C8E521DE3A5A00764C5E /* TongueExtension.swift */,
+				2271C8E121DE322200764C5E /* JawForward.swift */,
+				2271C8E321DE34A200764C5E /* EyeWink.swift */,
+			);
+			path = Exercises;
 			sourceTree = "<group>";
 		};
 		AC251F4621DD799E00A62718 /* Menu */ = {
@@ -124,7 +163,8 @@
 		BF7E0EE921DD77A8004D278C /* Facial Exercises */ = {
 			isa = PBXGroup;
 			children = (
-				2271C8CD21DE2C1400764C5E /* Models and Controllers */,
+				2271C8D221DE308800764C5E /* CoreData */,
+				2271C8CD21DE2C1400764C5E /* Models */,
 				AC251F4621DD799E00A62718 /* Menu */,
 				BF7E0F0121DDCF3E004D278C /* Excercies */,
 				AC251F4721DD79A200A62718 /* Utils */,
@@ -217,12 +257,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				AC251F4221DD798E00A62718 /* MenuViewController.swift in Sources */,
+				2271C8D921DE308900764C5E /* Exercise.xcdatamodeld in Sources */,
+				2271C8E221DE322200764C5E /* JawForward.swift in Sources */,
 				AC251F4321DD798E00A62718 /* ExerciseCollectionView.swift in Sources */,
+				2271C8E621DE3A5A00764C5E /* TongueExtension.swift in Sources */,
 				BF7E0F0321DDE2C2004D278C /* ExcerciseViewController.swift in Sources */,
+				2271C8DE21DE31AE00764C5E /* EyebrowRaise.swift in Sources */,
+				2271C8E421DE34A200764C5E /* EyeWink.swift in Sources */,
+				2271C8DB21DE30EF00764C5E /* ExerciseSession.swift in Sources */,
 				AC251F4521DD799B00A62718 /* AutoLayout.swift in Sources */,
 				AC251F5321DD81AA00A62718 /* UIColor+Theme.swift in Sources */,
+				2271C8D721DE308900764C5E /* CoreDataStack.swift in Sources */,
 				BF7E0F0021DDC64A004D278C /* ExcercisesViewController.swift in Sources */,
 				2271C8CF21DE2C3700764C5E /* FacialExercise.swift in Sources */,
+				2271C8D821DE308900764C5E /* Exercise+Convenience.swift in Sources */,
 				AC251F4C21DD7B0D00A62718 /* ExerciseCell.swift in Sources */,
 				BF7E0EEB21DD77A8004D278C /* AppDelegate.swift in Sources */,
 			);
@@ -424,6 +472,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		2271C8D521DE308800764C5E /* Exercise.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				2271C8D621DE308900764C5E /* Exercise.xcdatamodel */,
+			);
+			currentVersion = 2271C8D621DE308900764C5E /* Exercise.xcdatamodel */;
+			path = Exercise.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = BF7E0EDF21DD77A8004D278C /* Project object */;
 }

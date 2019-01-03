@@ -10,13 +10,13 @@ import ARKit
 
 class EyebrowRaise: FacialExercise {
     
-    static var displayedTitle: String {
+    var displayedTitle: String {
         return "Eyebrow Raises"
     }
-    static var displayedDescription: String {
+    
+    var displayedDescription: String {
         return "Lift your eyebrows and hold for 10 seconds"
     }
-    
     
     var expressionsWithThresholds: [ARFaceAnchor.BlendShapeLocation : SuccessThreshold] {
         return [.browInnerUp: 1.0]

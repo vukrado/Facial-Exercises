@@ -73,8 +73,8 @@
 			isa = PBXGroup;
 			children = (
 				2271C8CE21DE2C3700764C5E /* FacialExercise.swift */,
-				2271C8DC21DE319E00764C5E /* Exercises */,
 				2271C8DA21DE30EF00764C5E /* ExerciseSession.swift */,
+				2271C8DC21DE319E00764C5E /* Exercises */,
 			);
 			path = Models;
 			sourceTree = "<group>";

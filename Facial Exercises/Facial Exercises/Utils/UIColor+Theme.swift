@@ -8,8 +8,7 @@
 
 import UIKit
 
-extension UIColor
-{
+extension UIColor {
     static func rgb(red: CGFloat, green: CGFloat, blue: CGFloat) -> UIColor {
         return UIColor(red: red/255, green: green/255, blue: blue/255, alpha: 1)
     }
@@ -19,13 +18,14 @@ extension UIColor
 
 }
 
-enum Appearance
-{
-    static func appFont(with size: CGFloat) -> UIFont {
-        return UIFont(name: "Merriweather-Regular", size: size)!
+enum Appearance {
+    static func appFont(style: UIFont.TextStyle, size: CGFloat) -> UIFont {
+        let font = UIFont(name: "Merriweather-Regular", size: size)!
+        return UIFontMetrics(forTextStyle: style).scaledFont(for: font)
     }
     
-    static func boldAppFont(with size: CGFloat) -> UIFont {
-        return UIFont(name: "Merriweather-Bold", size: size)!
+    static func boldAppFont(style: UIFont.TextStyle, size: CGFloat) -> UIFont {
+        let font = UIFont(name: "Merriweather-Bold", size: size)!
+        return UIFontMetrics(forTextStyle: style).scaledFont(for: font)
     }
 }

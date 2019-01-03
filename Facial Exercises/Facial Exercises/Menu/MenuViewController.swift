@@ -25,7 +25,7 @@ class MenuViewController: UIViewController {
         label.text = "1/5 Exercises selected"
         label.textColor = .black
         label.numberOfLines = 0
-        label.font = Appearance.appFont(with: 12)
+        label.font = Appearance.appFont(style: .body, size: 12)
         label.sizeToFit()
         label.textAlignment = .center
         
@@ -36,7 +36,7 @@ class MenuViewController: UIViewController {
         let button = UIButton(type: .system)
         button.setTitle("Start", for: .normal)
         button.backgroundColor = .selectedGreen
-        button.titleLabel?.font = Appearance.appFont(with: 16)
+        button.titleLabel?.font = Appearance.appFont(style: .title2, size: 16)
         button.layer.cornerRadius = 8
         button.setTitleColor(.white, for: .normal)
         button.addTarget(self, action: #selector(handleStart), for: .touchUpInside)

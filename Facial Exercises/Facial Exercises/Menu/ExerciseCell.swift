@@ -16,7 +16,7 @@ class ExerciseCell: UICollectionViewCell {
         label.textAlignment = .center
         label.textColor = .white
         label.sizeToFit()
-        label.font = Appearance.appFont(with: 22)
+        label.font = Appearance.appFont(style: .title1, size: 22)
         
         return label
     }()
@@ -36,7 +36,7 @@ class ExerciseCell: UICollectionViewCell {
         label.text = "Some exercise description uihfiuwehf iuhewfiuwehf iwuhfwei uqwpdwq[dpokpqw pqwodk qpdjqo ijq ojqw odijqwod j ijiodq"
         label.textColor = .white
         label.numberOfLines = 0
-        label.font = Appearance.appFont(with: 12)
+        label.font = Appearance.appFont(style: .body, size: 12)
         label.sizeToFit()
         label.textAlignment = .center
         

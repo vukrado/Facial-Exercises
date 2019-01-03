@@ -7,18 +7,19 @@
 //
 
 /**
- A view controller which shows the results of the user's exercise session.
+ A view controller which shows the results summary of the user's exercise session.
  - Author: Stefano Demicheli
  */
 
 import UIKit
+import CoreData
 
 class ResultViewController: UIViewController {
     
     // MARK: - Public properties
     
     var completedExercises = [Exercise]()
-    var shouldCelebrate = true
+    var shouldCelebrate = false
     
     // MARK: - Private properties
     
@@ -34,6 +35,18 @@ class ResultViewController: UIViewController {
         layout.minimumInteritemSpacing = 12
         let cv = ExerciseResultsCollectionView(collectionViewLayout: layout)
         return cv
+    }()
+    
+    private lazy var finishButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Finish", for: .normal)
+        button.backgroundColor = .selectedGreen
+        button.titleLabel?.font = Appearance.appFont(style: .title2, size: 16)
+        button.layer.cornerRadius = 8
+        button.setTitleColor(.white, for: .normal)
+        button.addTarget(self, action: #selector(handleFinish), for: .touchUpInside)
+        
+        return button
     }()
     
     private let blurEffect: UIVisualEffectView = {
@@ -55,6 +68,22 @@ class ResultViewController: UIViewController {
         if shouldCelebrate { setupEmitterView() }
     }
     
+    // MARK: - User actions
+    // When the user dismisses the results summary page we'll save the exercise results to local persistence
+    @objc func handleFinish() {
+        saveExercises()
+    }
+    
+    private func saveExercises(context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
+        context.performAndWait {
+            do {
+                try CoreDataStack.shared.save(context: context)
+            } catch {
+                NSLog("Error saving in context \(context): \(error)")
+            }
+        }
+    }
+    
     // MARK: - Configuration
     
     private func setupViews() {
@@ -64,8 +93,12 @@ class ResultViewController: UIViewController {
         view.addSubview(headerView)
         headerView.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: UIEdgeInsets(top: 50, left: sidePadding, bottom: 0, right: sidePadding), size: CGSize(width: 0, height: 150))
         
+        view.addSubview(finishButton)
+        finishButton.anchor(top: nil, leading: view.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.trailingAnchor, padding: .init(top: 0, left: 30, bottom: 24, right: 30), size: CGSize(width: 0, height: 50))
+        
         view.addSubview(exerciseResultsView)
-        exerciseResultsView.anchor(top: headerView.bottomAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor, padding: UIEdgeInsets(top: sidePadding, left: sidePadding, bottom: sidePadding, right: sidePadding))
+        exerciseResultsView.anchor(top: headerView.bottomAnchor, leading: view.leadingAnchor, bottom: finishButton.topAnchor, trailing: view.trailingAnchor, padding: UIEdgeInsets(top: sidePadding, left: sidePadding, bottom: sidePadding, right: sidePadding))
+        
     }
     
     private func setupEmitterView() {
@@ -157,7 +190,7 @@ private class ExerciseResultsCollectionView: UICollectionView {
         delegate = self
         dataSource = self
         backgroundColor = .clear
-        showsHorizontalScrollIndicator = false
+        showsVerticalScrollIndicator = false
         contentInset = UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 12)
         register(ExerciseResultCell.self, forCellWithReuseIdentifier: ExerciseResultsCollectionView.cellId)
         self.allowsSelection = true
@@ -171,7 +204,7 @@ private class ExerciseResultsCollectionView: UICollectionView {
 
 extension ExerciseResultsCollectionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return 4
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -183,7 +216,7 @@ extension ExerciseResultsCollectionView: UICollectionViewDataSource {
 
 extension ExerciseResultsCollectionView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: self.frame.width, height: 65)
+        return CGSize(width: self.frame.width, height: 80)
     }
 }
 
@@ -216,6 +249,14 @@ private class ExerciseResultCell: UICollectionViewCell {
     private let exerciseNameLabel: UILabel = {
         let label = UILabel()
         label.font = Appearance.appFont(style: .body, size: 17.0)
+        label.numberOfLines = 1
+        label.textColor = .white
+        return label
+    }()
+    
+    private let scoreLabel: UILabel = {
+        let label = UILabel()
+        label.font = Appearance.appFont(style: .body, size: 14.0)
         label.numberOfLines = 2
         label.textColor = .white
         return label
@@ -241,110 +282,13 @@ private class ExerciseResultCell: UICollectionViewCell {
         
         addSubview(mainStackView)
         mainStackView.addArrangedSubview(exerciseNameLabel)
+        mainStackView.addArrangedSubview(scoreLabel)
         mainStackView.anchor(top: topAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: UIEdgeInsets(top: 8, left: sidePadding, bottom: 8, right: sidePadding))
     }
     
     private func updateViews() {
         exerciseNameLabel.text = exerciseName
-    }
-    
-}
-
-class ProgressIndicator: UIView {
-    
-    // MARK: - Public properties
-    
-    var lineWidth: CGFloat = 40.0
-    var bgLineWidth: CGFloat = 7.5
-    var fgLineWidth: CGFloat = 12.0
-    var bgColor = UIColor(white: 1.0, alpha: 0.5).cgColor
-    var fgColor = UIColor.white.cgColor
-    var progressValue: Double!
-    var goalValue: Double!
-    var progressPercentage: CGFloat {
-        if (progressValue >= goalValue) {
-            return 1.0
-        }
-        return CGFloat(progressValue) / CGFloat(goalValue)
-    }
-    var animationDuration: CFTimeInterval!
-    
-    // MARK: - Private properties
-    
-    private let bgLayer = CAShapeLayer()
-    private let fgLayer = CAShapeLayer()
-    private let margin: CGFloat = 20
-    private var startValue = 0.0
-    private let animationStartDate = Date()
-    
-    // MARK: - Init
-    
-    init(frame: CGRect, progress: Double, goal: Double, animationDuration: CFTimeInterval? = 1.2) {
-        super.init(frame: frame)
-        self.progressValue = progress
-        self.goalValue = goal
-        self.animationDuration = animationDuration
-        setupViews()
-        animateProgress()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    // MARK: - Lifecycle
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        setupShapeLayer(bgLayer)
-        setupShapeLayer(fgLayer)
-    }
-    
-    // MARK: - Animation
-    
-    func animateProgress() {
-        let activityAnimation = CABasicAnimation(keyPath: "strokeEnd")
-        activityAnimation.fromValue = 0.0
-        activityAnimation.toValue = progressPercentage
-        activityAnimation.duration = animationDuration
-        activityAnimation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
-        fgLayer.add(activityAnimation, forKey: nil)
-        
-    }
-    
-    
-    // MARK: - Configuration
-    
-    private func setupViews() {
-        bgLayer.lineWidth = bgLineWidth
-        bgLayer.fillColor = nil
-        bgLayer.strokeColor = bgColor
-        bgLayer.strokeEnd = 1.0
-        layer.addSublayer(bgLayer)
-        
-        fgLayer.lineWidth = fgLineWidth
-        fgLayer.fillColor = nil
-        fgLayer.strokeColor = fgColor
-        fgLayer.strokeEnd = progressPercentage
-        layer.addSublayer(fgLayer)
-        
-        setupShapeLayer(bgLayer)
-        setupShapeLayer(fgLayer)
-    }
-    
-    private func setupShapeLayer(_ shapeLayer: CAShapeLayer) {
-        shapeLayer.frame = self.bounds
-        let startAngle = DegreesToRadians(value: 135.0)
-        let endAngle = DegreesToRadians(value: 45.0)
-        let center = CGPoint(x: bounds.midX, y: bounds.midY)
-        let radius = self.bounds.width * 0.35
-        let path = UIBezierPath(arcCenter: center, radius: radius, startAngle: startAngle, endAngle: endAngle, clockwise: true)
-        shapeLayer.lineCap = CAShapeLayerLineCap.round
-        shapeLayer.path = path.cgPath
-    }
-    
-    private func DegreesToRadians (value:CGFloat) -> CGFloat {
-        return value * CGFloat.pi / 180.0
+        scoreLabel.text = "Your score was \(String(0.6)). (+XY% vs. previous score)"
     }
     
 }

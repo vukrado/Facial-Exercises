@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2271C8CF21DE2C3700764C5E /* FacialExercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2271C8CE21DE2C3700764C5E /* FacialExercise.swift */; };
 		AC251F4221DD798E00A62718 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC251F4021DD798D00A62718 /* MenuViewController.swift */; };
 		AC251F4321DD798E00A62718 /* ExerciseCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC251F4121DD798D00A62718 /* ExerciseCollectionView.swift */; };
 		AC251F4521DD799B00A62718 /* AutoLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC251F4421DD799B00A62718 /* AutoLayout.swift */; };
@@ -24,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2271C8CE21DE2C3700764C5E /* FacialExercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacialExercise.swift; sourceTree = "<group>"; };
 		AC251F4021DD798D00A62718 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		AC251F4121DD798D00A62718 /* ExerciseCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExerciseCollectionView.swift; sourceTree = "<group>"; };
 		AC251F4421DD799B00A62718 /* AutoLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoLayout.swift; sourceTree = "<group>"; };
@@ -53,6 +55,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2271C8CD21DE2C1400764C5E /* Models and Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				2271C8CE21DE2C3700764C5E /* FacialExercise.swift */,
+			);
+			path = "Models and Controllers";
+			sourceTree = "<group>";
+		};
 		AC251F4621DD799E00A62718 /* Menu */ = {
 			isa = PBXGroup;
 			children = (
@@ -114,6 +124,7 @@
 		BF7E0EE921DD77A8004D278C /* Facial Exercises */ = {
 			isa = PBXGroup;
 			children = (
+				2271C8CD21DE2C1400764C5E /* Models and Controllers */,
 				AC251F4621DD799E00A62718 /* Menu */,
 				BF7E0F0121DDCF3E004D278C /* Excercies */,
 				AC251F4721DD79A200A62718 /* Utils */,
@@ -211,6 +222,7 @@
 				AC251F4521DD799B00A62718 /* AutoLayout.swift in Sources */,
 				AC251F5321DD81AA00A62718 /* UIColor+Theme.swift in Sources */,
 				BF7E0F0021DDC64A004D278C /* ExcercisesViewController.swift in Sources */,
+				2271C8CF21DE2C3700764C5E /* FacialExercise.swift in Sources */,
 				AC251F4C21DD7B0D00A62718 /* ExerciseCell.swift in Sources */,
 				BF7E0EEB21DD77A8004D278C /* AppDelegate.swift in Sources */,
 			);

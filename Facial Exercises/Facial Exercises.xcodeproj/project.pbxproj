@@ -23,6 +23,7 @@
 		AC251F4F21DD814D00A62718 /* Merriweather-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AC251F4D21DD814D00A62718 /* Merriweather-Bold.ttf */; };
 		AC251F5021DD814D00A62718 /* Merriweather-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AC251F4E21DD814D00A62718 /* Merriweather-Regular.ttf */; };
 		AC251F5321DD81AA00A62718 /* UIColor+Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC251F5221DD81AA00A62718 /* UIColor+Theme.swift */; };
+		AC9BD0D621DEC5D700467B57 /* AlertHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9BD0D521DEC5D700467B57 /* AlertHelper.swift */; };
 		BF7E0EEB21DD77A8004D278C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7E0EEA21DD77A8004D278C /* AppDelegate.swift */; };
 		BF7E0EF021DD77A8004D278C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF7E0EEE21DD77A8004D278C /* Main.storyboard */; };
 		BF7E0EF221DD77A9004D278C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BF7E0EF121DD77A9004D278C /* Assets.xcassets */; };
@@ -48,6 +49,7 @@
 		AC251F4D21DD814D00A62718 /* Merriweather-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Merriweather-Bold.ttf"; sourceTree = "<group>"; };
 		AC251F4E21DD814D00A62718 /* Merriweather-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Merriweather-Regular.ttf"; sourceTree = "<group>"; };
 		AC251F5221DD81AA00A62718 /* UIColor+Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Theme.swift"; sourceTree = "<group>"; };
+		AC9BD0D521DEC5D700467B57 /* AlertHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertHelper.swift; sourceTree = "<group>"; };
 		BF7E0EE721DD77A8004D278C /* Facial Exercises.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Facial Exercises.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF7E0EEA21DD77A8004D278C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BF7E0EEF21DD77A8004D278C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -115,6 +117,7 @@
 			children = (
 				AC251F4421DD799B00A62718 /* AutoLayout.swift */,
 				AC251F5221DD81AA00A62718 /* UIColor+Theme.swift */,
+				AC9BD0D521DEC5D700467B57 /* AlertHelper.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -258,6 +261,7 @@
 				AC251F4321DD798E00A62718 /* ExerciseCollectionView.swift in Sources */,
 				2271C8E621DE3A5A00764C5E /* TongueExtension.swift in Sources */,
 				BF7E0F0321DDE2C2004D278C /* ExcerciseViewController.swift in Sources */,
+				AC9BD0D621DEC5D700467B57 /* AlertHelper.swift in Sources */,
 				2271C8DE21DE31AE00764C5E /* EyebrowRaise.swift in Sources */,
 				2271C8E421DE34A200764C5E /* EyeWink.swift in Sources */,
 				2271C8DB21DE30EF00764C5E /* ExerciseSession.swift in Sources */,

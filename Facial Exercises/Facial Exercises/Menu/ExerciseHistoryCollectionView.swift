@@ -44,7 +44,7 @@ class ExerciseHistoryCollectionView: UICollectionView, UICollectionViewDataSourc
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: self.frame.width, height: 80)
+        return CGSize(width: self.frame.width - 24.0, height: 80)
     }
     
 }

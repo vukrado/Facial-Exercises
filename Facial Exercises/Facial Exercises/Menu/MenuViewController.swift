@@ -46,7 +46,7 @@ class MenuViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.setGradientBackground(colors: [UIColor.rgb(red: 31, green: 162, blue: 255).cgColor, UIColor.rgb(red: 18, green: 216, blue: 250).cgColor, UIColor.rgb(red: 166, green: 255, blue: 203).cgColor], locations: [0.0, 0.5, 1.0], startPoint: CGPoint(x: 0, y: 0), endPoint: CGPoint(x: 1, y: 1))
         
         setupViews()
     }

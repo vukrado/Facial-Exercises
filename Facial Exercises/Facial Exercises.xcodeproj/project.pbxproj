@@ -11,7 +11,6 @@
 		AC251F4221DD798E00A62718 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC251F4021DD798D00A62718 /* MenuViewController.swift */; };
 		AC251F4321DD798E00A62718 /* ExerciseCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC251F4121DD798D00A62718 /* ExerciseCollectionView.swift */; };
 		AC251F4521DD799B00A62718 /* AutoLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC251F4421DD799B00A62718 /* AutoLayout.swift */; };
-		AC251F4A21DD7AEF00A62718 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AC251F4921DD7AEF00A62718 /* Default-568h@2x.png */; };
 		AC251F4C21DD7B0D00A62718 /* ExerciseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC251F4B21DD7B0D00A62718 /* ExerciseCell.swift */; };
 		AC251F4F21DD814D00A62718 /* Merriweather-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AC251F4D21DD814D00A62718 /* Merriweather-Bold.ttf */; };
 		AC251F5021DD814D00A62718 /* Merriweather-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AC251F4E21DD814D00A62718 /* Merriweather-Regular.ttf */; };
@@ -29,7 +28,6 @@
 		AC251F4021DD798D00A62718 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		AC251F4121DD798D00A62718 /* ExerciseCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExerciseCollectionView.swift; sourceTree = "<group>"; };
 		AC251F4421DD799B00A62718 /* AutoLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoLayout.swift; sourceTree = "<group>"; };
-		AC251F4921DD7AEF00A62718 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		AC251F4B21DD7B0D00A62718 /* ExerciseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseCell.swift; sourceTree = "<group>"; };
 		AC251F4D21DD814D00A62718 /* Merriweather-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Merriweather-Bold.ttf"; sourceTree = "<group>"; };
 		AC251F4E21DD814D00A62718 /* Merriweather-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Merriweather-Regular.ttf"; sourceTree = "<group>"; };
@@ -107,7 +105,6 @@
 		BF7E0EDE21DD77A8004D278C = {
 			isa = PBXGroup;
 			children = (
-				AC251F4921DD7AEF00A62718 /* Default-568h@2x.png */,
 				BF7E0EE921DD77A8004D278C /* Facial Exercises */,
 				BF7E0EE821DD77A8004D278C /* Products */,
 			);
@@ -201,7 +198,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				BF7E0EF521DD77A9004D278C /* LaunchScreen.storyboard in Resources */,
-				AC251F4A21DD7AEF00A62718 /* Default-568h@2x.png in Resources */,
 				AC251F4F21DD814D00A62718 /* Merriweather-Bold.ttf in Resources */,
 				BF7E0EF221DD77A9004D278C /* Assets.xcassets in Resources */,
 				AC251F5021DD814D00A62718 /* Merriweather-Regular.ttf in Resources */,

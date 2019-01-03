@@ -46,7 +46,7 @@ class ExerciseCell: UICollectionViewCell {
     let selectedImageView: UIImageView = {
         let iv = UIImageView(image: #imageLiteral(resourceName: "selected").withRenderingMode(.alwaysTemplate))
         iv.contentMode = .scaleAspectFit
-        iv.tintColor = .white
+        iv.tintColor = .selectedGreen
         
         return iv
     }()

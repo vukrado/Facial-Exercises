@@ -8,6 +8,7 @@
 
 import UIKit
 import ARKit
+import Lottie
 
 class ExcerciseViewController: UIViewController {
 
@@ -18,7 +19,7 @@ class ExcerciseViewController: UIViewController {
     private var count: Float = 0.0
     private var timer = Timer()
     private var timerIsRunning: Bool = false
-    
+    private var mask: Mask?
     //Will hold the ARFaceAnchor - which has information about the pose, topology, and expression of a face detected in a face-tracking AR session.
     private var faceNode: SCNNode?
     
@@ -26,7 +27,7 @@ class ExcerciseViewController: UIViewController {
     // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupScene()
+        setupScenes()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -43,7 +44,7 @@ class ExcerciseViewController: UIViewController {
         UIApplication.shared.isIdleTimerDisabled = true
         resetTracking()
     }
-    
+
     override var prefersStatusBarHidden: Bool {
         return true
     }
@@ -52,9 +53,18 @@ class ExcerciseViewController: UIViewController {
     @IBOutlet weak var sceneView: ARSCNView! {
         didSet {
             sceneView.layer.cornerRadius = 10.0
+            sceneView.layer.masksToBounds = true
         }
     }
     @IBOutlet weak var progressView: UIProgressView!
+    @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var checkmarkAnimation: LOTAnimationView! {
+        didSet {
+            checkmarkAnimation.animation = "checkmark"
+            checkmarkAnimation.contentMode = .scaleAspectFit
+        }
+    }
+    @IBOutlet weak var maskSceneView: SCNView!
     
     
     
@@ -65,9 +75,12 @@ class ExcerciseViewController: UIViewController {
 private extension ExcerciseViewController {
     
     // Tag: SceneKit Setup
-    func setupScene() {
+    func setupScenes() {
         //Sets the views delegate to self
         sceneView.delegate = self
+        maskSceneView.backgroundColor = .clear
+        maskSceneView.scene = SCNScene()
+        maskSceneView.rendersContinuously = true
     }
     
 
@@ -108,6 +121,23 @@ private extension ExcerciseViewController {
             }
         }
     }
+    
+    func createFaceGeometry() {
+        updateMessage(text: "Creating face geometry")
+        
+        let device = sceneView.device!
+        let maskGeometry = ARSCNFaceGeometry(device: device)!
+        mask = Mask(geometry: maskGeometry)
+        maskSceneView.scene?.rootNode.addChildNode(mask!)
+        mask?.position = SCNVector3(0.0, 0.0, 0.0)
+    }
+    
+    // Tag: Update UI
+    func updateMessage(text: String) {
+        DispatchQueue.main.async {
+            self.descriptionLabel.text = text
+        }
+    }
 }
 
 
@@ -115,12 +145,51 @@ extension ExcerciseViewController: ARSCNViewDelegate {
     // Tag: ARNodeTracking
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
         faceNode = node
+        
+    }
+    
+
+    func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
+        guard let device = sceneView.device else {
+            return nil
+        }
+        
+        let faceGeometry = ARSCNFaceGeometry(device: device)
+        
+        let node = SCNNode(geometry: faceGeometry)
+        
+        node.geometry?.firstMaterial?.fillMode = .lines
+
+        DispatchQueue.main.async {
+            self.checkmarkAnimation.play { (_) in
+                self.checkmarkAnimation.isHidden = true
+                self.createFaceGeometry()
+                
+                var maskTransform = CATransform3DIdentity
+                maskTransform = CATransform3DScale(maskTransform, 2.0, 2.0, 1.01)
+                maskTransform = CATransform3DTranslate(maskTransform, 0, 100, 0)
+                
+                var sceneViewTransform = CATransform3DIdentity
+                sceneViewTransform = CATransform3DScale(maskTransform, 0.1, 0.1, 1)
+                sceneViewTransform = CATransform3DTranslate(maskTransform, 100, 0, 0)
+                UIView.animate(withDuration: 1.0, delay: 0, options: [.curveEaseIn], animations: {
+                    self.maskSceneView.layer.transform = maskTransform
+                    self.sceneView.layer.transform = sceneViewTransform
+                }, completion: nil)
+            }
+        }
+        
+        return node
     }
     
     func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
-        guard let faceAnchor = anchor as? ARFaceAnchor else {
-            return
+        guard let faceAnchor = anchor as? ARFaceAnchor,
+            let faceGeometry = node.geometry as? ARSCNFaceGeometry else {
+                return
         }
+        
+        faceGeometry.update(from: faceAnchor.geometry)
+        mask?.update(withFaceAnchor: faceAnchor)
         
         //Test for Raising eyebrows
         let blendShapes = faceAnchor.blendShapes
@@ -136,4 +205,6 @@ extension ExcerciseViewController: ARSCNViewDelegate {
             }
         }
     }
+    
+    
 }

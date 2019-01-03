@@ -52,8 +52,8 @@
 		AC251F4621DD799E00A62718 /* Menu */ = {
 			isa = PBXGroup;
 			children = (
-				AC251F4121DD798D00A62718 /* ExerciseCollectionView.swift */,
 				AC251F4021DD798D00A62718 /* MenuViewController.swift */,
+				AC251F4121DD798D00A62718 /* ExerciseCollectionView.swift */,
 				AC251F4B21DD7B0D00A62718 /* ExerciseCell.swift */,
 			);
 			path = Menu;

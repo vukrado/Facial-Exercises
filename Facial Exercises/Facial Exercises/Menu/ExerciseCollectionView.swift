@@ -24,6 +24,7 @@ class ExerciseCollectionView: UICollectionView {
         showsHorizontalScrollIndicator = false
         contentInset = UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 12)
         register(ExerciseCell.self, forCellWithReuseIdentifier: cellId)
+        self.allowsSelection = true
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -32,7 +33,10 @@ class ExerciseCollectionView: UICollectionView {
 }
 
 extension ExerciseCollectionView: UICollectionViewDelegate {
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cell = self.cellForItem(at: indexPath)
+        cell?.backgroundColor = .selectedGreen
+    }
 }
 
 extension ExerciseCollectionView: UICollectionViewDataSource {

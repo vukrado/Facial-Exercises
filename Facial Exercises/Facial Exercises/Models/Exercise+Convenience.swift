@@ -13,6 +13,7 @@ import CoreData
  An exercise model which represents a facial exercise performed by the user.
  - Author: Stefano Demicheli
  */
+
 extension Exercise {
     
     convenience init(type: String, identifier: UUID = UUID(), length: Double, score: Double?, context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {

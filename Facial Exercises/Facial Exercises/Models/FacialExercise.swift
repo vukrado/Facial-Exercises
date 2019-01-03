@@ -17,9 +17,9 @@ protocol FacialExercise {
     typealias SuccessThreshold = NSNumber
     
     /// The name of the exercise to be displayed to the user
-    static var displayedTitle: String { get }
+    var displayedTitle: String { get }
     /// The description and/or instructions on how to complete the exercise, to be displayed to the user
-    static var displayedDescription: String { get }
+    var displayedDescription: String { get }
     
     /**
      Facial Expressions that make up the exercise and their respective success thresholds

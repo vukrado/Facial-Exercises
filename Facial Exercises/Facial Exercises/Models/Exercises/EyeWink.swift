@@ -10,10 +10,10 @@ import ARKit
 
 class EyeWink: FacialExercise {
     
-    static var displayedTitle: String {
+    var displayedTitle: String {
         return "Eye Winks"
     }
-    static var displayedDescription: String {
+    var displayedDescription: String {
         return "Close both eyes for 3 seconds. Then alternate eyelids 4 times."
     }
     

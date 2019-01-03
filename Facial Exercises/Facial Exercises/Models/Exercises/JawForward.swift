@@ -10,10 +10,10 @@ import ARKit
 
 class JawForward: FacialExercise {
     
-    static var displayedTitle: String {
+    var displayedTitle: String {
         return "Jaw Forwards"
     }
-    static var displayedDescription: String {
+    var displayedDescription: String {
         return "Move your jaw forward for 5 seconds, then return it back to its resting position. Complete 5 repetitions."
     }
     

@@ -10,10 +10,10 @@ import ARKit
 
 class TongueExtension: FacialExercise {
     
-    static var displayedTitle: String {
+    var displayedTitle: String {
         return "Tongue Extensions"
     }
-    static var displayedDescription: String {
+    var displayedDescription: String {
         return "Stick your tongue out for 2 seconds. Complete 5 repetitions."
     }
     

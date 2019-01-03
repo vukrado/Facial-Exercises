@@ -26,20 +26,26 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yK4-qF-da1">
                                 <rect key="frame" x="0.0" y="672" width="414" height="224"/>
                                 <subviews>
-                                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="1" translatesAutoresizingMaskIntoConstraints="NO" id="5cW-o5-9SK">
-                                        <rect key="frame" x="101" y="141" width="212" height="2"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="1" translatesAutoresizingMaskIntoConstraints="NO" id="5cW-o5-9SK">
+                                        <rect key="frame" x="103.66666666666669" y="111" width="207" height="2"/>
                                         <color key="trackTintColor" red="0.63935247569999998" green="0.84237130130000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     </progressView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Raise your eyebrows for 15 seconds" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ahm-gP-f3d">
-                                        <rect key="frame" x="8" y="8" width="398" height="45"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Raise your eyebrows for 15 seconds" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ahm-gP-f3d">
+                                        <rect key="frame" x="8" y="8.0000000000000018" width="398" height="21.666666666666671"/>
                                         <fontDescription key="fontDescription" name="Merriweather-Regular" family="Merriweather" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.50508791990883362" green="0.7816796769604436" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstItem="ahm-gP-f3d" firstAttribute="top" secondItem="yK4-qF-da1" secondAttribute="top" constant="8" id="1es-dQ-Ozg"/>
+                                    <constraint firstAttribute="trailing" secondItem="ahm-gP-f3d" secondAttribute="trailing" constant="8" id="2yE-7U-IQ3"/>
+                                    <constraint firstItem="ahm-gP-f3d" firstAttribute="leading" secondItem="yK4-qF-da1" secondAttribute="leading" constant="8" id="5dw-9h-Y6O"/>
+                                    <constraint firstItem="5cW-o5-9SK" firstAttribute="centerY" secondItem="yK4-qF-da1" secondAttribute="centerY" id="Mul-9G-sOd"/>
+                                    <constraint firstItem="5cW-o5-9SK" firstAttribute="width" secondItem="yK4-qF-da1" secondAttribute="width" multiplier="0.5" id="N5N-3T-f5d"/>
+                                    <constraint firstItem="5cW-o5-9SK" firstAttribute="centerX" secondItem="yK4-qF-da1" secondAttribute="centerX" id="ysx-Za-10a"/>
+                                </constraints>
                             </view>
                             <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DOD-wQ-Q34">
                                 <rect key="frame" x="103.66666666666669" y="344.66666666666669" width="207" height="207.00000000000006"/>
@@ -47,16 +53,28 @@
                                     <constraint firstAttribute="width" secondItem="DOD-wQ-Q34" secondAttribute="height" multiplier="1:1" id="r6T-eh-Kd6"/>
                                 </constraints>
                             </arscnView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7ZS-Ig-VIo" customClass="LOTAnimationView">
+                                <rect key="frame" x="138.66666666666669" y="559.66666666666663" width="136.66666666666669" height="104.33333333333337"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tCP-hf-jjO">
+                                <rect key="frame" x="87" y="137" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </sceneKitView>
                         </subviews>
                         <color key="backgroundColor" red="0.63935247569999998" green="0.84237130130000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="yK4-qF-da1" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.25" id="9fW-h9-btX"/>
+                            <constraint firstItem="7ZS-Ig-VIo" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.33" id="CDH-ct-nIR"/>
                             <constraint firstItem="yK4-qF-da1" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="CVu-oT-HyN"/>
+                            <constraint firstItem="7ZS-Ig-VIo" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="GUq-yx-C41"/>
                             <constraint firstAttribute="bottom" secondItem="yK4-qF-da1" secondAttribute="bottom" id="Kie-jB-efl"/>
                             <constraint firstItem="yK4-qF-da1" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="Ml8-YP-HDR"/>
+                            <constraint firstItem="yK4-qF-da1" firstAttribute="top" secondItem="7ZS-Ig-VIo" secondAttribute="bottom" constant="8" id="VPk-H6-7z2"/>
                             <constraint firstItem="DOD-wQ-Q34" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="YBj-9e-kPN"/>
                             <constraint firstItem="DOD-wQ-Q34" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.5" id="bn4-Ik-hVe"/>
+                            <constraint firstItem="7ZS-Ig-VIo" firstAttribute="top" secondItem="DOD-wQ-Q34" secondAttribute="bottom" constant="8" id="gqy-7H-Bpa"/>
                             <constraint firstItem="DOD-wQ-Q34" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ry6-NG-rkF"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -65,13 +83,16 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="pause" id="Y73-Vw-lik"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="checkmarkAnimation" destination="7ZS-Ig-VIo" id="eZT-Qt-o62"/>
+                        <outlet property="descriptionLabel" destination="ahm-gP-f3d" id="Q5o-GN-xUq"/>
+                        <outlet property="maskSceneView" destination="tCP-hf-jjO" id="bRQ-hj-VdH"/>
                         <outlet property="progressView" destination="5cW-o5-9SK" id="lIX-sW-UfN"/>
                         <outlet property="sceneView" destination="DOD-wQ-Q34" id="kRh-7S-d9b"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="487" y="135"/>
+            <point key="canvasLocation" x="486.95652173913049" y="134.59821428571428"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="7Ll-Yu-Wv7">

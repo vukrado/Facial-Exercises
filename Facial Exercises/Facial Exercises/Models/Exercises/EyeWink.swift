@@ -13,7 +13,7 @@ class EyeWink: FacialExercise {
     var displayedTitle: String {
         return "Eye Winks"
     }
-    
+
     var displayedDescription: String {
         return "Close both eyes for 3 seconds. Then alternate eyelids 4 times."
     }
@@ -25,16 +25,11 @@ class EyeWink: FacialExercise {
         var individualProgress : [Float] = []
         
         for (expression, threshold) in expressionsWithThresholds {
-            
             if let currentCoefficient = currentCoefficients[expression] {
-                
-                if currentCoefficient.floatValue >= threshold.floatValue {
-                    individualProgress.append(1.0)
-                } else {
-                    individualProgress.append(currentCoefficient.floatValue / threshold.floatValue)
-                }
+                individualProgress.append(currentCoefficient.floatValue / threshold.floatValue)
             }
         }
+        
         return individualProgress.reduce(0.0, +) / Float(individualProgress.count)
     }
     

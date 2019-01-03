@@ -108,8 +108,9 @@ class MenuViewController: UIViewController {
         let difficulty = difficultySegmentedControl.selectedSegmentIndex
         
         
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let navVc = storyboard.instantiateViewController(withIdentifier: "Excercise") as! ExcerciseViewController
+//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//        let navVc = storyboard.instantiateViewController(withIdentifier: "Excercise") as! ExcerciseViewController
+        let navVc = ExcerciseViewController()
         self.present(navVc, animated: true, completion: nil)
     }
     

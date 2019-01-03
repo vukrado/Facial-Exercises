@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		121FD5EECC7DB6912806BFB3 /* Pods_Facial_Exercises.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F573AD28E552FD36A6A0C9C /* Pods_Facial_Exercises.framework */; };
 		2271C8CF21DE2C3700764C5E /* FacialExercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2271C8CE21DE2C3700764C5E /* FacialExercise.swift */; };
 		2271C8D721DE308900764C5E /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2271C8D321DE308800764C5E /* CoreDataStack.swift */; };
 		2271C8D821DE308900764C5E /* Exercise+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2271C8D421DE308800764C5E /* Exercise+Convenience.swift */; };
@@ -16,6 +17,8 @@
 		2271C8E221DE322200764C5E /* JawForward.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2271C8E121DE322200764C5E /* JawForward.swift */; };
 		2271C8E421DE34A200764C5E /* EyeWink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2271C8E321DE34A200764C5E /* EyeWink.swift */; };
 		2271C8E621DE3A5A00764C5E /* TongueExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2271C8E521DE3A5A00764C5E /* TongueExtension.swift */; };
+		228E6AB821DEB6B60060ED5E /* UserStatHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228E6AB721DEB6B60060ED5E /* UserStatHistoryView.swift */; };
+		3D94188321DE601A0000FAD0 /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D94188221DE601A0000FAD0 /* ResultViewController.swift */; };
 		AC251F4221DD798E00A62718 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC251F4021DD798D00A62718 /* MenuViewController.swift */; };
 		AC251F4321DD798E00A62718 /* ExerciseCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC251F4121DD798D00A62718 /* ExerciseCollectionView.swift */; };
 		AC251F4521DD799B00A62718 /* AutoLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC251F4421DD799B00A62718 /* AutoLayout.swift */; };
@@ -24,11 +27,12 @@
 		AC251F5021DD814D00A62718 /* Merriweather-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AC251F4E21DD814D00A62718 /* Merriweather-Regular.ttf */; };
 		AC251F5321DD81AA00A62718 /* UIColor+Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC251F5221DD81AA00A62718 /* UIColor+Theme.swift */; };
 		AC9BD0D621DEC5D700467B57 /* AlertHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9BD0D521DEC5D700467B57 /* AlertHelper.swift */; };
+		AC9BD0D821DECFA500467B57 /* checkmark.json in Resources */ = {isa = PBXBuildFile; fileRef = AC9BD0D721DECFA500467B57 /* checkmark.json */; };
+		BF5242AB21DE7B7000D357EC /* Mask.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5242AA21DE7B7000D357EC /* Mask.swift */; };
 		BF7E0EEB21DD77A8004D278C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7E0EEA21DD77A8004D278C /* AppDelegate.swift */; };
 		BF7E0EF021DD77A8004D278C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF7E0EEE21DD77A8004D278C /* Main.storyboard */; };
 		BF7E0EF221DD77A9004D278C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BF7E0EF121DD77A9004D278C /* Assets.xcassets */; };
 		BF7E0EF521DD77A9004D278C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF7E0EF321DD77A9004D278C /* LaunchScreen.storyboard */; };
-		BF7E0F0021DDC64A004D278C /* ExcercisesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7E0EFF21DDC64A004D278C /* ExcercisesViewController.swift */; };
 		BF7E0F0321DDE2C2004D278C /* ExcerciseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7E0F0221DDE2C2004D278C /* ExcerciseViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -42,6 +46,10 @@
 		2271C8E121DE322200764C5E /* JawForward.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JawForward.swift; sourceTree = "<group>"; };
 		2271C8E321DE34A200764C5E /* EyeWink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EyeWink.swift; sourceTree = "<group>"; };
 		2271C8E521DE3A5A00764C5E /* TongueExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TongueExtension.swift; sourceTree = "<group>"; };
+		228E6AB721DEB6B60060ED5E /* UserStatHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStatHistoryView.swift; sourceTree = "<group>"; };
+		3D94188221DE601A0000FAD0 /* ResultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
+		6F573AD28E552FD36A6A0C9C /* Pods_Facial_Exercises.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Facial_Exercises.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7B3010CB580678E822A59345 /* Pods-Facial Exercises.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Facial Exercises.release.xcconfig"; path = "Pods/Target Support Files/Pods-Facial Exercises/Pods-Facial Exercises.release.xcconfig"; sourceTree = "<group>"; };
 		AC251F4021DD798D00A62718 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		AC251F4121DD798D00A62718 /* ExerciseCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExerciseCollectionView.swift; sourceTree = "<group>"; };
 		AC251F4421DD799B00A62718 /* AutoLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoLayout.swift; sourceTree = "<group>"; };
@@ -50,14 +58,16 @@
 		AC251F4E21DD814D00A62718 /* Merriweather-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Merriweather-Regular.ttf"; sourceTree = "<group>"; };
 		AC251F5221DD81AA00A62718 /* UIColor+Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Theme.swift"; sourceTree = "<group>"; };
 		AC9BD0D521DEC5D700467B57 /* AlertHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertHelper.swift; sourceTree = "<group>"; };
+		AC9BD0D721DECFA500467B57 /* checkmark.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = checkmark.json; sourceTree = "<group>"; };
+		BF5242AA21DE7B7000D357EC /* Mask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mask.swift; sourceTree = "<group>"; };
 		BF7E0EE721DD77A8004D278C /* Facial Exercises.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Facial Exercises.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF7E0EEA21DD77A8004D278C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BF7E0EEF21DD77A8004D278C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		BF7E0EF121DD77A9004D278C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BF7E0EF421DD77A9004D278C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BF7E0EF621DD77A9004D278C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		BF7E0EFF21DDC64A004D278C /* ExcercisesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExcercisesViewController.swift; sourceTree = "<group>"; };
 		BF7E0F0221DDE2C2004D278C /* ExcerciseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExcerciseViewController.swift; sourceTree = "<group>"; };
+		F4AF143646AA6505CAA8CE27 /* Pods-Facial Exercises.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Facial Exercises.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Facial Exercises/Pods-Facial Exercises.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +75,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				121FD5EECC7DB6912806BFB3 /* Pods_Facial_Exercises.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -102,6 +113,14 @@
 			path = Exercises;
 			sourceTree = "<group>";
 		};
+		2F2BD05EC58BD72E81C797E3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6F573AD28E552FD36A6A0C9C /* Pods_Facial_Exercises.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		AC251F4621DD799E00A62718 /* Menu */ = {
 			isa = PBXGroup;
 			children = (
@@ -115,6 +134,7 @@
 		AC251F4721DD79A200A62718 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				BF5242AA21DE7B7000D357EC /* Mask.swift */,
 				AC251F4421DD799B00A62718 /* AutoLayout.swift */,
 				AC251F5221DD81AA00A62718 /* UIColor+Theme.swift */,
 				AC9BD0D521DEC5D700467B57 /* AlertHelper.swift */,
@@ -147,8 +167,11 @@
 		BF7E0EDE21DD77A8004D278C = {
 			isa = PBXGroup;
 			children = (
+				AC9BD0D721DECFA500467B57 /* checkmark.json */,
 				BF7E0EE921DD77A8004D278C /* Facial Exercises */,
 				BF7E0EE821DD77A8004D278C /* Products */,
+				E2612F27135F2961720A24A0 /* Pods */,
+				2F2BD05EC58BD72E81C797E3 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -163,6 +186,7 @@
 		BF7E0EE921DD77A8004D278C /* Facial Exercises */ = {
 			isa = PBXGroup;
 			children = (
+				228E6AB721DEB6B60060ED5E /* UserStatHistoryView.swift */,
 				2271C8D221DE308800764C5E /* CoreData */,
 				2271C8CD21DE2C1400764C5E /* Models */,
 				AC251F4621DD799E00A62718 /* Menu */,
@@ -177,9 +201,18 @@
 			isa = PBXGroup;
 			children = (
 				BF7E0F0221DDE2C2004D278C /* ExcerciseViewController.swift */,
-				BF7E0EFF21DDC64A004D278C /* ExcercisesViewController.swift */,
+				3D94188221DE601A0000FAD0 /* ResultViewController.swift */,
 			);
 			path = Excercies;
+			sourceTree = "<group>";
+		};
+		E2612F27135F2961720A24A0 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F4AF143646AA6505CAA8CE27 /* Pods-Facial Exercises.debug.xcconfig */,
+				7B3010CB580678E822A59345 /* Pods-Facial Exercises.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -189,9 +222,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BF7E0EF921DD77A9004D278C /* Build configuration list for PBXNativeTarget "Facial Exercises" */;
 			buildPhases = (
+				E42C46470AC8100A63233D63 /* [CP] Check Pods Manifest.lock */,
 				BF7E0EE321DD77A8004D278C /* Sources */,
 				BF7E0EE421DD77A8004D278C /* Frameworks */,
 				BF7E0EE521DD77A8004D278C /* Resources */,
+				815DFA4A9B3311195935B7E4 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -240,6 +275,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC9BD0D821DECFA500467B57 /* checkmark.json in Resources */,
 				BF7E0EF521DD77A9004D278C /* LaunchScreen.storyboard in Resources */,
 				AC251F4F21DD814D00A62718 /* Merriweather-Bold.ttf in Resources */,
 				BF7E0EF221DD77A9004D278C /* Assets.xcassets in Resources */,
@@ -250,11 +286,59 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		815DFA4A9B3311195935B7E4 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Facial Exercises/Pods-Facial Exercises-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/lottie-ios/Lottie.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Lottie.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Facial Exercises/Pods-Facial Exercises-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E42C46470AC8100A63233D63 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Facial Exercises-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		BF7E0EE321DD77A8004D278C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				228E6AB821DEB6B60060ED5E /* UserStatHistoryView.swift in Sources */,
 				AC251F4221DD798E00A62718 /* MenuViewController.swift in Sources */,
 				2271C8D921DE308900764C5E /* Exercise.xcdatamodeld in Sources */,
 				2271C8E221DE322200764C5E /* JawForward.swift in Sources */,
@@ -268,11 +352,12 @@
 				AC251F4521DD799B00A62718 /* AutoLayout.swift in Sources */,
 				AC251F5321DD81AA00A62718 /* UIColor+Theme.swift in Sources */,
 				2271C8D721DE308900764C5E /* CoreDataStack.swift in Sources */,
-				BF7E0F0021DDC64A004D278C /* ExcercisesViewController.swift in Sources */,
 				2271C8CF21DE2C3700764C5E /* FacialExercise.swift in Sources */,
+				BF5242AB21DE7B7000D357EC /* Mask.swift in Sources */,
 				2271C8D821DE308900764C5E /* Exercise+Convenience.swift in Sources */,
 				AC251F4C21DD7B0D00A62718 /* ExerciseCell.swift in Sources */,
 				BF7E0EEB21DD77A8004D278C /* AppDelegate.swift in Sources */,
+				3D94188321DE601A0000FAD0 /* ResultViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -416,6 +501,7 @@
 		};
 		BF7E0EFA21DD77A9004D278C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F4AF143646AA6505CAA8CE27 /* Pods-Facial Exercises.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -434,6 +520,7 @@
 		};
 		BF7E0EFB21DD77A9004D278C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7B3010CB580678E822A59345 /* Pods-Facial Exercises.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

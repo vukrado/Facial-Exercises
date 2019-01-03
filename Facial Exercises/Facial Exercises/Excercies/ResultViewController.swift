@@ -18,12 +18,13 @@ class ResultViewController: UIViewController {
     // MARK: - Public properties
     
     var completedExercises = [Exercise]()
+    var shouldCelebrate = true
     
     // MARK: - Private properties
     
     private let headerView: HeaderResultsView = {
         let view = HeaderResultsView(score: 50)
-        view.backgroundColor = UIColor.init(white: 0.95, alpha: 1)
+        view.backgroundColor = UIColor.lightGray
         view.layer.cornerRadius = 12
         return view
     }()
@@ -33,13 +34,6 @@ class ResultViewController: UIViewController {
         layout.minimumInteritemSpacing = 12
         let cv = ExerciseResultsCollectionView(collectionViewLayout: layout)
         return cv
-    }()
-    
-    private let backgroundView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .blue
-        view.clipsToBounds = true
-        return view
     }()
     
     private let blurEffect: UIVisualEffectView = {
@@ -54,15 +48,16 @@ class ResultViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.setGradientBackground(colors: [UIColor.rgb(red: 166, green: 255, blue: 203).cgColor, UIColor.rgb(red: 18, green: 216, blue: 250).cgColor, UIColor.rgb(red: 31, green: 162, blue: 255).cgColor], locations: [0.0, 0.5, 1.0], startPoint: CGPoint(x: 1, y: 0), endPoint: CGPoint(x: 0, y: 1))
         
         setupViews()
+        
+        if shouldCelebrate { setupEmitterView() }
     }
     
     // MARK: - Configuration
     
     private func setupViews() {
-        view.addSubview(backgroundView)
-        backgroundView.fillSuperview()
         view.addSubview(blurEffect)
         blurEffect.fillSuperview()
         
@@ -73,6 +68,36 @@ class ResultViewController: UIViewController {
         exerciseResultsView.anchor(top: headerView.bottomAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor, padding: UIEdgeInsets(top: sidePadding, left: sidePadding, bottom: sidePadding, right: sidePadding))
     }
     
+    private func setupEmitterView() {
+        let rect = CGRect(x: 0.0, y: -90.0, width: view.bounds.width, height: 50.0)
+        let emitter = CAEmitterLayer()
+        emitter.frame = rect
+        emitter.emitterShape = CAEmitterLayerEmitterShape.point
+        emitter.emitterPosition = CGPoint(x: rect.width/2, y: rect.height/2)
+        emitter.emitterSize = rect.size
+        view.layer.addSublayer(emitter)
+        
+        emitter.emitterCells = [CAEmitterCell]()
+        
+        let emitterCell = CAEmitterCell()
+        emitterCell.contents = UIImage(named: "star")?.cgImage
+        emitterCell.color = UIColor.red.cgColor
+        emitterCell.birthRate = 100
+        emitterCell.lifetime = 5
+        emitterCell.yAcceleration = 100.0
+        emitterCell.xAcceleration = 10.0
+        emitterCell.zAcceleration = 10.0
+        emitterCell.spin = 5.0
+        emitterCell.velocity = 350.0
+        emitterCell.velocityRange = 200.0
+        emitterCell.emissionLongitude = .pi * 0.5
+        emitterCell.emissionRange = .pi * 0.5
+        emitterCell.scale = 1.0
+        emitterCell.scaleRange = 0.5
+        
+        emitter.emitterCells?.append(emitterCell)
+    }
+    
 }
 
 private class HeaderResultsView: UIView {
@@ -81,6 +106,8 @@ private class HeaderResultsView: UIView {
     
     private let title: UILabel = {
         let label = UILabel()
+        label.font = Appearance.appFont(style: .body, size: 24.0)
+        label.textColor = .white
         label.textAlignment = .center
         label.text = "Total Score"
         return label
@@ -88,6 +115,8 @@ private class HeaderResultsView: UIView {
     
     private let scoreLabel: UILabel = {
         let label = UILabel()
+        label.font = Appearance.boldAppFont(style: .body, size: 45.0)
+        label.textColor = .white
         label.textAlignment = .center
         return label
     }()
@@ -186,6 +215,7 @@ private class ExerciseResultCell: UICollectionViewCell {
     
     private let exerciseNameLabel: UILabel = {
         let label = UILabel()
+        label.font = Appearance.appFont(style: .body, size: 17.0)
         label.numberOfLines = 2
         label.textColor = .white
         return label

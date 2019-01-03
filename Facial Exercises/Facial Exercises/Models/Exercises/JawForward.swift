@@ -21,18 +21,11 @@ class JawForward: FacialExercise {
     
     func calculateProgress(currentCoefficients: [ARFaceAnchor.BlendShapeLocation : ExerciseSession.Coefficient]) -> Float {
         
-        if let expression = expressionsWithThresholds.first?.key,
+        guard let expression = expressionsWithThresholds.first?.key,
             let threshold = expressionsWithThresholds.first?.value,
-            let currentCoefficient = currentCoefficients[expression] {
+            let currentCoefficient = currentCoefficients[expression] else { return 0.0 }
             
-            if currentCoefficient.floatValue >= threshold.floatValue {
-                return 1.0
-            } else {
-                return currentCoefficient.floatValue / threshold.floatValue
-            }
-        } else {
-            return 0.0
-        }
+        return currentCoefficient.floatValue / threshold.floatValue
     }
     
     func calculateSuccess(currentCoefficients: [ARFaceAnchor.BlendShapeLocation : ExerciseSession.Coefficient]) -> Bool {

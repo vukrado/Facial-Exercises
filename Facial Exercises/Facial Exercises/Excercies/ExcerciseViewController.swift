@@ -23,6 +23,8 @@ class ExcerciseViewController: UIViewController {
     //Will hold the ARFaceAnchor - which has information about the pose, topology, and expression of a face detected in a face-tracking AR session.
     private var faceNode: SCNNode?
     
+    private var exercises = [FacialExercise]()
+    
     
     // MARK: - View Life Cycle
     override func viewDidLoad() {
@@ -162,6 +164,7 @@ extension ExcerciseViewController: ARSCNViewDelegate {
 
         DispatchQueue.main.async {
             self.checkmarkAnimation.play { (_) in
+                self.descriptionLabel.text = "Face sucessfully found"
                 self.checkmarkAnimation.isHidden = true
                 self.createFaceGeometry()
                 
@@ -169,12 +172,12 @@ extension ExcerciseViewController: ARSCNViewDelegate {
                 maskTransform = CATransform3DScale(maskTransform, 2.0, 2.0, 1.01)
                 maskTransform = CATransform3DTranslate(maskTransform, 0, 100, 0)
                 
-                var sceneViewTransform = CATransform3DIdentity
-                sceneViewTransform = CATransform3DScale(maskTransform, 0.1, 0.1, 1)
-                sceneViewTransform = CATransform3DTranslate(maskTransform, 100, 0, 0)
+//                var sceneViewTransform = CATransform3DIdentity
+//                sceneViewTransform = CATransform3DScale(maskTransform, 0.1, 0.1, 1)
+//                sceneViewTransform = CATransform3DTranslate(maskTransform, 100, 0, 0)
                 UIView.animate(withDuration: 1.0, delay: 0, options: [.curveEaseIn], animations: {
                     self.maskSceneView.layer.transform = maskTransform
-                    self.sceneView.layer.transform = sceneViewTransform
+                    self.sceneView.alpha = 0.0
                 }, completion: nil)
             }
         }

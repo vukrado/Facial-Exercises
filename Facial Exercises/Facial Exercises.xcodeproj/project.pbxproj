@@ -31,7 +31,6 @@
 		BF7E0EF021DD77A8004D278C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF7E0EEE21DD77A8004D278C /* Main.storyboard */; };
 		BF7E0EF221DD77A9004D278C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BF7E0EF121DD77A9004D278C /* Assets.xcassets */; };
 		BF7E0EF521DD77A9004D278C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF7E0EF321DD77A9004D278C /* LaunchScreen.storyboard */; };
-		BF7E0F0021DDC64A004D278C /* ExcercisesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7E0EFF21DDC64A004D278C /* ExcercisesViewController.swift */; };
 		BF7E0F0321DDE2C2004D278C /* ExcerciseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7E0F0221DDE2C2004D278C /* ExcerciseViewController.swift */; };
 		BF86ACE621DE9C3600DFD646 /* checkmark.json in Resources */ = {isa = PBXBuildFile; fileRef = BF86ACE521DE9C3500DFD646 /* checkmark.json */; };
 /* End PBXBuildFile section */
@@ -64,7 +63,6 @@
 		BF7E0EF121DD77A9004D278C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BF7E0EF421DD77A9004D278C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BF7E0EF621DD77A9004D278C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		BF7E0EFF21DDC64A004D278C /* ExcercisesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExcercisesViewController.swift; sourceTree = "<group>"; };
 		BF7E0F0221DDE2C2004D278C /* ExcerciseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExcerciseViewController.swift; sourceTree = "<group>"; };
 		BF86ACE521DE9C3500DFD646 /* checkmark.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = checkmark.json; path = "../../../Downloads/Check Mark Success/checkmark.json"; sourceTree = "<group>"; };
 		F4AF143646AA6505CAA8CE27 /* Pods-Facial Exercises.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Facial Exercises.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Facial Exercises/Pods-Facial Exercises.debug.xcconfig"; sourceTree = "<group>"; };
@@ -200,7 +198,6 @@
 			isa = PBXGroup;
 			children = (
 				BF7E0F0221DDE2C2004D278C /* ExcerciseViewController.swift */,
-				BF7E0EFF21DDC64A004D278C /* ExcercisesViewController.swift */,
 				3D94188221DE601A0000FAD0 /* ResultViewController.swift */,
 			);
 			path = Excercies;
@@ -351,7 +348,6 @@
 				AC251F4521DD799B00A62718 /* AutoLayout.swift in Sources */,
 				AC251F5321DD81AA00A62718 /* UIColor+Theme.swift in Sources */,
 				2271C8D721DE308900764C5E /* CoreDataStack.swift in Sources */,
-				BF7E0F0021DDC64A004D278C /* ExcercisesViewController.swift in Sources */,
 				2271C8CF21DE2C3700764C5E /* FacialExercise.swift in Sources */,
 				BF5242AB21DE7B7000D357EC /* Mask.swift in Sources */,
 				2271C8D821DE308900764C5E /* Exercise+Convenience.swift in Sources */,

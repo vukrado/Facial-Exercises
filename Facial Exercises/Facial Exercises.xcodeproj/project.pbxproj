@@ -17,6 +17,7 @@
 		2271C8E221DE322200764C5E /* JawForward.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2271C8E121DE322200764C5E /* JawForward.swift */; };
 		2271C8E421DE34A200764C5E /* EyeWink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2271C8E321DE34A200764C5E /* EyeWink.swift */; };
 		2271C8E621DE3A5A00764C5E /* TongueExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2271C8E521DE3A5A00764C5E /* TongueExtension.swift */; };
+		228E6AB821DEB6B60060ED5E /* UserStatHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228E6AB721DEB6B60060ED5E /* UserStatHistoryView.swift */; };
 		3D94188321DE601A0000FAD0 /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D94188221DE601A0000FAD0 /* ResultViewController.swift */; };
 		AC251F4221DD798E00A62718 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC251F4021DD798D00A62718 /* MenuViewController.swift */; };
 		AC251F4321DD798E00A62718 /* ExerciseCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC251F4121DD798D00A62718 /* ExerciseCollectionView.swift */; };
@@ -46,6 +47,7 @@
 		2271C8E121DE322200764C5E /* JawForward.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JawForward.swift; sourceTree = "<group>"; };
 		2271C8E321DE34A200764C5E /* EyeWink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EyeWink.swift; sourceTree = "<group>"; };
 		2271C8E521DE3A5A00764C5E /* TongueExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TongueExtension.swift; sourceTree = "<group>"; };
+		228E6AB721DEB6B60060ED5E /* UserStatHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStatHistoryView.swift; sourceTree = "<group>"; };
 		3D94188221DE601A0000FAD0 /* ResultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
 		6F573AD28E552FD36A6A0C9C /* Pods_Facial_Exercises.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Facial_Exercises.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B3010CB580678E822A59345 /* Pods-Facial Exercises.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Facial Exercises.release.xcconfig"; path = "Pods/Target Support Files/Pods-Facial Exercises/Pods-Facial Exercises.release.xcconfig"; sourceTree = "<group>"; };
@@ -186,6 +188,7 @@
 		BF7E0EE921DD77A8004D278C /* Facial Exercises */ = {
 			isa = PBXGroup;
 			children = (
+				228E6AB721DEB6B60060ED5E /* UserStatHistoryView.swift */,
 				2271C8D221DE308800764C5E /* CoreData */,
 				2271C8CD21DE2C1400764C5E /* Models */,
 				AC251F4621DD799E00A62718 /* Menu */,
@@ -339,6 +342,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				228E6AB821DEB6B60060ED5E /* UserStatHistoryView.swift in Sources */,
 				AC251F4221DD798E00A62718 /* MenuViewController.swift in Sources */,
 				2271C8D921DE308900764C5E /* Exercise.xcdatamodeld in Sources */,
 				2271C8E221DE322200764C5E /* JawForward.swift in Sources */,

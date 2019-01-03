@@ -8,9 +8,14 @@
 
 import UIKit
 
+protocol ExerciseCollectionViewDelegate: class {
+    func updateSelectedLabel(with amount: Int, max: Int)
+}
+
 class ExerciseCollectionView: UICollectionView {
     
-    private var cellId = "ExerciseCell  "
+    weak var updateDelegate: ExerciseCollectionViewDelegate?
+    private var cellId = "ExerciseCell"
     
     override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
         super.init(frame: frame, collectionViewLayout: layout)
@@ -24,7 +29,8 @@ class ExerciseCollectionView: UICollectionView {
         showsHorizontalScrollIndicator = false
         contentInset = UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 12)
         register(ExerciseCell.self, forCellWithReuseIdentifier: cellId)
-        self.allowsSelection = true
+        allowsSelection = true
+        allowsMultipleSelection = true
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -34,13 +40,17 @@ class ExerciseCollectionView: UICollectionView {
 
 extension ExerciseCollectionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let cell = self.cellForItem(at: indexPath)
-        cell?.backgroundColor = .selectedGreen
+        updateDelegate?.updateSelectedLabel(with: self.indexPathsForSelectedItems?.count ?? 0, max: 5)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        updateDelegate?.updateSelectedLabel(with: self.indexPathsForSelectedItems?.count ?? 0, max: 5)
     }
 }
 
 extension ExerciseCollectionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        updateDelegate?.updateSelectedLabel(with: 0, max: 5)
         return 5
     }
     

@@ -18,6 +18,19 @@ extension UIColor {
 
 }
 
+extension UIView {
+    func setGradientBackground(colors: [CGColor], locations: [NSNumber], startPoint: CGPoint, endPoint: CGPoint) {
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = bounds
+        gradientLayer.colors = colors
+        gradientLayer.locations = locations
+        gradientLayer.startPoint = startPoint
+        gradientLayer.endPoint = endPoint
+        
+        layer.insertSublayer(gradientLayer, at: 0)
+    }
+}
+
 enum Appearance {
     static func appFont(style: UIFont.TextStyle, size: CGFloat) -> UIFont {
         let font = UIFont(name: "Merriweather-Regular", size: size)!

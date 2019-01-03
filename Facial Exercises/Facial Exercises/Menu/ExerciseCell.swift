@@ -43,18 +43,54 @@ class ExerciseCell: UICollectionViewCell {
         return label
     }()
     
+    let selectedImageView: UIImageView = {
+        let iv = UIImageView(image: #imageLiteral(resourceName: "selected").withRenderingMode(.alwaysTemplate))
+        iv.contentMode = .scaleAspectFit
+        iv.tintColor = .selectedGreen
+        
+        return iv
+    }()
+    
+    let blurEffect: UIVisualEffectView = {
+        let frost = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
+        frost.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        
+        return frost
+    }()
+    
+    override var isSelected: Bool {
+        didSet {
+            selectedImageViewTrailingAnchor?.constant = isSelected ? -12 : 42
+            UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                
+                self.layoutIfNeeded()
+                
+            }, completion: nil)
+        }
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .red
         layer.cornerRadius = 16
+        layer.masksToBounds = true
         setupViews()
     }
     
+    var selectedImageViewTrailingAnchor: NSLayoutConstraint?
+    
     private func setupViews() {
+        addSubview(blurEffect)
+        blurEffect.fillSuperview()
+        
         addSubview(exerciseLabel)
-        exerciseLabel.anchor(top: topAnchor, leading: nil, bottom: nil, trailing: nil, padding: .init(top: 20, left: 0, bottom: 0, right: 0))
+        exerciseLabel.anchor(top: topAnchor, leading: leadingAnchor, bottom: nil, trailing: nil, padding: .init(top: 24, left: 0, bottom: 0, right: 0))
         exerciseLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        
+        addSubview(selectedImageView)
+        selectedImageView.anchor(top: nil, leading: nil, bottom: nil, trailing: nil, size: CGSize(width: 40, height: 40))
+        selectedImageView.centerYAnchor.constraint(equalTo: exerciseLabel.centerYAnchor).isActive = true
+        selectedImageViewTrailingAnchor = selectedImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 42)
+        selectedImageViewTrailingAnchor?.isActive = true
         
         addSubview(exerciseImageView)
         exerciseImageView.centerInSuperview(size: CGSize(width: 150, height: 150))

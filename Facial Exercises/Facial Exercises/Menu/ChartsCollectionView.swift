@@ -12,6 +12,12 @@ class ChartCollectionView: UICollectionView, UICollectionViewDataSource, UIColle
     
     static private var cellId = "ChartCell"
     
+    var exercises: [(String, [Exercise])]? {
+        didSet {
+            reloadData()
+        }
+    }
+    
     override init(frame: CGRect = CGRect.zero, collectionViewLayout layout: UICollectionViewLayout) {
         super.init(frame: frame, collectionViewLayout: layout)
         setupCollectionView()
@@ -32,12 +38,15 @@ class ChartCollectionView: UICollectionView, UICollectionViewDataSource, UIColle
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
+        return exercises?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = dequeueReusableCell(withReuseIdentifier: ChartCollectionView.cellId, for: indexPath) as! ChartCell
-        
+        guard let pastExercises = exercises else { return cell }
+        let exerciseType = pastExercises[indexPath.item]
+        cell.title = exerciseType.0
+        cell.exercises = exerciseType.1
         return cell
     }
     
@@ -53,10 +62,21 @@ class ChartCollectionView: UICollectionView, UICollectionViewDataSource, UIColle
 
 private class ChartCell: UICollectionViewCell {
     
+    var title: String? {
+        didSet {
+            updateViews()
+        }
+    }
+    
+    var exercises: [Exercise]? {
+        didSet {
+            setupChart()
+        }
+    }
+    
     private lazy var chartTitle: UILabel = {
         let label = UILabel()
         label.font = Appearance.appFont(style: .body, size: 17.0)
-        label.text = "Brow Exercises"
         label.textColor = .white
         label.textAlignment = .center
         return label
@@ -64,10 +84,10 @@ private class ChartCell: UICollectionViewCell {
     
     let userStatsView: UserStatHistoryView = {
         let graph = UserStatHistoryView()
-        graph.userRecords = [UserRecord(date: generateRandomDate(daysBack: 10)!, highScore: 0.0),
-                             UserRecord(date: generateRandomDate(daysBack: 10)!, highScore: 10.0),
-                             UserRecord(date: generateRandomDate(daysBack: 10)!, highScore: 3.0),
-                             UserRecord(date: generateRandomDate(daysBack: 10)!, highScore: 15.0)]
+//        graph.userRecords = [UserRecord(date: generateRandomDate(daysBack: 10)!, highScore: 0.0),
+//                             UserRecord(date: generateRandomDate(daysBack: 10)!, highScore: 10.0),
+//                             UserRecord(date: generateRandomDate(daysBack: 10)!, highScore: 3.0),
+//                             UserRecord(date: generateRandomDate(daysBack: 10)!, highScore: 15.0)]
         return graph
     }()
     
@@ -90,6 +110,16 @@ private class ChartCell: UICollectionViewCell {
         userStatsView.anchor(top: chartTitle.bottomAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: UIEdgeInsets(top: padding, left: padding, bottom: padding, right: padding))
         
         userStatsView.backgroundColor = .clear
+    }
+    
+    private func updateViews() {
+        guard let title = title else { return }
+        chartTitle.text = title
+    }
+    
+    private func setupChart() {
+        guard let exercises = exercises else { return }
+        userStatsView.userRecords = exercises.compactMap { UserRecord(date: $0.timestamp!, highScore: $0.score) }
     }
     
 }

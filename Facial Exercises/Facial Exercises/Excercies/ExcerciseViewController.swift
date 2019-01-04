@@ -33,9 +33,7 @@ class ExcerciseViewController: UIViewController {
             }
         }
     }
-    
-    var exerciseCopy = [FacialExercise]()
-    
+        
     var exercisesWithResults = [String: Float]()
     var highestResult: Float = 0.0
     
@@ -463,9 +461,8 @@ private extension ExcerciseViewController {
                         exercises.remove(at: 0)
                         if exercises.count > 0 {
                             exerciseCompleteView.showCelebrationView()
-                            detectFaceLabel.text = "\(exercises[0].title)"
                             updateMessage(text: "\(exercises[0].description)")
-                            detectFaceLabel.text = exercises[0].title
+                            detectFaceLabel.text = exercises[0].description
                         }
                         resetProgressView()
                         isPaused = false
@@ -473,6 +470,7 @@ private extension ExcerciseViewController {
                         count = exercise.holdCount
                         resetProgressView()
                         updateMessage(text: exercise.description)
+                        detectFaceLabel.text = exercise.description
                     }
                 }
             }

@@ -33,10 +33,10 @@ class FacialExercise {
     
     
     /// The shared instance of the eyebrow raises exercise
-    static let eyebrowRaises = FacialExercise(title: "Eyebrow Raises", description: "Lift your eyebrows and hold for 10 seconds", expressions: [.browInnerUp], holdCount: 10.0, repeatCount: 4)
+    static let eyebrowRaises = FacialExercise(title: "Eyebrow Raises", description: "Lift your eyebrows and hold for 10 seconds", expressions: [.browInnerUp], holdCount: 5.0, repeatCount: 2)
    
     /// The shared instance of the eyebrow raises exercise
-    static let tongueExtensions = FacialExercise(title: "Tongue Extensions", description: "Stick your tongue out for 2 seconds. Complete 5 repetitions.", expressions: [.tongueOut], holdCount: 2.0, repeatCount: 6)
+    static let tongueExtensions = FacialExercise(title: "Tongue Extensions", description: "Stick your tongue out for 2 seconds. Complete 5 repetitions.", expressions: [.tongueOut], holdCount: 2.0, repeatCount: 2)
     
     /// The shared instance of the eyebrow raises exercise
     static let jawForwards = FacialExercise(title: "Jaw Forwards", description: "Move your jaw forward for 5 seconds, then return it back to its resting position. Complete 5 repetitions.", expressions: [.jawForward], holdCount: 5.0, repeatCount: 5)

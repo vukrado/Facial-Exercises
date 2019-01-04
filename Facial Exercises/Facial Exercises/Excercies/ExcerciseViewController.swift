@@ -23,7 +23,15 @@ class ExcerciseViewController: UIViewController {
     //Will hold the ARFaceAnchor - which has information about the pose, topology, and expression of a face detected in a face-tracking AR session.
     private var faceNode: SCNNode?
     
-    var exercises = [FacialExercise]()
+    var exercises = [FacialExercise]() {
+        didSet {
+            if exercises.count > 0 {
+                count = exercises[0].holdCount
+            } else {
+                updateMessage(text: "Successfully completed exercises for today!")
+            }
+        }
+    }
     
     // MARK: - View Life Cycle
     override func viewDidLoad() {
@@ -84,7 +92,7 @@ class ExcerciseViewController: UIViewController {
         let pv = UIProgressView(progressViewStyle: .bar)
         pv.progress = 1
         pv.trackTintColor = UIColor.rgb(red: 163, green: 215, blue: 255)
-        
+        pv.tintColor = UIColor.white
         return pv
     }()
     
@@ -161,22 +169,23 @@ private extension ExcerciseViewController {
     @objc func updateProgressBar(length: Float) {
         if count > 0 {
             count -= 1
-            let progress = Float(count / 15.0)
+            let progress = Float(count / exercises[0].holdCount)
             print("the count is \(count) and the progress is \(progress)")
             DispatchQueue.main.async {
                 self.progressView.progress = progress
             }
+            updateCountLabel()
         } else if count == 0 {
             timer.invalidate()
             DispatchQueue.main.async {
-                self.progressView.progress = 0.0
+//                self.progressView.progress = 0.0
+                self.exercises.remove(at: 0)
             }
         }
     }
     
     func createFaceGeometry() {
         updateMessage(text: "Creating face geometry")
-        
         let device = sceneView.device!
         let maskGeometry = ARSCNFaceGeometry(device: device)!
         mask = Mask(geometry: maskGeometry)
@@ -190,6 +199,25 @@ private extension ExcerciseViewController {
             self.descriptionLabel.text = text
         }
     }
+    
+    //Resets the progress view back to 1 on the main queue, used for begining a new exercise or repeating an exercise from the beginning
+    func resetProgressView() {
+        DispatchQueue.main.async {
+            self.progressView.progress = 1
+        }
+    }
+    
+    func updateCountLabel() {
+        switch Int(count) {
+        case 0:
+            updateMessage(text: "Repition Complete")
+        case 1:
+            updateMessage(text: "Hold for \(Int(count)) more second")
+        default:
+            updateMessage(text: "Hold for \(Int(count)) more seconds")
+        }
+    }
+    
 }
 
 
@@ -214,7 +242,8 @@ extension ExcerciseViewController: ARSCNViewDelegate {
 
         DispatchQueue.main.async {
             self.checkmarkAnimation.play { (_) in
-                self.descriptionLabel.text = "Face sucessfully found"
+                self.updateMessage(text: "Face successfully found")
+                
                 self.checkmarkAnimation.isHidden = true
                 self.createFaceGeometry()
                 
@@ -225,10 +254,16 @@ extension ExcerciseViewController: ARSCNViewDelegate {
 //                var sceneViewTransform = CATransform3DIdentity
 //                sceneViewTransform = CATransform3DScale(maskTransform, 0.1, 0.1, 1)
 //                sceneViewTransform = CATransform3DTranslate(maskTransform, 100, 0, 0)
+                
                 UIView.animate(withDuration: 1.0, delay: 0, options: [.curveEaseIn], animations: {
                     self.maskSceneView.layer.transform = maskTransform
-                    self.sceneView.alpha = 0.0
-                }, completion: nil)
+                    self.sceneView.transform = CGAffineTransform(translationX: 0, y: -200)
+//                    self.sceneView.alpha = 0.0
+                }, completion: { (_) in
+                    let impactGenerator = UIImpactFeedbackGenerator(style: .heavy)
+                    impactGenerator.impactOccurred()
+                    self.updateMessage(text: self.exercises[0].description)
+                })
             }
         }
         
@@ -245,17 +280,66 @@ extension ExcerciseViewController: ARSCNViewDelegate {
         mask?.update(withFaceAnchor: faceAnchor)
         
         //Test for Raising eyebrows
+        
         let blendShapes = faceAnchor.blendShapes
-        guard let eyebrowsUp = blendShapes[.browInnerUp] as? Float else {return}
-        if eyebrowsUp > 0.6 {
-            if !timerIsRunning {
-                startTimer(for: 15.0)
-                timerIsRunning = true
+        
+        //Will crash when you are done with exercises need to present result view controller when done to stop from crashing
+        let exercise = exercises[0]
+        guard let expression = blendShapes[exercise.expressions.first!] as? Float else {return}
+        
+        //If the expression is above point 6 and the timer is not running, it starts the timer for the count, which is equal to the holdLength of the exercise
+        
+        if expression > 0.6 {
+            if !timer.isValid {
+                startTimer(for: count)
             }
         } else {
-            if timerIsRunning {
+            if timer.isValid {
                 timer.invalidate()
+                if count != 0 && count != exercise.holdCount {
+                    updateCountLabel()
+                } else if count == 0 {
+                    exercise.repeatCount -= 1
+                    if exercise.repeatCount == 0 {
+                        exercises.remove(at: 0)
+                        if exercises.count > 0 {
+                            updateMessage(text: exercises[0].description)
+                        }
+                        resetProgressView()
+                    } else {
+                        count = exercise.holdCount
+                        resetProgressView()
+                        updateMessage(text: exercise.description)
+                    }
+                }
             }
         }
     }
 }
+
+
+//if expression > 0.6 {
+//    if !timerIsRunning {
+//        startTimer(for: count)
+//        timerIsRunning = true
+//    }
+//} else {
+//    if timerIsRunning {
+//        timer.invalidate()
+//        if count != 0 && count != exercise.holdCount {
+//            updateMessage(text: "Hold for \(Int(count)) more seconds")
+//        } else if count == 0 {
+//            exercise.repeatCount -= 1
+//            if exercise.repeatCount == 0 {
+//                exercises.remove(at: 0)
+//                updateMessage(text: exercises[0].description)
+//                resetProgressView()
+//            } else {
+//                count = exercise.holdCount
+//                resetProgressView()
+//                updateMessage(text: exercise.description)
+//            }
+//        }
+//        timerIsRunning = false
+//    }
+//}

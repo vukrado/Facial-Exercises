@@ -114,6 +114,30 @@ class ExcerciseViewController: UIViewController {
         return view
     }()
     
+    private let statusTrackView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .rgb(red: 218, green: 231, blue: 236)
+        
+        return view
+    }()
+    
+    private let statusFillView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .red
+        
+        return view
+    }()
+    
+    private var statusFillViewHeightConstraint: NSLayoutConstraint?
+    
+    private let tickMark: UIView = {
+        let view = UIView()
+        view.backgroundColor = .lightGray
+        
+        return view
+    }()
+    
+    private var lastExpression: Float = 0.0
 }
 
 // MARK: - Private Methods
@@ -143,6 +167,19 @@ private extension ExcerciseViewController {
         view.addSubview(checkmarkAnimation)
         checkmarkAnimation.anchor(top: sceneView.bottomAnchor, leading: nil, bottom: nil, trailing: nil, padding: .init(top: 12, left: 0, bottom: 0, right: 0), size: CGSize(width: 80, height: 80))
         checkmarkAnimation.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        
+        view.addSubview(statusTrackView)
+        statusTrackView.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: containerView.topAnchor, trailing: nil, padding: UIEdgeInsets(top: 40.0, left: 30.0, bottom: 40.0, right: 0.0), size: CGSize(width: 5.0, height: 0.0))
+        
+        statusTrackView.addSubview(statusFillView)
+        statusFillView.anchor(top: nil, leading: statusFillView.superview?.leadingAnchor, bottom: statusFillView.superview?.bottomAnchor, trailing: statusFillView.superview?.trailingAnchor)
+        
+        statusFillViewHeightConstraint = statusFillView.heightAnchor.constraint(equalToConstant: 0.0)
+        statusFillViewHeightConstraint?.isActive = true
+        
+        // view.addSubview(tickMark)
+        // tickMark.anchor(top: nil, leading: nil, bottom: nil, trailing: nil, padding: UIEdgeInsets(top: 0.0, left: 0.0, bottom: statusViewTrack.bounds.size.height * 0.6, right: 0.0), size: CGSize(width: statusViewTrack.bounds.size.width + 6.0, height: 4.0))
+        // tickMark.centerXAnchor.constraint(equalTo: statusViewTrack.centerXAnchor)
     }
     
     // Tag: ARFaceTrackingConfiguration
@@ -285,7 +322,26 @@ extension ExcerciseViewController: ARSCNViewDelegate {
         
         //Will crash when you are done with exercises need to present result view controller when done to stop from crashing
         let exercise = exercises[0]
+        
         guard let expression = blendShapes[exercise.expressions.first!] as? Float else {return}
+        
+        if expression - lastExpression >= 0.015 || expression - lastExpression <= -0.015 {
+            DispatchQueue.main.async {
+                
+                let statusFillHeight = self.statusTrackView.bounds.height * CGFloat(expression)
+                self.statusFillViewHeightConstraint?.constant = statusFillHeight
+                
+                UIView.animate(withDuration: 0.5) {
+                    self.view.layoutIfNeeded()
+                }
+                
+                // let isAboveThreshold = expression >= LevelHelper.getThreshold(for: exercise.expressions.first!)
+                let isAboveThreshold = expression > 0.6
+                self.statusFillView.backgroundColor = isAboveThreshold ? .selectedGreen : .red
+            }
+        }
+        
+        lastExpression = expression
         
         //If the expression is above point 6 and the timer is not running, it starts the timer for the count, which is equal to the holdLength of the exercise
         

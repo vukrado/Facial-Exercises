@@ -84,10 +84,6 @@ private class ChartCell: UICollectionViewCell {
     
     let userStatsView: UserStatHistoryView = {
         let graph = UserStatHistoryView()
-//        graph.userRecords = [UserRecord(date: generateRandomDate(daysBack: 10)!, highScore: 0.0),
-//                             UserRecord(date: generateRandomDate(daysBack: 10)!, highScore: 10.0),
-//                             UserRecord(date: generateRandomDate(daysBack: 10)!, highScore: 3.0),
-//                             UserRecord(date: generateRandomDate(daysBack: 10)!, highScore: 15.0)]
         return graph
     }()
     

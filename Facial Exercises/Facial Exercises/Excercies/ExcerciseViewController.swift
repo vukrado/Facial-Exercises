@@ -508,6 +508,7 @@ private extension ExcerciseViewController {
                 } else if count == 0 {
                     exercise.repeatCount -= 1
                     if exercise.repeatCount == 0 {
+                        isPaused = true
                         exercisesWithResults[exercise.title] = highestResult
                         highestResult = 0.0
                         exercises.remove(at: 0)
@@ -518,6 +519,7 @@ private extension ExcerciseViewController {
                             detectFaceLabel.text = exercises[0].title
                         }
                         resetProgressView()
+                        isPaused = false
                     } else {
                         count = exercise.holdCount
                         resetProgressView()
@@ -605,6 +607,7 @@ extension ExcerciseViewController: ARSCNViewDelegate {
             }
         } else {
             DispatchQueue.main.async {
+                self.isPaused = true
                 let resultsVc = ResultViewController()
                 resultsVc.exercisesWithResults = self.exercisesWithResults
                 self.navigationController?.pushViewController(resultsVc, animated: true)

@@ -13,25 +13,17 @@
 
 import UIKit
 import CoreData
+import Lottie
 
 class ResultViewController: UIViewController {
     
     // MARK: - Public properties
-    // TODO: instantiated ExerciseController is only for testing purposes:
-    let exerciseController: ExerciseController? = ExerciseController(exercises: [
-            FacialExercise.eyebrowRaises,
-            FacialExercise.eyeBlinkLeft,
-            FacialExercise.jawForwards,
-            FacialExercise.tongueExtensions,
-            FacialExercise.eyeBlinkRight
-        ])
-    var completedExercises: [FacialExercise]? {
-        return exerciseController?.exercises
-    }
+    
     var shouldCelebrate = false
     var exercisesWithResults = [String: Float]() {
         didSet {
             print(exercisesWithResults)
+            updateViews()
         }
     }
     
@@ -39,7 +31,7 @@ class ResultViewController: UIViewController {
     
     private let headerView: HeaderResultsView = {
         let view = HeaderResultsView(score: 50)
-        view.backgroundColor = UIColor.lightGray
+        view.backgroundColor = .clear
         view.layer.cornerRadius = 12
         return view
     }()
@@ -91,13 +83,8 @@ class ResultViewController: UIViewController {
     }
     
     private func saveExercises(context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
-        guard let exerciseController = exerciseController else {
-            NSLog("ExerciseController not passed into ResultsView")
-            return
-        }
-        
-        for exercise in exerciseController.exercises {
-            let _ = Exercise(type: exercise.title, length: exercise.holdCount, score: 0.8)
+        for exercise in exercisesWithResults {
+            let _ = Exercise(type: exercise.key, score: exercise.value)
         }
         
         context.performAndWait {
@@ -122,12 +109,10 @@ class ResultViewController: UIViewController {
         
         view.addSubview(exerciseResultsView)
         exerciseResultsView.anchor(top: headerView.bottomAnchor, leading: view.leadingAnchor, bottom: finishButton.topAnchor, trailing: view.trailingAnchor, padding: UIEdgeInsets(top: sidePadding, left: sidePadding, bottom: sidePadding, right: sidePadding))
-        
-        exerciseResultsView.completedExercises = completedExercises
     }
     
     private func updateViews() {
-        exerciseResultsView.completedExercises = completedExercises
+        exerciseResultsView.completedExercises = exercisesWithResults.map { ($0.key, $0.value) }
     }
     
     private func setupEmitterView() {
@@ -163,31 +148,19 @@ class ResultViewController: UIViewController {
 }
 
 private class HeaderResultsView: UIView {
-    
-    var score: Int = 0
-    
-    private let title: UILabel = {
-        let label = UILabel()
-        label.font = Appearance.appFont(style: .body, size: 24.0)
-        label.textColor = .white
-        label.textAlignment = .center
-        label.text = "Total Score"
-        return label
-    }()
-    
-    private let scoreLabel: UILabel = {
-        let label = UILabel()
-        label.font = Appearance.boldAppFont(style: .body, size: 45.0)
-        label.textColor = .white
-        label.textAlignment = .center
-        return label
+
+    let animationView: LOTAnimationView = {
+        let lav = LOTAnimationView()
+        lav.setAnimation(named: "trophy")
+        lav.animationSpeed = 0.8
+        
+        return lav
     }()
     
     private let padding: CGFloat = 12.0
     
     init(frame: CGRect = CGRect.zero, score: Int) {
         super.init(frame: frame)
-        self.score = score
         setupViews()
     }
     
@@ -196,12 +169,9 @@ private class HeaderResultsView: UIView {
     }
     
     private func setupViews() {
-        addSubview(title)
-        title.anchor(top: topAnchor, leading: leadingAnchor, bottom: nil, trailing: trailingAnchor, padding: UIEdgeInsets(top: padding, left: padding, bottom: 0.0, right: padding))
-        
-        addSubview(scoreLabel)
-        scoreLabel.anchor(top: title.bottomAnchor, leading: leadingAnchor, bottom: nil, trailing: trailingAnchor, padding: UIEdgeInsets(top: padding, left: padding, bottom: 0.0, right: padding))
-        scoreLabel.text = String(score)
+        addSubview(animationView)
+        animationView.centerInSuperview(size: CGSize(width: 180, height: 180))
+        animationView.play()
     }
     
 }
@@ -209,7 +179,7 @@ private class HeaderResultsView: UIView {
 private class ExerciseResultsCollectionView: UICollectionView, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     static private var cellId = "ExerciseResultCell"
-    var completedExercises: [FacialExercise]? {
+    var completedExercises: [(String, Float)]? {
         didSet {
             reloadData()
         }
@@ -243,7 +213,7 @@ private class ExerciseResultsCollectionView: UICollectionView, UICollectionViewD
         
         guard let exercises = completedExercises else { return cell }
         let exercise = exercises[indexPath.item]
-        cell.exerciseName = exercise.title
+        cell.exercise = exercise
         
         return cell
     }
@@ -256,7 +226,7 @@ private class ExerciseResultsCollectionView: UICollectionView, UICollectionViewD
 
 private class ExerciseResultCell: UICollectionViewCell {
     
-    var exerciseName: String? {
+    var exercise: (String, Float)? {
         didSet {
             updateViews()
         }
@@ -320,8 +290,9 @@ private class ExerciseResultCell: UICollectionViewCell {
     }
     
     private func updateViews() {
-        exerciseNameLabel.text = exerciseName
-        scoreLabel.text = "Your score was \(String(0.6))"
+        guard let exercise = exercise else { return }
+        exerciseNameLabel.text = exercise.0
+        scoreLabel.text = "Your score was \(String(exercise.1))"
     }
     
 }

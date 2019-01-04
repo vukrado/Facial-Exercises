@@ -13,23 +13,15 @@ class ProgressViewController: UIViewController {
 
     // MARK: - Public properties
     
-    // TODO: instantiated ExerciseController is only for testing purposes:
-    let exerciseController = ExerciseController(exercises: [
-        FacialExercise.eyebrowRaises,
-        FacialExercise.eyeBlinkLeft,
-        FacialExercise.jawForwards,
-        FacialExercise.tongueExtensions,
-        FacialExercise.eyeBlinkRight
-    ])
     var exerciseTypes = [
         FacialExercise.eyebrowRaises,
-        FacialExercise.eyeBlinkLeft,
-        FacialExercise.jawForwards,
         FacialExercise.tongueExtensions,
-        FacialExercise.eyeBlinkRight
+        FacialExercise.eyeBlinkLeft,
+        FacialExercise.eyeBlinkRight,
+        FacialExercise.jawForwards
     ]
     
-    var numberOfExercisesToShow = 5
+    var numberOfExercisesToShow = 7
     var fetchLimit = 20
     
     // MARK: - Private properties
@@ -107,6 +99,7 @@ class ProgressViewController: UIViewController {
         var exercises = [Exercise]()
         
         let fetchRequest: NSFetchRequest<Exercise> = Exercise.fetchRequest()
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "timestamp", ascending: false)]
         fetchRequest.fetchLimit = fetchLimit
         context.performAndWait {
             do {

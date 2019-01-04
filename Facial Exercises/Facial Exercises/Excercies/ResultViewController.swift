@@ -17,8 +17,16 @@ import CoreData
 class ResultViewController: UIViewController {
     
     // MARK: - Public properties
-    
-    var completedExercises = [Exercise]()
+    // TODO: instantiated ExerciseController is only for testing purposes:
+    let exerciseController: ExerciseController? = ExerciseController(exercises: [
+            FacialExercise.eyebrowRaises,
+            FacialExercise.eyeWinks,
+            FacialExercise.jawForwards,
+            FacialExercise.tongueExtensions,
+        ])
+    var completedExercises: [FacialExercise]? {
+        return exerciseController?.exercises
+    }
     var shouldCelebrate = false
     
     // MARK: - Private properties
@@ -69,12 +77,22 @@ class ResultViewController: UIViewController {
     }
     
     // MARK: - User actions
+    
     // When the user dismisses the results summary page we'll save the exercise results to local persistence
     @objc func handleFinish() {
         saveExercises()
     }
     
     private func saveExercises(context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
+        guard let exerciseController = exerciseController else {
+            NSLog("ExerciseController not passed into ResultsView")
+            return
+        }
+        
+        for exercise in exerciseController.exercises {
+            let _ = Exercise(type: exercise.title, length: exercise.holdCount, score: 0.7)
+        }
+        
         context.performAndWait {
             do {
                 try CoreDataStack.shared.save(context: context)
@@ -97,6 +115,11 @@ class ResultViewController: UIViewController {
         view.addSubview(exerciseResultsView)
         exerciseResultsView.anchor(top: headerView.bottomAnchor, leading: view.leadingAnchor, bottom: finishButton.topAnchor, trailing: view.trailingAnchor, padding: UIEdgeInsets(top: sidePadding, left: sidePadding, bottom: sidePadding, right: sidePadding))
         
+        exerciseResultsView.completedExercises = completedExercises
+    }
+    
+    private func updateViews() {
+        exerciseResultsView.completedExercises = completedExercises
     }
     
     private func setupEmitterView() {
@@ -178,6 +201,11 @@ private class HeaderResultsView: UIView {
 private class ExerciseResultsCollectionView: UICollectionView, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     static private var cellId = "ExerciseResultCell"
+    var completedExercises: [FacialExercise]? {
+        didSet {
+            reloadData()
+        }
+    }
     
     override init(frame: CGRect = CGRect.zero, collectionViewLayout layout: UICollectionViewLayout) {
         super.init(frame: frame, collectionViewLayout: layout)
@@ -199,12 +227,16 @@ private class ExerciseResultsCollectionView: UICollectionView, UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
+        return completedExercises?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = dequeueReusableCell(withReuseIdentifier: ExerciseResultsCollectionView.cellId, for: indexPath) as! ExerciseResultCell
-        cell.exerciseName = "Brow challenge"
+        
+        guard let exercises = completedExercises else { return cell }
+        let exercise = exercises[indexPath.item]
+        cell.exerciseName = exercise.title
+        
         return cell
     }
     
@@ -281,7 +313,7 @@ private class ExerciseResultCell: UICollectionViewCell {
     
     private func updateViews() {
         exerciseNameLabel.text = exerciseName
-        scoreLabel.text = "Your score was \(String(0.6)). (+XY% vs. previous score)"
+        scoreLabel.text = "Your score was \(String(0.6))"
     }
     
 }

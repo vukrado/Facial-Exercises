@@ -29,7 +29,6 @@ class ExcerciseViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.rgb(red: 163, green: 215, blue: 255)
-        setupScenes()
         setupViews()
     }
     
@@ -52,10 +51,11 @@ class ExcerciseViewController: UIViewController {
         return true
     }
     
-    private let sceneView: ARSCNView = {
+    private lazy var sceneView: ARSCNView = {
         let view = ARSCNView()
         view.layer.cornerRadius = 10.0
         view.layer.masksToBounds = true
+        view.delegate = self
         
         return view
     }()
@@ -108,12 +108,6 @@ class ExcerciseViewController: UIViewController {
 // MARK: - Private Methods
 private extension ExcerciseViewController {
     
-    // Tag: SceneKit Setup
-    func setupScenes() {
-        //Sets the views delegate to self
-        sceneView.delegate = self
-    }
-    
     func setupViews() {
         view.addSubview(containerView)
         containerView.anchor(top: nil, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor, size: CGSize(width: 0, height: self.view.frame.height / 4))
@@ -121,17 +115,21 @@ private extension ExcerciseViewController {
         containerView.addSubview(descriptionLabel)
         descriptionLabel.anchor(top: containerView.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 12, left: 12, bottom: 0, right: 12))
         
-        containerView.addSubview(progressView)
         progressView.translatesAutoresizingMaskIntoConstraints = false
+        containerView.addSubview(progressView)
         progressView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
         progressView.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).isActive = true
-        progressView.widthAnchor.constraint(equalToConstant: containerView.frame.width / 2).isActive = true
+        progressView.widthAnchor.constraint(equalToConstant: view.frame.width / 2).isActive = true
         
         view.addSubview(sceneView)
         sceneView.centerInSuperview(size: CGSize(width: view.frame.width / 2, height: view.frame.width / 2))
         
         view.addSubview(maskSceneView)
         maskSceneView.anchor(top: nil, leading: nil, bottom: sceneView.topAnchor, trailing: nil, padding: .init(top: 0, left: 0, bottom: 50, right: 0), size: CGSize(width: sceneView.frame.width / 2, height: sceneView.frame.width / 2))
+        
+        view.addSubview(checkmarkAnimation)
+        checkmarkAnimation.anchor(top: sceneView.bottomAnchor, leading: nil, bottom: nil, trailing: nil, padding: .init(top: 12, left: 0, bottom: 0, right: 0), size: CGSize(width: 80, height: 80))
+        checkmarkAnimation.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
     }
     
     // Tag: ARFaceTrackingConfiguration

@@ -93,25 +93,29 @@ class MenuViewController: UIViewController {
     
     @objc private func handleStart() {
         
-        guard let selectedIndexPaths = collectionView.indexPathsForSelectedItems else {
-            self.showAlert(with: "Please select an exercise.")
+        guard let selectedIndexPaths = collectionView.indexPathsForSelectedItems, !selectedIndexPaths.isEmpty else {
+            self.showAlert(with: "Please select at least one exercise.")
             return
-        }
-        
-        var selectedExercises = [FacialExercise]()
-        for indexPath in selectedIndexPaths {
-            collectionView.exercises[indexPath.item]
-            selectedExercises.append(collectionView.exercises[indexPath.item])
         }
         
         //0 = easy, 1 = medium, 2 = hard
         let difficulty = difficultySegmentedControl.selectedSegmentIndex
         
+        var selectedExercises = [FacialExercise]()
+        for indexPath in selectedIndexPaths {
+//            let exercise = collectionView.exercises[indexPath.item]
+//            switch difficulty {
+//            case 0: //exercise.threshold = 0.5
+//            case 1: //exercise.threshold = 0.7
+//            case 2: //exercise.threshold = 0.9
+//            default: //exercise.threshold = 0.7
+//            }
+            selectedExercises.append(collectionView.exercises[indexPath.item])
+        }
         
-//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//        let navVc = storyboard.instantiateViewController(withIdentifier: "Excercise") as! ExcerciseViewController
-        let navVc = ExcerciseViewController()
-        self.present(navVc, animated: true, completion: nil)
+        let excerciseViewController = ExcerciseViewController()
+//        excerciseViewController.exercises = selectedExercises
+        self.present(excerciseViewController, animated: true, completion: nil)
     }
     
     @objc private func handleSettings() {

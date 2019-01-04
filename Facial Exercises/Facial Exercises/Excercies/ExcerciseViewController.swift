@@ -23,7 +23,7 @@ class ExcerciseViewController: UIViewController {
     //Will hold the ARFaceAnchor - which has information about the pose, topology, and expression of a face detected in a face-tracking AR session.
     private var faceNode: SCNNode?
     
-    private var exercises = [FacialExercise]()
+    var exercises = [FacialExercise]()
     
     // MARK: - View Life Cycle
     override func viewDidLoad() {

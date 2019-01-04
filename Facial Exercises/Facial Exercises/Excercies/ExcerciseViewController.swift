@@ -24,16 +24,16 @@ class ExcerciseViewController: UIViewController {
     //Will hold the ARFaceAnchor - which has information about the pose, topology, and expression of a face detected in a face-tracking AR session.
     private var faceNode: SCNNode?
     
-    var exercises = [FacialExercise]() {
-        didSet {
-            if exercises.count > 0 {
-                count = exercises[0].holdCount
-            } else {
-                updateMessage(text: "Successfully completed exercises for today!")
-            }
-        }
-    }
-        
+    var exercises = [FacialExercise]()
+//    {
+//        didSet {
+//            if let exercise = exercises.first {
+//                count = exercise.holdCount
+//            }
+//        }
+//    }
+
+    
     var exercisesWithResults = [String: Float]()
     var highestResult: Float = 0.0
     
@@ -43,6 +43,7 @@ class ExcerciseViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         resetTracking()
+        count = exercises[0].holdCount
 //        view.backgroundColor = UIColor.rgb(red: 163, green: 215, blue: 255)
         view.setGradientBackground(colors: [UIColor.grayBlue.cgColor, UIColor.extraLightGray.cgColor], locations: [0.0, 1.0], startPoint: CGPoint(x: 1, y: 0), endPoint: CGPoint(x: 0, y: 1))
         setupViews()
@@ -386,26 +387,56 @@ private extension ExcerciseViewController {
         session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
     }
     
-    func startTimer(for length: Float) {
-        count = length
-        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateProgressBar(length:)), userInfo: nil, repeats: true)
+//    func startTimer(for length: Float) {
+//        count = length
+//        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateProgressBar), userInfo: nil, repeats: true)
+//    }
+    
+    func fireTimer() {
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateProgressBar), userInfo: nil, repeats: true)
     }
     
-    @objc func updateProgressBar(length: Float) {
-        if count > 0 {
-            count -= 1
-            let progress = Float(count / exercises[0].holdCount)
-            print("the count is \(count) and the progress is \(progress)")
-            DispatchQueue.main.async {
-                self.progressView.progress = progress
-            }
-            updateCountLabel()
-        } else if count == 0 {
-            timer.invalidate()
-            DispatchQueue.main.async {
-                self.exercises.remove(at: 0)
-            }
+    @objc func updateProgressBar() {
+        count -= 1
+        updateCountLabel()
+        let progress = Float(count / exercises[0].holdCount)
+        DispatchQueue.main.async {
+            self.progressView.progress = progress
         }
+        
+        if count == 0 {
+            exercises[0].repeatCount -= 1
+            
+            if exercises[0].repeatCount == 0 {
+                isPaused = true
+                exercises.remove(at: 0)
+                timer.invalidate()
+                exerciseCompleteView.showCelebrationView()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    self.isPaused = false
+                }
+                if let exercise = exercises.first {
+                    count = exercise.holdCount
+                    updateMessage(text: exercise.description)
+                    detectFaceLabel.text = exercise.title
+                    resetProgressView()
+                } else {
+                    let resultsVc = ResultViewController()
+                    resultsVc.exercisesWithResults = self.exercisesWithResults
+                    self.navigationController?.pushViewController(resultsVc, animated: true)
+                }
+            
+            } else {
+                if let exercise = exercises.first {
+                    updateMessage(text: exercise.description)
+                    detectFaceLabel.text = exercise.title
+                    count = exercise.holdCount
+                    resetProgressView()
+                }
+            }
+        
+        }
+
     }
     
     func createFaceGeometry() {
@@ -442,40 +473,40 @@ private extension ExcerciseViewController {
         }
     }
     
-    func checkExpressionSuccess(expression: Float, exercise: FacialExercise) {
-        if expression > LevelHelper.getThreshold(for: exercise.expressions.first!) {
-            if !timer.isValid {
-                startTimer(for: count)
-            }
-        } else {
-            if timer.isValid {
-                timer.invalidate()
-                if count != 0 && count != exercise.holdCount {
-                    updateCountLabel()
-                } else if count == 0 {
-                    exercise.repeatCount -= 1
-                    if exercise.repeatCount == 0 {
-                        isPaused = true
-                        exercisesWithResults[exercise.title] = highestResult
-                        highestResult = 0.0
-                        exercises.remove(at: 0)
-                        if exercises.count > 0 {
-                            exerciseCompleteView.showCelebrationView()
-                            updateMessage(text: "\(exercises[0].description)")
-                            detectFaceLabel.text = exercises[0].description
-                        }
-                        resetProgressView()
-                        isPaused = false
-                    } else {
-                        count = exercise.holdCount
-                        resetProgressView()
-                        updateMessage(text: exercise.description)
-                        detectFaceLabel.text = exercise.description
-                    }
-                }
-            }
-        }
-    }
+//    func checkExpressionSuccess(expression: Float, exercise: FacialExercise) {
+//        if expression > LevelHelper.getThreshold(for: exercise.expressions.first!) {
+//            if !timer.isValid {
+//                startTimer(for: count)
+//            }
+//        } else {
+//            if timer.isValid {
+//                timer.invalidate()
+//                if count != 0 && count != exercise.holdCount {
+//                    updateCountLabel()
+//                } else if count == 0 {
+//                    exercise.repeatCount -= 1
+//                    if exercise.repeatCount == 0 {
+//                        isPaused = true
+//                        exercisesWithResults[exercise.title] = highestResult
+//                        highestResult = 0.0
+//                        exercises.remove(at: 0)
+//                        if exercises.count > 0 {
+//                            exerciseCompleteView.showCelebrationView()
+//                            updateMessage(text: "\(exercises[0].description)")
+//                            detectFaceLabel.text = exercises[0].description
+//                        }
+//                        resetProgressView()
+//                        isPaused = false
+//                    } else {
+//                        count = exercise.holdCount
+//                        resetProgressView()
+//                        updateMessage(text: exercise.description)
+//                        detectFaceLabel.text = exercise.description
+//                    }
+//                }
+//            }
+//        }
+//    }
 }
 
 
@@ -501,7 +532,7 @@ extension ExcerciseViewController: ARSCNViewDelegate {
                 self.transitionAnimation()
             }
         }
-
+        
         isPaused = false
         return node
     }
@@ -523,8 +554,30 @@ extension ExcerciseViewController: ARSCNViewDelegate {
         
         let blendShapes = faceAnchor.blendShapes
         
-        if exercises.count > 0 {
+        
+        guard let expressionScale = blendShapes[exercises[0].expressions.first!] as? Float else {return}
+        
+        
+        if expressionScale > LevelHelper.getThreshold(for: exercises[0].expressions.first!) {
+            if !timerIsRunning {
+                DispatchQueue.main.async {
+                    self.fireTimer()
+                }
+                timerIsRunning = true
+            }
+        } else {
+            timer.invalidate()
+            timerIsRunning = false
+        }
+            
+            
+            
+            
             let exercise = exercises[0]
+            
+            
+            
+            
             
             guard let expression = blendShapes[exercise.expressions.first!] as? Float else {return}
             
@@ -545,21 +598,21 @@ extension ExcerciseViewController: ARSCNViewDelegate {
             }
             
             lastExpression = expression
-            if expression > highestResult {
-                highestResult = expression
-            }
-            //If the expression is above point 6 and the timer is not running, it starts the timer for the count, which is equal to the holdLength of the exercise
-            DispatchQueue.main.async {
-                self.checkExpressionSuccess(expression: expression, exercise: exercise)
-            }
-        } else {
-            DispatchQueue.main.async {
-                self.isPaused = true
-                let resultsVc = ResultViewController()
-                resultsVc.exercisesWithResults = self.exercisesWithResults
-                self.navigationController?.pushViewController(resultsVc, animated: true)
-            }
-        }
+//            if expression > highestResult {
+//                highestResult = expression
+//            }
+//            //If the expression is above point 6 and the timer is not running, it starts the timer for the count, which is equal to the holdLength of the exercise
+//            DispatchQueue.main.async {
+//                self.checkExpressionSuccess(expression: expression, exercise: exercise)
+//            }
+//        } else {
+//            DispatchQueue.main.async {
+//                self.isPaused = true
+//                let resultsVc = ResultViewController()
+//                resultsVc.exercisesWithResults = self.exercisesWithResults
+//                self.navigationController?.pushViewController(resultsVc, animated: true)
+//            }
+//        }
 
     }
 }

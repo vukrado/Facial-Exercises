@@ -33,7 +33,7 @@ class FacialExercise {
     
     
     /// The shared instance of the eyebrow raises exercise
-    static let eyebrowRaises = FacialExercise(title: "Eyebrow Raises", description: "Lift your eyebrows", expressions: [.browInnerUp], holdCount: 5.0, repeatCount: 1)
+    static let eyebrowRaises = FacialExercise(title: "Eyebrow Raises", description: "Lift your eyebrows", expressions: [.browInnerUp], holdCount: 2.0, repeatCount: 2)
    
     /// The shared instance of the eyebrow raises exercise
     static let tongueExtensions = FacialExercise(title: "Tongue Extensions", description: "Stick your tongue out", expressions: [.tongueOut], holdCount: 2.0, repeatCount: 1)

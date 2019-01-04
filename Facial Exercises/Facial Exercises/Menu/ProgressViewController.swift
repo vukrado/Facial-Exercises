@@ -26,7 +26,9 @@ class ProgressViewController: UIViewController {
         FacialExercise.jawForwards,
         FacialExercise.tongueExtensions,
     ]
+    
     var numberOfExercisesToShow = 5
+    var fetchLimit = 20
     
     // MARK: - Private properties
     
@@ -50,7 +52,7 @@ class ProgressViewController: UIViewController {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         let cv = ChartCollectionView(frame: .zero, collectionViewLayout: layout)
-        cv.pastExercises = getPastExercises(forTypes: exerciseTypes)
+        cv.exercises = getPastExercises(forTypes: exerciseTypes)
         
         return cv
     }()
@@ -63,11 +65,12 @@ class ProgressViewController: UIViewController {
         return label
     }()
     
-    private var exerciseHistoryCollectionView: ExerciseHistoryCollectionView = {
+    private lazy var exerciseHistoryCollectionView: ExerciseHistoryCollectionView = {
         let layout = UICollectionViewFlowLayout()
         let cv = ExerciseHistoryCollectionView(frame: .zero, collectionViewLayout: layout)
         cv.layer.cornerRadius = 16
         cv.layer.masksToBounds = true
+        cv.exercises = getPastExercisesForAllTypes(withLimit: fetchLimit)
         return cv
     }()
     
@@ -97,6 +100,24 @@ class ProgressViewController: UIViewController {
     }
     
     // MARK: - Private methods
+    
+    private func getPastExercisesForAllTypes(withLimit fetchLimit: Int, context: NSManagedObjectContext = CoreDataStack.shared.mainContext) -> [Exercise] {
+        var exercises = [Exercise]()
+        
+        let fetchRequest: NSFetchRequest<Exercise> = Exercise.fetchRequest()
+        fetchRequest.fetchLimit = fetchLimit
+        context.performAndWait {
+            do {
+                let fetchedExercises = try context.fetch(fetchRequest)
+                exercises.append(contentsOf: fetchedExercises)
+            } catch {
+                NSLog("Error fetching movie from persistent store: \(error)")
+            }
+        }
+        
+        return exercises
+    }
+    
     // Returns past exercises for different exercise types and returns the type name and its associated exercises in a tuple
     private func getPastExercises(forTypes types: [FacialExercise]) -> [(String, [Exercise])] {
         var pastExercises = [(String, [Exercise])]()

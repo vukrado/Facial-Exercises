@@ -12,7 +12,7 @@ class ChartCollectionView: UICollectionView, UICollectionViewDataSource, UIColle
     
     static private var cellId = "ChartCell"
     
-    var pastExercises: [(String, [Exercise])]? {
+    var exercises: [(String, [Exercise])]? {
         didSet {
             reloadData()
         }
@@ -38,12 +38,12 @@ class ChartCollectionView: UICollectionView, UICollectionViewDataSource, UIColle
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return pastExercises?.count ?? 0
+        return exercises?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = dequeueReusableCell(withReuseIdentifier: ChartCollectionView.cellId, for: indexPath) as! ChartCell
-        guard let pastExercises = pastExercises else { return cell }
+        guard let pastExercises = exercises else { return cell }
         let exerciseType = pastExercises[indexPath.item]
         cell.title = exerciseType.0
         cell.exercises = exerciseType.1

@@ -99,6 +99,7 @@ class ProgressViewController: UIViewController {
         var exercises = [Exercise]()
         
         let fetchRequest: NSFetchRequest<Exercise> = Exercise.fetchRequest()
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "timestamp", ascending: false)]
         fetchRequest.fetchLimit = fetchLimit
         context.performAndWait {
             do {

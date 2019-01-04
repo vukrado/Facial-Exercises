@@ -20,11 +20,13 @@ public class UserStatHistoryView: UIView {
         didSet {
             self.userRecords = userRecords.sorted { $0.date < $1.date }
             setNeedsDisplay(bounds)
+            //drawChart()
         }
     }
+    let path = UIBezierPath()
+    var shapeLayer: CAShapeLayer?
     
     override public func draw(_ rect: CGRect) {
-        let path = UIBezierPath()
         if let first = userRecords.first {
             path.move(to: point(for: first, index: 0))
         }
@@ -37,17 +39,8 @@ public class UserStatHistoryView: UIView {
         path.stroke()
     }
     
-    var shapeLayer: CAShapeLayer?
     private func drawChart() {
         self.shapeLayer?.removeFromSuperlayer()
-        
-        let path = UIBezierPath()
-        if let first = userRecords.first {
-            path.move(to: point(for: first, index: 0))
-        }
-        for (index, userRecord) in userRecords.dropFirst().enumerated() {
-            path.addLine(to: point(for: userRecord, index: index + 1))
-        }
         
         let shapeLayer = CAShapeLayer()
         shapeLayer.fillColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0).cgColor
@@ -73,7 +66,7 @@ public class UserStatHistoryView: UIView {
                 return .zero
         }
         
-        let scoreRange = (maxScore + 0.01) - (minScore - 0.01)
+        let scoreRange = (maxScore + 0.001) - (minScore - 0.001)
         let scoreStep = bounds.height / CGFloat(scoreRange)
         let userRecordStep = bounds.width / CGFloat(numUserRecords)
         
@@ -83,42 +76,3 @@ public class UserStatHistoryView: UIView {
     }
 }
 
-// To be deleted -- Just for testing purposes
-func generateRandomDate(daysBack: Int)-> Date?{
-    let day = arc4random_uniform(UInt32(daysBack))+1
-    let hour = arc4random_uniform(23)
-    let minute = arc4random_uniform(59)
-    
-    let today = Date(timeIntervalSinceNow: 0)
-    let gregorian  = NSCalendar(calendarIdentifier: NSCalendar.Identifier.gregorian)
-    var offsetComponents = DateComponents()
-    offsetComponents.day = Int(day - 1)
-    offsetComponents.hour = Int(hour)
-    offsetComponents.minute = Int(minute)
-    
-    let randomDate = gregorian?.date(byAdding: offsetComponents, to: today, options: .init(rawValue: 0) )
-    return randomDate
-}
-
-class VC: UIViewController {
-    
-    let graph : UserStatHistoryView = {
-        let graph = UserStatHistoryView()
-        graph.userRecords = [UserRecord(date: generateRandomDate(daysBack: 10)!, highScore: 0.0),
-                             UserRecord(date: generateRandomDate(daysBack: 10)!, highScore: 10.0),
-                             UserRecord(date: generateRandomDate(daysBack: 10)!, highScore: 3.0),
-                             UserRecord(date: generateRandomDate(daysBack: 10)!, highScore: 15.0),
-                             UserRecord(date: generateRandomDate(daysBack: 10)!, highScore: 10.0),
-                             UserRecord(date: generateRandomDate(daysBack: 10)!, highScore: 3.0),
-                             UserRecord(date: generateRandomDate(daysBack: 10)!, highScore: 15.0)]
-        return graph
-    }()
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        
-        view.addSubview(graph)
-        graph.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.safeAreaLayoutGuide.trailingAnchor)
-    }
-}

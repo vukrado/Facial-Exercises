@@ -28,7 +28,7 @@ class EyeWink: FacialExercise {
         
         for expression in expressions {
             if let currentCoefficient = currentCoefficients[expression] {
-                individualProgress.append(currentCoefficient.floatValue / EyeWink.threshold)
+                individualProgress.append(currentCoefficient.floatValue / threshold)
             }
         }
         

@@ -103,18 +103,18 @@ class MenuViewController: UIViewController {
         
         var selectedExercises = [FacialExercise]()
         for indexPath in selectedIndexPaths {
-//            let exercise = collectionView.exercises[indexPath.item]
-//            switch difficulty {
-//            case 0: //exercise.threshold = 0.5
-//            case 1: //exercise.threshold = 0.7
-//            case 2: //exercise.threshold = 0.9
-//            default: //exercise.threshold = 0.7
-//            }
+            var exercise = collectionView.exercises[indexPath.item]
+            switch difficulty {
+            case 0: exercise.threshold = 0.5
+            case 1: exercise.threshold = 0.7
+            case 2: exercise.threshold = 0.9
+            default: exercise.threshold = 0.7
+            }
             selectedExercises.append(collectionView.exercises[indexPath.item])
         }
         
         let excerciseViewController = ExcerciseViewController()
-//        excerciseViewController.exercises = selectedExercises
+        excerciseViewController.exercises = selectedExercises
         self.present(excerciseViewController, animated: true, completion: nil)
     }
     

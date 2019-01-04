@@ -26,7 +26,7 @@ class TongueExtension: FacialExercise {
         guard let expression = expressions.first,
             let currentCoefficient = currentCoefficients[expression] else { return 0.0 }
         
-        return currentCoefficient.floatValue / TongueExtension.threshold
+        return currentCoefficient.floatValue / threshold
     }
     
     func calculateSuccess(currentCoefficients: [ARFaceAnchor.BlendShapeLocation : FacialExercise.Coefficient]) -> Bool {

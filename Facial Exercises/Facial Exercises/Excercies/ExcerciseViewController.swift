@@ -28,6 +28,7 @@ class ExcerciseViewController: UIViewController {
     // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        resetTracking()
         view.backgroundColor = UIColor.rgb(red: 163, green: 215, blue: 255)
         setupViews()
     }
@@ -92,6 +93,8 @@ class ExcerciseViewController: UIViewController {
         scnview.backgroundColor = .clear
         scnview.rendersContinuously = true
         scnview.scene = SCNScene()
+//        scnview.layer.borderColor = UIColor.black.cgColor
+//        scnview.layer.borderWidth = 5.0
         
         return scnview
     }()
@@ -125,7 +128,9 @@ private extension ExcerciseViewController {
         sceneView.centerInSuperview(size: CGSize(width: view.frame.width / 2, height: view.frame.width / 2))
         
         view.addSubview(maskSceneView)
-        maskSceneView.anchor(top: nil, leading: nil, bottom: sceneView.topAnchor, trailing: nil, padding: .init(top: 0, left: 0, bottom: 50, right: 0), size: CGSize(width: sceneView.frame.width / 2, height: sceneView.frame.width / 2))
+        maskSceneView.anchor(top: nil, leading: nil, bottom: sceneView.topAnchor, trailing: nil, padding: .init(top: 0, left: 0, bottom: 50, right: 0), size: CGSize(width: 100, height: 100))
+        maskSceneView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+
         
         view.addSubview(checkmarkAnimation)
         checkmarkAnimation.anchor(top: sceneView.bottomAnchor, leading: nil, bottom: nil, trailing: nil, padding: .init(top: 12, left: 0, bottom: 0, right: 0), size: CGSize(width: 80, height: 80))

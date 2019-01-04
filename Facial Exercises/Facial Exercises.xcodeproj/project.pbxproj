@@ -84,7 +84,6 @@
 			isa = PBXGroup;
 			children = (
 				2271C8CE21DE2C3700764C5E /* FacialExercise.swift */,
-				2271C8DA21DE30EF00764C5E /* ExerciseSession.swift */,
 				2271C8DC21DE319E00764C5E /* Exercises */,
 			);
 			path = Models;
@@ -502,13 +501,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = SPRLQ9JET8;
+				DEVELOPMENT_TEAM = NB32394B2A;
 				INFOPLIST_FILE = "$(SRCROOT)/Facial Exercises/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.SamanthaGatt.Facial-Exercises";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.vukr.Facial-Exercises";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -521,15 +520,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-
-				DEVELOPMENT_TEAM = SPRLQ9JET8;
-
+				DEVELOPMENT_TEAM = NB32394B2A;
 				INFOPLIST_FILE = "$(SRCROOT)/Facial Exercises/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.SamanthaGatt.Facial-Exercises";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.vukr.Facial-Exercises";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";

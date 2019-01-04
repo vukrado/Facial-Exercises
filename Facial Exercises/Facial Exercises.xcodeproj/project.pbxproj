@@ -12,7 +12,6 @@
 		2271C8D721DE308900764C5E /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2271C8D321DE308800764C5E /* CoreDataStack.swift */; };
 		2271C8D821DE308900764C5E /* Exercise+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2271C8D421DE308800764C5E /* Exercise+Convenience.swift */; };
 		2271C8D921DE308900764C5E /* Exercise.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2271C8D521DE308800764C5E /* Exercise.xcdatamodeld */; };
-		2271C8DB21DE30EF00764C5E /* ExerciseSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2271C8DA21DE30EF00764C5E /* ExerciseSession.swift */; };
 		2271C8DE21DE31AE00764C5E /* EyebrowRaise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2271C8DD21DE31AE00764C5E /* EyebrowRaise.swift */; };
 		2271C8E221DE322200764C5E /* JawForward.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2271C8E121DE322200764C5E /* JawForward.swift */; };
 		2271C8E421DE34A200764C5E /* EyeWink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2271C8E321DE34A200764C5E /* EyeWink.swift */; };
@@ -41,7 +40,6 @@
 		2271C8D321DE308800764C5E /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		2271C8D421DE308800764C5E /* Exercise+Convenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Exercise+Convenience.swift"; sourceTree = "<group>"; };
 		2271C8D621DE308900764C5E /* Exercise.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Exercise.xcdatamodel; sourceTree = "<group>"; };
-		2271C8DA21DE30EF00764C5E /* ExerciseSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseSession.swift; sourceTree = "<group>"; };
 		2271C8DD21DE31AE00764C5E /* EyebrowRaise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EyebrowRaise.swift; sourceTree = "<group>"; };
 		2271C8E121DE322200764C5E /* JawForward.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JawForward.swift; sourceTree = "<group>"; };
 		2271C8E321DE34A200764C5E /* EyeWink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EyeWink.swift; sourceTree = "<group>"; };
@@ -348,7 +346,6 @@
 				AC9BD0D621DEC5D700467B57 /* AlertHelper.swift in Sources */,
 				2271C8DE21DE31AE00764C5E /* EyebrowRaise.swift in Sources */,
 				2271C8E421DE34A200764C5E /* EyeWink.swift in Sources */,
-				2271C8DB21DE30EF00764C5E /* ExerciseSession.swift in Sources */,
 				AC251F4521DD799B00A62718 /* AutoLayout.swift in Sources */,
 				AC251F5321DD81AA00A62718 /* UIColor+Theme.swift in Sources */,
 				2271C8D721DE308900764C5E /* CoreDataStack.swift in Sources */,
@@ -511,7 +508,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.vukr.Facial-Exercises";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.SamanthaGatt.Facial-Exercises";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -524,13 +521,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+
 				DEVELOPMENT_TEAM = SPRLQ9JET8;
+
 				INFOPLIST_FILE = "$(SRCROOT)/Facial Exercises/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.vukr.Facial-Exercises";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.SamanthaGatt.Facial-Exercises";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";

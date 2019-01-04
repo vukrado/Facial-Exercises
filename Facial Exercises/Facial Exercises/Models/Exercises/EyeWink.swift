@@ -10,6 +10,8 @@ import ARKit
 
 class EyeWink: FacialExercise {
     
+    var threshold: Float = 0.3
+    
     var displayedTitle: String {
         return "Eye Winks"
     }
@@ -18,22 +20,22 @@ class EyeWink: FacialExercise {
         return "Close both eyes for 3 seconds. Then alternate eyelids 4 times."
     }
     
-    var expressionsWithThresholds: [ARFaceAnchor.BlendShapeLocation : SuccessThreshold] = [.eyeBlinkLeft : 1.0, .eyeBlinkRight : 1.0]
+    var expressions: [ARFaceAnchor.BlendShapeLocation] = [.eyeBlinkLeft, .eyeBlinkRight]
     
-    func calculateProgress(currentCoefficients: [ARFaceAnchor.BlendShapeLocation : ExerciseSession.Coefficient]) -> Float {
+    func calculateProgress(currentCoefficients: [ARFaceAnchor.BlendShapeLocation : FacialExercise.Coefficient]) -> Float {
         
         var individualProgress : [Float] = []
         
-        for (expression, threshold) in expressionsWithThresholds {
+        for expression in expressions {
             if let currentCoefficient = currentCoefficients[expression] {
-                individualProgress.append(currentCoefficient.floatValue / threshold.floatValue)
+                individualProgress.append(currentCoefficient.floatValue / EyeWink.threshold)
             }
         }
         
         return individualProgress.reduce(0.0, +) / Float(individualProgress.count)
     }
     
-    func calculateSuccess(currentCoefficients: [ARFaceAnchor.BlendShapeLocation : ExerciseSession.Coefficient]) -> Bool {
-        return calculateProgress(currentCoefficients: currentCoefficients) == 1 ? true : false
+    func calculateSuccess(currentCoefficients: [ARFaceAnchor.BlendShapeLocation : FacialExercise.Coefficient]) -> Bool {
+        return calculateProgress(currentCoefficients: currentCoefficients) >= 1 ? true : false
     }
 }

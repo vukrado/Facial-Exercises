@@ -14,7 +14,7 @@ protocol ExerciseCollectionViewDelegate: class {
 
 class ExerciseCollectionView: UICollectionView {
     
-    let exercises: [FacialExercise] = [EyebrowRaise(), TongueExtension(), JawForward(), EyeWink()]
+    let exercises: [FacialExercise] = [.eyebrowRaises, .tongueExtensions, .jawForwards, .eyeWinks]
     
     weak var updateDelegate: ExerciseCollectionViewDelegate?
     private var cellId = "ExerciseCell"
@@ -60,9 +60,8 @@ extension ExerciseCollectionView: UICollectionViewDataSource {
         let cell = dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! ExerciseCell
         
         let exercise = exercises[indexPath.item]
-        cell.exerciseLabel.text = exercise.displayedTitle
-        cell.exerciseDescriptionLabel.text = exercise.displayedDescription
-        
+        cell.exerciseLabel.text = exercise.title
+        cell.exerciseDescriptionLabel.text = exercise.description
         
         return cell
     }

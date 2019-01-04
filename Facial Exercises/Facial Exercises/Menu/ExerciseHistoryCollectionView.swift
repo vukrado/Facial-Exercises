@@ -84,8 +84,16 @@ private class ExerciseHistoryCell: UICollectionViewCell {
     
     private let scoreLabel: UILabel = {
         let label = UILabel()
-        label.font = Appearance.appFont(style: .body, size: 14.0)
-        label.numberOfLines = 2
+        label.font = Appearance.appFont(style: .body, size: 12.0)
+        label.numberOfLines = 1
+        label.textColor = .white
+        return label
+    }()
+    
+    private let dateLabel: UILabel = {
+        let label = UILabel()
+        label.font = Appearance.appFont(style: .body, size: 12.0)
+        label.numberOfLines = 1
         label.textColor = .white
         return label
     }()
@@ -111,12 +119,14 @@ private class ExerciseHistoryCell: UICollectionViewCell {
         addSubview(mainStackView)
         mainStackView.addArrangedSubview(exerciseNameLabel)
         mainStackView.addArrangedSubview(scoreLabel)
+        mainStackView.addArrangedSubview(dateLabel)
         mainStackView.anchor(top: topAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: UIEdgeInsets(top: 8, left: sidePadding, bottom: 8, right: sidePadding))
     }
     
     private func updateViews() {
         exerciseNameLabel.text = exerciseName
-        scoreLabel.text = "Your score was \(String(0.6)). (+XY% vs. previous score)"
+        scoreLabel.text = "Score: \(String(0.6))"
+        dateLabel.text = "Date: 04/Jan/2019 \(1)"
     }
     
 }

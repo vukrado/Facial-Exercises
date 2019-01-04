@@ -64,7 +64,7 @@ class MenuViewController: UIViewController {
     
     let difficultySegmentedControl: UISegmentedControl = {
         let sc = UISegmentedControl(items: ["Easy", "Medium", "Hard"])
-        sc.selectedSegmentIndex = 0
+        sc.selectedSegmentIndex = LevelHelper.getLevelPreference().rawValue
         sc.tintColor = UIColor.rgb(red: 67, green: 206, blue: 162)
         sc.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white], for: .selected)
         sc.setTitleTextAttributes([NSAttributedString.Key.font: Appearance.appFont(style: .body, size: 12)], for: .normal)
@@ -100,12 +100,20 @@ class MenuViewController: UIViewController {
         
         //0 = easy, 1 = medium, 2 = hard
         let difficulty = difficultySegmentedControl.selectedSegmentIndex
+        switch difficulty {
+        case 1:
+            LevelHelper.updateLevelPreference(.medium)
+        case 2:
+            LevelHelper.updateLevelPreference(.hard)
+        default:
+            LevelHelper.updateLevelPreference(.easy)
+        }
         
         var selectedExercises = [FacialExercise]()
         for indexPath in selectedIndexPaths {
             selectedExercises.append(collectionView.exercises[indexPath.item])
         }
-        
+
         let excerciseViewController = ExcerciseViewController()
         excerciseViewController.exercises = selectedExercises
         self.present(excerciseViewController, animated: true, completion: nil)

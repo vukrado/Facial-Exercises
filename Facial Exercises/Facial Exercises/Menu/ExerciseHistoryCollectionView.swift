@@ -12,6 +12,12 @@ class ExerciseHistoryCollectionView: UICollectionView, UICollectionViewDataSourc
     
     static private var cellId = "ExerciseHistoryCell"
     
+    var exercises: [Exercise]? {
+        didSet {
+            reloadData()
+        }
+    }
+    
     override init(frame: CGRect = CGRect.zero, collectionViewLayout layout: UICollectionViewLayout) {
         super.init(frame: frame, collectionViewLayout: layout)
         setupCollectionView()
@@ -34,12 +40,14 @@ class ExerciseHistoryCollectionView: UICollectionView, UICollectionViewDataSourc
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
+        return exercises?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = dequeueReusableCell(withReuseIdentifier: ExerciseHistoryCollectionView.cellId, for: indexPath) as! ExerciseHistoryCell
-        cell.exerciseName = "Brow challenge"
+        guard let exercises = exercises else { return cell }
+        cell.exercise = exercises[indexPath.item]
+        
         return cell
     }
     
@@ -51,7 +59,7 @@ class ExerciseHistoryCollectionView: UICollectionView, UICollectionViewDataSourc
 
 private class ExerciseHistoryCell: UICollectionViewCell {
     
-    var exerciseName: String? {
+    var exercise: Exercise? {
         didSet {
             updateViews()
         }
@@ -124,9 +132,11 @@ private class ExerciseHistoryCell: UICollectionViewCell {
     }
     
     private func updateViews() {
-        exerciseNameLabel.text = exerciseName
-        scoreLabel.text = "Score: \(String(0.6))"
-        dateLabel.text = "Date: 04/Jan/2019 \(1)"
+        guard let score = exercise?.score, let timestamp = exercise?.timestamp else { return }
+        
+        exerciseNameLabel.text = exercise?.type
+        scoreLabel.text = "Score: \(String(describing: score))"
+        dateLabel.text = "Date: \(String(describing: timestamp))"
     }
     
 }

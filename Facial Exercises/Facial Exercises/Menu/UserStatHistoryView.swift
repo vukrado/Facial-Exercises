@@ -19,10 +19,10 @@ public class UserStatHistoryView: UIView {
     override public func draw(_ rect: CGRect) {
         let path = UIBezierPath()
         if let first = userRecords.first {
-            path.move(to: point(for: first))
+            path.move(to: point(for: first, index: 0))
         }
-        for exchangeRate in userRecords.dropFirst() {
-            path.addLine(to: point(for: exchangeRate))
+        for (index, userRecord) in userRecords.dropFirst().enumerated() {
+            path.addLine(to: point(for: userRecord, index: index + 1))
         }
         
         UIColor.cyan.set()
@@ -30,27 +30,21 @@ public class UserStatHistoryView: UIView {
         path.stroke()
     }
     
-    private func point(for exchangeRate: UserRecord) -> CGPoint {
+    private func point(for user: UserRecord, index: Int) -> CGPoint {
         
-        let calendar = Calendar.current
+        let numUserRecords = userRecords.count
         
-        guard let minDate = userRecords.first?.date,
-            let maxDate = userRecords.last?.date,
-            let minRate = userRecords.min(by: { $0.highScore < $1.highScore })?.highScore,
-            let maxRate = userRecords.max(by: { $0.highScore < $1.highScore })?.highScore,
-            let numDays = calendar.dateComponents([.day], from: minDate, to: maxDate).day,
-            maxDate != minDate,
-            minRate != maxRate else {
+        guard let minScore = userRecords.min(by: { $0.highScore < $1.highScore })?.highScore,
+            let maxScore = userRecords.max(by: { $0.highScore < $1.highScore })?.highScore else {
                 return .zero
         }
         
-        let rateRange = maxRate - minRate
-        let rateStep = bounds.height / CGFloat(rateRange)
-        let dayStep = bounds.width / CGFloat(numDays)
+        let scoreRange = maxScore - minScore
+        let scoreStep = bounds.height / CGFloat(scoreRange)
+        let userRecordStep = bounds.width / CGFloat(numUserRecords)
         
-        let yPosition = bounds.maxY - rateStep * CGFloat(exchangeRate.highScore - minRate)
-        guard let daysSinceBeginning = calendar.dateComponents([.day], from: minDate, to: exchangeRate.date).day else { return .zero }
-        let xPosition = bounds.minX + CGFloat(daysSinceBeginning) * dayStep
+        let yPosition = bounds.maxY - scoreStep * CGFloat(user.highScore - minScore)
+        let xPosition = bounds.minX + CGFloat(index) * userRecordStep
         return CGPoint(x: xPosition, y: yPosition)
     }
     
@@ -84,6 +78,9 @@ class VC: UIViewController {
     let graph : UserStatHistoryView = {
         let graph = UserStatHistoryView()
         graph.userRecords = [UserRecord(date: generateRandomDate(daysBack: 10)!, highScore: 0.0),
+                             UserRecord(date: generateRandomDate(daysBack: 10)!, highScore: 10.0),
+                             UserRecord(date: generateRandomDate(daysBack: 10)!, highScore: 3.0),
+                             UserRecord(date: generateRandomDate(daysBack: 10)!, highScore: 15.0),
                              UserRecord(date: generateRandomDate(daysBack: 10)!, highScore: 10.0),
                              UserRecord(date: generateRandomDate(daysBack: 10)!, highScore: 3.0),
                              UserRecord(date: generateRandomDate(daysBack: 10)!, highScore: 15.0)]

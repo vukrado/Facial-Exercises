@@ -10,11 +10,37 @@ import ARKit
 
 enum LevelHelper {
     
-    static func updateLevel() {
-        
+    enum Level: Int {
+        case easy
+        case medium
+        case hard
+    }
+
+    private static let levelKey = "levelKey"
+    
+    public static func updateLevelPreference(_ level: LevelHelper.Level) {
+        UserDefaults.standard.set(level.rawValue, forKey: LevelHelper.levelKey)
     }
     
-    static func getThreshold(for expression: ARFaceAnchor.BlendShapeLocation) -> Float {
-        return 0.6
+    public static func getLevelPreference() -> LevelHelper.Level {
+        switch UserDefaults.standard.integer(forKey: levelKey) {
+        case 1:
+            return .medium
+        case 2:
+            return .hard
+        default:
+            return .easy
+        }
+    }
+    
+    public static func getThreshold(for expression: ARFaceAnchor.BlendShapeLocation) -> Float {
+        switch getLevelPreference() {
+        case .easy:
+            return 0.25
+        case .medium:
+            return 0.40
+        case .hard:
+            return 0.55            
+        }
     }
 }

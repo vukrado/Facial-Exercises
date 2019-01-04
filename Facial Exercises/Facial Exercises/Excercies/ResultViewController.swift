@@ -20,9 +20,10 @@ class ResultViewController: UIViewController {
     // TODO: instantiated ExerciseController is only for testing purposes:
     let exerciseController: ExerciseController? = ExerciseController(exercises: [
             FacialExercise.eyebrowRaises,
-            FacialExercise.eyeWinks,
+            FacialExercise.eyeBlinkLeft,
             FacialExercise.jawForwards,
             FacialExercise.tongueExtensions,
+            FacialExercise.eyeBlinkRight
         ])
     var completedExercises: [FacialExercise]? {
         return exerciseController?.exercises

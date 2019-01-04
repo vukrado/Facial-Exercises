@@ -16,15 +16,17 @@ class ProgressViewController: UIViewController {
     // TODO: instantiated ExerciseController is only for testing purposes:
     let exerciseController = ExerciseController(exercises: [
         FacialExercise.eyebrowRaises,
-        FacialExercise.eyeWinks,
+        FacialExercise.eyeBlinkLeft,
         FacialExercise.jawForwards,
         FacialExercise.tongueExtensions,
+        FacialExercise.eyeBlinkRight
     ])
     var exerciseTypes = [
         FacialExercise.eyebrowRaises,
-        FacialExercise.eyeWinks,
+        FacialExercise.eyeBlinkLeft,
         FacialExercise.jawForwards,
         FacialExercise.tongueExtensions,
+        FacialExercise.eyeBlinkRight
     ]
     
     var numberOfExercisesToShow = 5

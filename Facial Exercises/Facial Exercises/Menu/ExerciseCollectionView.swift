@@ -14,7 +14,7 @@ protocol ExerciseCollectionViewDelegate: class {
 
 class ExerciseCollectionView: UICollectionView {
     
-    let exercises: [FacialExercise] = [.eyebrowRaises, .tongueExtensions, .jawForwards, .eyeWinks]
+    let exercises: [FacialExercise] = [.eyebrowRaises, .tongueExtensions, .jawForwards, .eyeBlinkLeft, .eyeBlinkRight]
     
     weak var updateDelegate: ExerciseCollectionViewDelegate?
     private var cellId = "ExerciseCell"

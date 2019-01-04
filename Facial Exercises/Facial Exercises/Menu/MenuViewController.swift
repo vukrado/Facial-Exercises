@@ -119,10 +119,9 @@ class MenuViewController: UIViewController {
         }
         
         excerciseViewController.exercises = selectedExercises
-
+        excerciseViewController.exerciseCopy = selectedExercises
        
-       
-        self.present(excerciseViewController, animated: true, completion: nil)
+        self.navigationController?.pushViewController(excerciseViewController, animated: true)
     }
     
     @objc private func handleSettings() {

@@ -27,6 +27,8 @@
 		AC251F5321DD81AA00A62718 /* UIColor+Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC251F5221DD81AA00A62718 /* UIColor+Theme.swift */; };
 		AC9BD0D621DEC5D700467B57 /* AlertHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9BD0D521DEC5D700467B57 /* AlertHelper.swift */; };
 		AC9BD0D821DECFA500467B57 /* checkmark.json in Resources */ = {isa = PBXBuildFile; fileRef = AC9BD0D721DECFA500467B57 /* checkmark.json */; };
+		ACBE169321DF951E009DE54C /* star_success.json in Resources */ = {isa = PBXBuildFile; fileRef = ACBE169221DF951E009DE54C /* star_success.json */; };
+		ACBE169521DF9570009DE54C /* ExerciseCompleteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACBE169421DF9570009DE54C /* ExerciseCompleteView.swift */; };
 		BF5242AB21DE7B7000D357EC /* Mask.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5242AA21DE7B7000D357EC /* Mask.swift */; };
 		BF7E0EEB21DD77A8004D278C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7E0EEA21DD77A8004D278C /* AppDelegate.swift */; };
 		BF7E0EF021DD77A8004D278C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF7E0EEE21DD77A8004D278C /* Main.storyboard */; };
@@ -57,6 +59,8 @@
 		AC251F5221DD81AA00A62718 /* UIColor+Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Theme.swift"; sourceTree = "<group>"; };
 		AC9BD0D521DEC5D700467B57 /* AlertHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertHelper.swift; sourceTree = "<group>"; };
 		AC9BD0D721DECFA500467B57 /* checkmark.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = checkmark.json; sourceTree = "<group>"; };
+		ACBE169221DF951E009DE54C /* star_success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = star_success.json; sourceTree = "<group>"; };
+		ACBE169421DF9570009DE54C /* ExerciseCompleteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseCompleteView.swift; sourceTree = "<group>"; };
 		BF5242AA21DE7B7000D357EC /* Mask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mask.swift; sourceTree = "<group>"; };
 		BF7E0EE721DD77A8004D278C /* Facial Exercises.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Facial Exercises.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF7E0EEA21DD77A8004D278C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -84,7 +88,6 @@
 			isa = PBXGroup;
 			children = (
 				2271C8CE21DE2C3700764C5E /* FacialExercise.swift */,
-				22B50FEE21DF10170056A75A /* LevelHelper.swift */,
 				3DEF492F21DF2881007D900A /* LevelHelper.swift */,
 			);
 			path = Models;
@@ -158,6 +161,7 @@
 		BF7E0EDE21DD77A8004D278C = {
 			isa = PBXGroup;
 			children = (
+				ACBE169221DF951E009DE54C /* star_success.json */,
 				AC9BD0D721DECFA500467B57 /* checkmark.json */,
 				BF7E0EE921DD77A8004D278C /* Facial Exercises */,
 				BF7E0EE821DD77A8004D278C /* Products */,
@@ -192,6 +196,7 @@
 			children = (
 				BF7E0F0221DDE2C2004D278C /* ExcerciseViewController.swift */,
 				3D94188221DE601A0000FAD0 /* ResultViewController.swift */,
+				ACBE169421DF9570009DE54C /* ExerciseCompleteView.swift */,
 			);
 			path = Excercies;
 			sourceTree = "<group>";
@@ -265,6 +270,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ACBE169321DF951E009DE54C /* star_success.json in Resources */,
 				AC9BD0D821DECFA500467B57 /* checkmark.json in Resources */,
 				BF7E0EF521DD77A9004D278C /* LaunchScreen.storyboard in Resources */,
 				AC251F4F21DD814D00A62718 /* Merriweather-Bold.ttf in Resources */,
@@ -337,6 +343,7 @@
 				BF7E0F0321DDE2C2004D278C /* ExcerciseViewController.swift in Sources */,
 				3DEF493021DF2881007D900A /* LevelHelper.swift in Sources */,
 				AC9BD0D621DEC5D700467B57 /* AlertHelper.swift in Sources */,
+				ACBE169521DF9570009DE54C /* ExerciseCompleteView.swift in Sources */,
 				AC251F4521DD799B00A62718 /* AutoLayout.swift in Sources */,
 				3DEF492C21DF0399007D900A /* ChartsCollectionView.swift in Sources */,
 				AC251F5321DD81AA00A62718 /* UIColor+Theme.swift in Sources */,

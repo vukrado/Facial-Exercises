@@ -283,7 +283,6 @@ private extension ExcerciseViewController {
             updateMessage(text: "Hold for \(Int(count)) more seconds")
         }
     }
-    
 }
 
 
@@ -306,7 +305,7 @@ extension ExcerciseViewController: ARSCNViewDelegate {
         
         node.geometry?.firstMaterial?.fillMode = .lines
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
             let impactGenerator = UIImpactFeedbackGenerator(style: .heavy)
             impactGenerator.impactOccurred()
             self.detectFaceLabel.text = "Face successfully found"

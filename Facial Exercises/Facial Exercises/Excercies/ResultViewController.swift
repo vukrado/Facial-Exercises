@@ -90,12 +90,13 @@ class ResultViewController: UIViewController {
         }
         
         for exercise in exerciseController.exercises {
-            let _ = Exercise(type: exercise.title, length: exercise.holdCount, score: 0.7)
+            let _ = Exercise(type: exercise.title, length: exercise.holdCount, score: 0.8)
         }
         
         context.performAndWait {
             do {
                 try CoreDataStack.shared.save(context: context)
+                NSLog("Successfully saved exercises")
             } catch {
                 NSLog("Error saving in context \(context): \(error)")
             }

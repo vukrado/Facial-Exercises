@@ -13,11 +13,11 @@
 		2271C8D821DE308900764C5E /* Exercise+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2271C8D421DE308800764C5E /* Exercise+Convenience.swift */; };
 		2271C8D921DE308900764C5E /* Exercise.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2271C8D521DE308800764C5E /* Exercise.xcdatamodeld */; };
 		228E6AB821DEB6B60060ED5E /* UserStatHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228E6AB721DEB6B60060ED5E /* UserStatHistoryView.swift */; };
-		22B50FEF21DF10170056A75A /* LevelHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B50FEE21DF10170056A75A /* LevelHelper.swift */; };
 		3D94188321DE601A0000FAD0 /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D94188221DE601A0000FAD0 /* ResultViewController.swift */; };
 		3DEF492B21DF0399007D900A /* ExerciseHistoryCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DEF492821DF0399007D900A /* ExerciseHistoryCollectionView.swift */; };
 		3DEF492C21DF0399007D900A /* ChartsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DEF492921DF0399007D900A /* ChartsCollectionView.swift */; };
 		3DEF492D21DF0399007D900A /* ProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DEF492A21DF0399007D900A /* ProgressViewController.swift */; };
+		3DEF493021DF2881007D900A /* LevelHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DEF492F21DF2881007D900A /* LevelHelper.swift */; };
 		AC251F4221DD798E00A62718 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC251F4021DD798D00A62718 /* MenuViewController.swift */; };
 		AC251F4321DD798E00A62718 /* ExerciseCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC251F4121DD798D00A62718 /* ExerciseCollectionView.swift */; };
 		AC251F4521DD799B00A62718 /* AutoLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC251F4421DD799B00A62718 /* AutoLayout.swift */; };
@@ -41,11 +41,11 @@
 		2271C8D421DE308800764C5E /* Exercise+Convenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Exercise+Convenience.swift"; sourceTree = "<group>"; };
 		2271C8D621DE308900764C5E /* Exercise.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Exercise.xcdatamodel; sourceTree = "<group>"; };
 		228E6AB721DEB6B60060ED5E /* UserStatHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStatHistoryView.swift; sourceTree = "<group>"; };
-		22B50FEE21DF10170056A75A /* LevelHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelHelper.swift; sourceTree = "<group>"; };
 		3D94188221DE601A0000FAD0 /* ResultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
 		3DEF492821DF0399007D900A /* ExerciseHistoryCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExerciseHistoryCollectionView.swift; sourceTree = "<group>"; };
 		3DEF492921DF0399007D900A /* ChartsCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartsCollectionView.swift; sourceTree = "<group>"; };
 		3DEF492A21DF0399007D900A /* ProgressViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressViewController.swift; sourceTree = "<group>"; };
+		3DEF492F21DF2881007D900A /* LevelHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelHelper.swift; sourceTree = "<group>"; };
 		6F573AD28E552FD36A6A0C9C /* Pods_Facial_Exercises.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Facial_Exercises.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B3010CB580678E822A59345 /* Pods-Facial Exercises.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Facial Exercises.release.xcconfig"; path = "Pods/Target Support Files/Pods-Facial Exercises/Pods-Facial Exercises.release.xcconfig"; sourceTree = "<group>"; };
 		AC251F4021DD798D00A62718 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
@@ -84,7 +84,7 @@
 			isa = PBXGroup;
 			children = (
 				2271C8CE21DE2C3700764C5E /* FacialExercise.swift */,
-				22B50FEE21DF10170056A75A /* LevelHelper.swift */
+				3DEF492F21DF2881007D900A /* LevelHelper.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -333,8 +333,8 @@
 				3DEF492D21DF0399007D900A /* ProgressViewController.swift in Sources */,
 				3DEF492B21DF0399007D900A /* ExerciseHistoryCollectionView.swift in Sources */,
 				AC251F4321DD798E00A62718 /* ExerciseCollectionView.swift in Sources */,
-				22B50FEF21DF10170056A75A /* LevelHelper.swift in Sources */,
 				BF7E0F0321DDE2C2004D278C /* ExcerciseViewController.swift in Sources */,
+				3DEF493021DF2881007D900A /* LevelHelper.swift in Sources */,
 				AC9BD0D621DEC5D700467B57 /* AlertHelper.swift in Sources */,
 				AC251F4521DD799B00A62718 /* AutoLayout.swift in Sources */,
 				3DEF492C21DF0399007D900A /* ChartsCollectionView.swift in Sources */,
@@ -493,13 +493,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = NB32394B2A;
+				DEVELOPMENT_TEAM = 84BULQXU2Q;
 				INFOPLIST_FILE = "$(SRCROOT)/Facial Exercises/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.vukr.Facial-Exercises";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.SamanthaGatt.Facial-Exercises";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -512,13 +512,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = NB32394B2A;
+				DEVELOPMENT_TEAM = 84BULQXU2Q;
 				INFOPLIST_FILE = "$(SRCROOT)/Facial Exercises/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.vukr.Facial-Exercises";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.SamanthaGatt.Facial-Exercises";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";

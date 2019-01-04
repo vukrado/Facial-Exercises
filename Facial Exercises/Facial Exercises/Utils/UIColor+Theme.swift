@@ -15,7 +15,10 @@ extension UIColor {
     
     //app colors here
     static let selectedGreen = UIColor.rgb(red: 76, green: 185, blue: 68)
-    
+    static let turquoise = UIColor.rgb(red: 67, green: 206, blue: 162)
+    static let waveBlue = UIColor.rgb(red: 24, green: 90, blue: 157)
+    static let grayBlue = UIColor.rgb(red: 142, green: 158, blue: 171)
+    static let extraLightGray = UIColor.rgb(red: 238, green: 242, blue: 243)
 }
 
 extension UIView {

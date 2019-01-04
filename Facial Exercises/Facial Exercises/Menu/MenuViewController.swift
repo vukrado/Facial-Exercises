@@ -148,7 +148,7 @@ class MenuViewController: UIViewController {
         collectionView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         
         view.addSubview(titleLabel)
-        titleLabel.anchor(top: nil, leading: view.leadingAnchor, bottom: collectionView.topAnchor, trailing: view.trailingAnchor, padding: .init(top: 0, left: 30, bottom: 30, right: 30))
+        titleLabel.anchor(top: nil, leading: view.leadingAnchor, bottom: collectionView.topAnchor, trailing: view.trailingAnchor, padding: .init(top: 0, left: 30, bottom: 50, right: 30))
         
         view.addSubview(selectedExercisesLabel)
         selectedExercisesLabel.anchor(top: collectionView.bottomAnchor, leading: nil, bottom: nil, trailing: nil, padding: .init(top: 12, left: 0, bottom: 0, right: 0))

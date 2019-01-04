@@ -159,7 +159,7 @@ class ProgressViewController: UIViewController {
     private func setupViews() {
         
         view.addSubview(closeButton)
-        closeButton.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: nil, bottom: nil, trailing: view.trailingAnchor, padding: UIEdgeInsets(top: padding, left: 0, bottom: 0, right: padding), size: CGSize(width: 13, height: 13))
+        closeButton.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: nil, bottom: nil, trailing: view.trailingAnchor, padding: UIEdgeInsets(top: padding, left: 0, bottom: 0, right: padding), size: CGSize(width: 25, height: 25))
         
         view.addSubview(mainTitle)
         mainTitle.anchor(top: closeButton.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: UIEdgeInsets(top: 0.0, left: padding, bottom: padding, right: padding))

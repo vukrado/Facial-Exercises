@@ -20,7 +20,7 @@ class ExcerciseViewController: UIViewController {
     private var timer = Timer()
     private var timerIsRunning: Bool = false
     private var mask: Mask?
-    private var isPaused = false
+    private var isPaused = true
     //Will hold the ARFaceAnchor - which has information about the pose, topology, and expression of a face detected in a face-tracking AR session.
     private var faceNode: SCNNode?
     
@@ -74,6 +74,8 @@ class ExcerciseViewController: UIViewController {
     }
     
     //MARK: - UI Objects
+    
+    let exerciseCompleteView = ExerciseCompleteView()
     
     let detectFaceLabel: UILabel = {
         let label = UILabel()
@@ -162,6 +164,7 @@ class ExcerciseViewController: UIViewController {
         button.setImage(UIImage(named: "pause"), for: .normal)
         button.tintColor = .white
         button.addTarget(self, action: #selector(handlePause), for: .touchUpInside)
+        button.alpha = 0
         return button
     }()
     
@@ -177,6 +180,7 @@ class ExcerciseViewController: UIViewController {
     private let statusTrackView: UIView = {
         let view = UIView()
         view.backgroundColor = .rgb(red: 218, green: 231, blue: 236)
+        view.alpha = 0
         
         return view
     }()
@@ -184,6 +188,7 @@ class ExcerciseViewController: UIViewController {
     private let statusFillView: UIView = {
         let view = UIView()
         view.backgroundColor = .red
+        view.alpha = 0
         
         return view
     }()
@@ -357,6 +362,9 @@ private extension ExcerciseViewController {
         
         UIView.animate(withDuration: 1.0, delay: 0, options: [.curveEaseIn], animations: {
             self.maskSceneView.alpha = 1
+            self.statusTrackView.alpha = 1
+            self.statusFillView.alpha = 1
+            self.pauseButton.alpha = 1
         }, completion: { (_) in
             self.updateMessage(text: self.exercises[0].description)
             self.detectFaceLabel.text = self.exercises[0].title
@@ -450,7 +458,9 @@ private extension ExcerciseViewController {
                     if exercise.repeatCount == 0 {
                         exercises.remove(at: 0)
                         if exercises.count > 0 {
+                            exerciseCompleteView.showCelebrationView()
                             updateMessage(text: "\(exercises[0].description)")
+                            detectFaceLabel.text = exercises[0].title
                         }
                         resetProgressView()
                     } else {
@@ -466,12 +476,7 @@ private extension ExcerciseViewController {
 
 
 extension ExcerciseViewController: ARSCNViewDelegate {
-    // Tag: ARNodeTracking
-    func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
-        faceNode = node
-        
-    }
-    
+    // Tag: ARNodeTrackin
 
     func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
         guard let device = sceneView.device else {
@@ -492,6 +497,8 @@ extension ExcerciseViewController: ARSCNViewDelegate {
                 self.transitionAnimation()
             }
         }
+        
+        isPaused = false
         return node
     }
     
@@ -536,7 +543,9 @@ extension ExcerciseViewController: ARSCNViewDelegate {
             lastExpression = expression
             
             //If the expression is above point 6 and the timer is not running, it starts the timer for the count, which is equal to the holdLength of the exercise
-            checkExpressionSuccess(expression: expression, exercise: exercise)
+            DispatchQueue.main.async {
+                self.checkExpressionSuccess(expression: expression, exercise: exercise)
+            }
         } else {
             DispatchQueue.main.async {
                 let resultsVc = ResultViewController()

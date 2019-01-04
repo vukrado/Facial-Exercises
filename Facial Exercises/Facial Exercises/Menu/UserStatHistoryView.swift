@@ -19,7 +19,7 @@ public class UserStatHistoryView: UIView {
     var userRecords : [UserRecord] = [] {
         didSet {
             self.userRecords = userRecords.sorted { $0.date < $1.date }
-            setNeedsDisplay(bounds)
+            setNeedsDisplay()
             //drawChart()
         }
     }
@@ -27,6 +27,8 @@ public class UserStatHistoryView: UIView {
     var shapeLayer: CAShapeLayer?
     
     override public func draw(_ rect: CGRect) {
+        guard !userRecords.isEmpty else { return }
+        
         if let first = userRecords.first {
             path.move(to: point(for: first, index: 0))
         }

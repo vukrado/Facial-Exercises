@@ -21,6 +21,7 @@ class ExcerciseViewController: UIViewController {
     private var timerIsRunning: Bool = false
     private var mask: Mask?
     private var isPaused = true
+    private var isDisplayingMask = true
     //Will hold the ARFaceAnchor - which has information about the pose, topology, and expression of a face detected in a face-tracking AR session.
     private var faceNode: SCNNode?
     
@@ -135,6 +136,16 @@ class ExcerciseViewController: UIViewController {
         return pv
     }()
     
+    private let swapButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(#imageLiteral(resourceName: "refresh").withRenderingMode(.alwaysTemplate), for: .normal)
+        button.tintColor = .white
+        button.addTarget(self, action: #selector(swap), for: .touchUpInside)
+        button.alpha = 0
+        
+        return button
+    }()
+    
     private let maskSceneView: SCNView = {
         let scnview = SCNView()
         scnview.backgroundColor = .clear
@@ -206,10 +217,16 @@ class ExcerciseViewController: UIViewController {
     private var lastExpression: Float = 0.0
 
     var containerViewBottomAnchor: NSLayoutConstraint?
+    
     var sceneViewTrailingAnchor: NSLayoutConstraint?
     var sceneViewLeadingAnchor: NSLayoutConstraint?
     var sceneViewBottomAnchor: NSLayoutConstraint?
     var sceneViewTopAnchor: NSLayoutConstraint?
+    
+    var maskViewTrailingAnchor: NSLayoutConstraint?
+    var maskViewLeadingAnchor: NSLayoutConstraint?
+    var maskViewBottomAnchor: NSLayoutConstraint?
+    var maskViewTopAnchor: NSLayoutConstraint?
 }
 
 // MARK: - Private Methods
@@ -305,6 +322,7 @@ private extension ExcerciseViewController {
         progressView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
         progressView.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).isActive = true
         progressView.widthAnchor.constraint(equalToConstant: view.frame.width / 2).isActive = true
+        progressView.heightAnchor.constraint(equalToConstant: 10).isActive = true
         
         sceneView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(sceneView)
@@ -317,8 +335,17 @@ private extension ExcerciseViewController {
         sceneViewBottomAnchor = sceneView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -220)
         sceneViewBottomAnchor?.isActive = true
         
+        maskSceneView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(maskSceneView)
-        maskSceneView.anchor(top: nil, leading: view.leadingAnchor, bottom: containerView.topAnchor, trailing: view.trailingAnchor, padding: .init(top: 0, left: 35, bottom: 70, right: 35), size: CGSize(width: 0, height: 350))
+        maskViewLeadingAnchor = maskSceneView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40)
+        maskViewLeadingAnchor?.isActive = true
+        maskViewTrailingAnchor = maskSceneView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40)
+        maskViewTrailingAnchor?.isActive = true
+        maskViewTopAnchor = maskSceneView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 120)
+        maskViewTopAnchor?.isActive = true
+        maskViewBottomAnchor = maskSceneView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -280)
+        maskViewBottomAnchor?.isActive = true
+//        maskSceneView.anchor(top: nil, leading: view.leadingAnchor, bottom: containerView.topAnchor, trailing: view.trailingAnchor, padding: .init(top: 0, left: 35, bottom: 70, right: 35), size: CGSize(width: 0, height: 350))
 
         
         view.addSubview(checkmarkAnimation)
@@ -326,9 +353,10 @@ private extension ExcerciseViewController {
         checkmarkAnimation.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
 
         view.addSubview(pauseButton)
-        pauseButton.anchor(top: view.topAnchor, leading: nil, bottom: nil, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: .init(top: 30, left: 0, bottom: 0, right: 20))
+        pauseButton.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: nil, bottom: nil, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: .init(top: 12, left: 0, bottom: 0, right: 20), size: CGSize(width: 30, height: 30))
         
-
+        view.addSubview(swapButton)
+        swapButton.anchor(top: pauseButton.bottomAnchor, leading: nil, bottom: nil, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: UIEdgeInsets(top: 12, left: 0, bottom: 0, right: 20), size: CGSize(width: 30, height: 30))
          
         view.addSubview(statusTrackView)
         statusTrackView.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: containerView.topAnchor, trailing: nil, padding: UIEdgeInsets(top: 40.0, left: 30.0, bottom: 40.0, right: 0.0), size: CGSize(width: 5.0, height: 0.0))
@@ -345,6 +373,27 @@ private extension ExcerciseViewController {
         // tickMark.centerXAnchor.constraint(equalTo: statusViewTrack.centerXAnchor)
     }
     
+    @objc func swap() {
+        maskViewLeadingAnchor?.constant = isDisplayingMask ? self.view.frame.width - 80 : 40
+        maskViewTrailingAnchor?.constant = isDisplayingMask ? -20 : -40
+        maskViewTopAnchor?.constant = isDisplayingMask ? 440 : 220
+        maskViewBottomAnchor?.constant = isDisplayingMask ? -220 : -280
+        
+        sceneViewLeadingAnchor?.constant = isDisplayingMask ? 60 : self.view.frame.width - 80
+        sceneViewTrailingAnchor?.constant = isDisplayingMask ? -60 : -20
+        sceneViewTopAnchor?.constant = isDisplayingMask ? 220 : 440
+        sceneViewBottomAnchor?.constant = isDisplayingMask ? -280 : -220
+        
+        UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            
+            self.view.layoutIfNeeded()
+            
+        }) { (completed) in
+            
+            self.isDisplayingMask = self.isDisplayingMask ? false : true
+        }
+    }
+    
     func transitionAnimation() {
         self.checkmarkAnimation.isHidden = true
         self.createFaceGeometry()
@@ -354,6 +403,7 @@ private extension ExcerciseViewController {
         self.sceneViewLeadingAnchor?.constant = self.view.frame.width - 80
         self.sceneViewTrailingAnchor?.constant = -20
         self.sceneViewTopAnchor?.constant = 440
+        self.sceneViewBottomAnchor?.constant = -220
         
         UIView.animate(withDuration: 0.8, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             
@@ -366,6 +416,7 @@ private extension ExcerciseViewController {
             self.statusTrackView.alpha = 1
             self.statusFillView.alpha = 1
             self.pauseButton.alpha = 1
+            self.swapButton.alpha = 1
         }, completion: { (_) in
             self.updateMessage(text: self.exercises[0].description)
             self.detectFaceLabel.text = self.exercises[0].title

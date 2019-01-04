@@ -14,6 +14,8 @@ protocol ExerciseCollectionViewDelegate: class {
 
 class ExerciseCollectionView: UICollectionView {
     
+    let exercises: [FacialExercise] = [EyebrowRaise(), TongueExtension(), JawForward(), EyeWink()]
+    
     weak var updateDelegate: ExerciseCollectionViewDelegate?
     private var cellId = "ExerciseCell"
     
@@ -40,22 +42,27 @@ class ExerciseCollectionView: UICollectionView {
 
 extension ExerciseCollectionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        updateDelegate?.updateSelectedLabel(with: self.indexPathsForSelectedItems?.count ?? 0, max: 5)
+        updateDelegate?.updateSelectedLabel(with: self.indexPathsForSelectedItems?.count ?? 0, max: exercises.count)
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        updateDelegate?.updateSelectedLabel(with: self.indexPathsForSelectedItems?.count ?? 0, max: 5)
+        updateDelegate?.updateSelectedLabel(with: self.indexPathsForSelectedItems?.count ?? 0, max: exercises.count)
     }
 }
 
 extension ExerciseCollectionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        updateDelegate?.updateSelectedLabel(with: 0, max: 5)
-        return 5
+        updateDelegate?.updateSelectedLabel(with: 0, max: exercises.count)
+        return exercises.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! ExerciseCell
+        
+        let exercise = exercises[indexPath.item]
+        cell.exerciseLabel.text = exercise.displayedTitle
+        cell.exerciseDescriptionLabel.text = exercise.displayedDescription
+        
         
         return cell
     }

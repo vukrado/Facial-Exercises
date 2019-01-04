@@ -12,7 +12,6 @@ class ExerciseCell: UICollectionViewCell {
     
     let exerciseLabel: UILabel = {
         let label = UILabel()
-        label.text = "Exercise name"
         label.textAlignment = .center
         label.textColor = .white
         label.sizeToFit()
@@ -33,7 +32,6 @@ class ExerciseCell: UICollectionViewCell {
     
     let exerciseDescriptionLabel: UILabel = {
         let label = UILabel()
-        label.text = "Some exercise description uihfiuwehf iuhewfiuwehf iwuhfwei uqwpdwq[dpokpqw pqwodk qpdjqo ijq ojqw odijqwod j ijiodq"
         label.textColor = .white
         label.numberOfLines = 0
         label.font = Appearance.appFont(style: .body, size: 12)

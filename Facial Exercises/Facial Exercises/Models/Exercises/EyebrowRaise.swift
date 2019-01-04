@@ -15,14 +15,15 @@ class EyebrowRaise: FacialExercise {
     var displayedTitle: String {
         return "Eyebrow Raises"
     }
+
     var displayedDescription: String {
         return "Lift your eyebrows and hold for 10 seconds"
     }
     
-    
     var expressions: [ARFaceAnchor.BlendShapeLocation] {
         return [.browInnerUp]
     }
+
     
     func calculateProgress(currentCoefficients: [ARFaceAnchor.BlendShapeLocation : FacialExercise.Coefficient]) -> Float {
         

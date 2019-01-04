@@ -15,6 +15,7 @@ class EyeWink: FacialExercise {
     var displayedTitle: String {
         return "Eye Winks"
     }
+
     var displayedDescription: String {
         return "Close both eyes for 3 seconds. Then alternate eyelids 4 times."
     }

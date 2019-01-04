@@ -25,11 +25,12 @@ class ExcerciseViewController: UIViewController {
     
     private var exercises = [FacialExercise]()
     
-    
     // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = UIColor.rgb(red: 163, green: 215, blue: 255)
         setupScenes()
+        setupViews()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -51,25 +52,56 @@ class ExcerciseViewController: UIViewController {
         return true
     }
     
-    // MARK: - IBOutlets
-    @IBOutlet weak var sceneView: ARSCNView! {
-        didSet {
-            sceneView.layer.cornerRadius = 10.0
-            sceneView.layer.masksToBounds = true
-        }
-    }
-    @IBOutlet weak var progressView: UIProgressView!
-    @IBOutlet weak var descriptionLabel: UILabel!
-    @IBOutlet weak var checkmarkAnimation: LOTAnimationView! {
-        didSet {
-            checkmarkAnimation.animation = "checkmark"
-            checkmarkAnimation.contentMode = .scaleAspectFit
-        }
-    }
-    @IBOutlet weak var maskSceneView: SCNView!
+    private let sceneView: ARSCNView = {
+        let view = ARSCNView()
+        view.layer.cornerRadius = 10.0
+        view.layer.masksToBounds = true
+        
+        return view
+    }()
     
+    private let checkmarkAnimation: LOTAnimationView = {
+        let view = LOTAnimationView(name: "checkmark")
+        view.contentMode = .scaleAspectFit
+        view.backgroundColor = .clear
+        
+        return view
+    }()
     
+    private let descriptionLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .white
+        label.font = Appearance.appFont(style: .title1, size: 20)
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        label.text = "Detect face geometry"
+        
+        return label
+    }()
     
+    private let progressView: UIProgressView = {
+        let pv = UIProgressView(progressViewStyle: .bar)
+        pv.progress = 1
+        pv.trackTintColor = UIColor.rgb(red: 163, green: 215, blue: 255)
+        
+        return pv
+    }()
+    
+    private let maskSceneView: SCNView = {
+        let scnview = SCNView()
+        scnview.backgroundColor = .clear
+        scnview.rendersContinuously = true
+        scnview.scene = SCNScene()
+        
+        return scnview
+    }()
+    
+    private let containerView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.rgb(red: 129, green: 199, blue: 255)
+    
+        return view
+    }()
     
 }
 
@@ -80,12 +112,27 @@ private extension ExcerciseViewController {
     func setupScenes() {
         //Sets the views delegate to self
         sceneView.delegate = self
-        maskSceneView.backgroundColor = .clear
-        maskSceneView.scene = SCNScene()
-        maskSceneView.rendersContinuously = true
     }
     
-
+    func setupViews() {
+        view.addSubview(containerView)
+        containerView.anchor(top: nil, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor, size: CGSize(width: 0, height: self.view.frame.height / 4))
+        
+        containerView.addSubview(descriptionLabel)
+        descriptionLabel.anchor(top: containerView.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 12, left: 12, bottom: 0, right: 12))
+        
+        containerView.addSubview(progressView)
+        progressView.translatesAutoresizingMaskIntoConstraints = false
+        progressView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
+        progressView.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).isActive = true
+        progressView.widthAnchor.constraint(equalToConstant: containerView.frame.width / 2).isActive = true
+        
+        view.addSubview(sceneView)
+        sceneView.centerInSuperview(size: CGSize(width: view.frame.width / 2, height: view.frame.width / 2))
+        
+        view.addSubview(maskSceneView)
+        maskSceneView.anchor(top: nil, leading: nil, bottom: sceneView.topAnchor, trailing: nil, padding: .init(top: 0, left: 0, bottom: 50, right: 0), size: CGSize(width: sceneView.frame.width / 2, height: sceneView.frame.width / 2))
+    }
     
     // Tag: ARFaceTrackingConfiguration
     func resetTracking() {
@@ -208,6 +255,4 @@ extension ExcerciseViewController: ARSCNViewDelegate {
             }
         }
     }
-    
-    
 }

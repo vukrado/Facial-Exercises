@@ -114,10 +114,98 @@ class ExcerciseViewController: UIViewController {
         return view
     }()
     
+    private let blurEffect = UIBlurEffect(style: .dark)
+    var blurredEffectView: UIVisualEffectView?
+    
+    private let pauseButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(named: "pause"), for: .normal)
+        button.tintColor = .white
+        button.addTarget(self, action: #selector(handlePause), for: .touchUpInside)
+        return button
+    }()
+    
+    private let resumeButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.titleLabel?.font = Appearance.appFont(style: .title1, size: 20)
+        button.setTitle("RESUME", for: .normal)
+        button.addTarget(self, action: #selector(handleResume), for: .touchUpInside)
+        
+        return button
+    }()
+    
 }
 
 // MARK: - Private Methods
 private extension ExcerciseViewController {
+    
+    @objc func handleResume() {
+        blurredEffectView?.removeFromSuperview()
+    }
+    
+    @objc func handleRestart() {
+        let excerciseVc = ExcerciseViewController()
+        excerciseVc.exercises = exercises
+        present(excerciseVc, animated: true, completion: nil)
+    }
+    
+    @objc func handleQuit() {
+        let menuVc = MenuViewController()
+        self.present(menuVc, animated: true, completion: nil)
+    }
+    
+    @objc func handlePause() {
+        blurredEffectView = UIVisualEffectView(effect: blurEffect)
+        blurredEffectView?.frame = view.frame
+        view.addSubview(blurredEffectView!)
+        
+     
+        let resumeButton = UIButton(type: .system)
+        resumeButton.titleLabel?.font = Appearance.appFont(style: .title1, size: 25)
+        resumeButton.setTitle("RESUME", for: .normal)
+        resumeButton.addTarget(self, action: #selector(handleResume), for: .touchUpInside)
+        resumeButton.titleLabel?.contentMode = .center
+        resumeButton.backgroundColor = UIColor.white
+        resumeButton.tintColor = UIColor.black
+        resumeButton.layer.cornerRadius = 10.0
+
+        let restartButton = UIButton(type: .system)
+        restartButton.titleLabel?.font = Appearance.appFont(style: .title1, size: 25)
+        restartButton.setTitle("RESTART", for: .normal)
+        restartButton.addTarget(self, action: #selector(handleRestart), for: .touchUpInside)
+        restartButton.titleLabel?.contentMode = .center
+        restartButton.backgroundColor = UIColor.white
+        restartButton.tintColor = UIColor.black
+        restartButton.layer.cornerRadius = 10.0
+        
+        let quitButton = UIButton(type: .system)
+        quitButton.titleLabel?.font = Appearance.appFont(style: .title1, size: 25)
+        quitButton.setTitle("QUIT", for: .normal)
+        quitButton.addTarget(self, action: #selector(handleQuit), for: .touchUpInside)
+        quitButton.titleLabel?.contentMode = .center
+        quitButton.backgroundColor = UIColor.white
+        quitButton.tintColor = UIColor.black
+        quitButton.layer.cornerRadius = 10.0
+
+        
+        
+        
+        
+        resumeButton.frame = CGRect(x: view.center.x - 150, y: view.center.y - 100, width: 300, height: 40)
+        restartButton.frame = CGRect(x: view.center.x - 150, y: view.center.y - 20, width: 300, height: 40)
+        quitButton.frame = CGRect(x: view.center.x - 150, y: view.center.y + 60, width: 300, height: 40)
+
+       
+        let vibrancyEffect = UIVibrancyEffect(blurEffect: blurEffect)
+        let vibrancyEffectView = UIVisualEffectView(effect: vibrancyEffect)
+        vibrancyEffectView.frame = view.bounds
+        
+        vibrancyEffectView.contentView.addSubview(resumeButton)
+        vibrancyEffectView.contentView.addSubview(restartButton)
+        vibrancyEffectView.contentView.addSubview(quitButton)
+        blurredEffectView?.contentView.addSubview(vibrancyEffectView)
+        
+    }
     
     func setupViews() {
         view.addSubview(containerView)
@@ -143,6 +231,9 @@ private extension ExcerciseViewController {
         view.addSubview(checkmarkAnimation)
         checkmarkAnimation.anchor(top: sceneView.bottomAnchor, leading: nil, bottom: nil, trailing: nil, padding: .init(top: 12, left: 0, bottom: 0, right: 0), size: CGSize(width: 80, height: 80))
         checkmarkAnimation.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        view.addSubview(pauseButton)
+        pauseButton.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: nil, bottom: nil, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: .init(top: 20, left: 0, bottom: 0, right: 20))
+        
     }
     
     // Tag: ARFaceTrackingConfiguration

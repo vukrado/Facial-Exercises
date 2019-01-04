@@ -137,7 +137,7 @@ class ResultViewController: UIViewController {
         
         let emitterCell = CAEmitterCell()
         emitterCell.contents = UIImage(named: "star")?.cgImage
-        emitterCell.color = UIColor.red.cgColor
+        emitterCell.color = UIColor.cyan.cgColor
         emitterCell.birthRate = 100
         emitterCell.lifetime = 5
         emitterCell.yAcceleration = 100.0

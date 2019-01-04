@@ -10,7 +10,7 @@ import ARKit
 
 class TongueExtension: FacialExercise {
     
-    static var threshold: Float = 0.3
+    var threshold: Float = 0.3
     
     var displayedTitle: String {
         return "Tongue Extensions"

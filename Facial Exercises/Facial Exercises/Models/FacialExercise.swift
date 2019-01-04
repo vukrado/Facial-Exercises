@@ -12,7 +12,7 @@ protocol FacialExercise {
     
     typealias Coefficient = NSNumber
     
-    static var threshold: Float { get set }
+    var threshold: Float { get set }
     
     /// The name of the exercise to be displayed to the user
     var displayedTitle: String { get }

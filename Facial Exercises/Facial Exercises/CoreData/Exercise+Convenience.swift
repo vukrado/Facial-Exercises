@@ -16,11 +16,10 @@ import CoreData
 
 extension Exercise {
     
-    convenience init(type: String, identifier: UUID = UUID(), length: Float, score: Float?, context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
+    convenience init(type: String, identifier: UUID = UUID(), score: Float?, context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
         self.init(context: context)
         self.identifier = identifier
         self.type = type
-        self.length = length
         self.score = score ?? 0.0
         self.timestamp = Date()
     }

@@ -19,24 +19,24 @@ public class UserStatHistoryView: UIView {
     var userRecords : [UserRecord] = [] {
         didSet {
             self.userRecords = userRecords.sorted { $0.date < $1.date }
-            drawChart()
-            setNeedsDisplay()
+            setNeedsDisplay(bounds)
         }
     }
     
-//    override public func draw(_ rect: CGRect) {
-//        let path = UIBezierPath()
-//        if let first = userRecords.first {
-//            path.move(to: point(for: first, index: 0))
-//        }
-//        for (index, userRecord) in userRecords.dropFirst().enumerated() {
-//            path.addLine(to: point(for: userRecord, index: index + 1))
-//        }
-//
-//        UIColor.cyan.set()
-//        path.lineWidth = 5
-//        path.stroke()
-//    }
+    override public func draw(_ rect: CGRect) {
+        let path = UIBezierPath()
+        if let first = userRecords.first {
+            path.move(to: point(for: first, index: 0))
+        }
+        for (index, userRecord) in userRecords.dropFirst().enumerated() {
+            path.addLine(to: point(for: userRecord, index: index + 1))
+        }
+
+        UIColor.cyan.set()
+        path.lineWidth = 5
+        path.stroke()
+    }
+    
     var shapeLayer: CAShapeLayer?
     private func drawChart() {
         self.shapeLayer?.removeFromSuperlayer()
@@ -73,7 +73,7 @@ public class UserStatHistoryView: UIView {
                 return .zero
         }
         
-        let scoreRange = maxScore - minScore
+        let scoreRange = (maxScore + 0.01) - (minScore - 0.01)
         let scoreStep = bounds.height / CGFloat(scoreRange)
         let userRecordStep = bounds.width / CGFloat(numUserRecords)
         

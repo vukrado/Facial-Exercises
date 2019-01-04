@@ -124,6 +124,7 @@ class MenuViewController: UIViewController {
     
     @objc private func handleStats() {
         print("Stats")
+        present(ProgressViewController(), animated: true, completion: nil)
     }
     
     private func setupViews() {

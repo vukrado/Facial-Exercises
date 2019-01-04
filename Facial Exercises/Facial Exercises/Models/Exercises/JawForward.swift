@@ -10,6 +10,8 @@ import ARKit
 
 class JawForward: FacialExercise {
     
+    static var threshold: Float = 0.3
+    
     var displayedTitle: String {
         return "Jaw Forwards"
     }
@@ -17,18 +19,17 @@ class JawForward: FacialExercise {
         return "Move your jaw forward for 5 seconds, then return it back to its resting position. Complete 5 repetitions."
     }
     
-    var expressionsWithThresholds: [ARFaceAnchor.BlendShapeLocation : SuccessThreshold] = [.jawForward : 1.0]
+    var expressions: [ARFaceAnchor.BlendShapeLocation] = [.jawForward]
     
-    func calculateProgress(currentCoefficients: [ARFaceAnchor.BlendShapeLocation : ExerciseSession.Coefficient]) -> Float {
+    func calculateProgress(currentCoefficients: [ARFaceAnchor.BlendShapeLocation : FacialExercise.Coefficient]) -> Float {
         
-        guard let expression = expressionsWithThresholds.first?.key,
-            let threshold = expressionsWithThresholds.first?.value,
+        guard let expression = expressions.first,
             let currentCoefficient = currentCoefficients[expression] else { return 0.0 }
             
-        return currentCoefficient.floatValue / threshold.floatValue
+        return currentCoefficient.floatValue / JawForward.threshold
     }
     
-    func calculateSuccess(currentCoefficients: [ARFaceAnchor.BlendShapeLocation : ExerciseSession.Coefficient]) -> Bool {
-        return calculateProgress(currentCoefficients: currentCoefficients) == 1 ? true : false
+    func calculateSuccess(currentCoefficients: [ARFaceAnchor.BlendShapeLocation : FacialExercise.Coefficient]) -> Bool {
+        return calculateProgress(currentCoefficients: currentCoefficients) >= 1 ? true : false
     }
 }

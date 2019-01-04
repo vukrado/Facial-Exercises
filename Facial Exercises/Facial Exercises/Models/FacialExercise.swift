@@ -10,11 +10,9 @@ import ARKit
 
 protocol FacialExercise {
     
-    /**
-     A float from 0 to 1 at which a facial expression can be considered as complete
-     - Author: Samantha Gatt
-     */
-    typealias SuccessThreshold = NSNumber
+    typealias Coefficient = NSNumber
+    
+    static var threshold: Float { get set }
     
     /// The name of the exercise to be displayed to the user
     var displayedTitle: String { get }
@@ -22,10 +20,10 @@ protocol FacialExercise {
     var displayedDescription: String { get }
     
     /**
-     Facial Expressions that make up the exercise and their respective success thresholds
+     Facial Expressions that make up the exercise
      - Author: Samantha Gatt
      */
-    var expressionsWithThresholds: [ARFaceAnchor.BlendShapeLocation : SuccessThreshold] { get }
+    var expressions: [ARFaceAnchor.BlendShapeLocation] { get }
     
     /**
      Calculates the level of exaggeration of the facial exercise, taking into account each of the facial expressions it is comprised of
@@ -33,12 +31,12 @@ protocol FacialExercise {
      - Parameter currentCoefficients: A dictionary containing each expression as a key and the user's current coefficient as the value
      - Returns: A float representing the percentage of success where 0 is no facial expressions present and 1 is all facial expressions fully present
      */
-    func calculateProgress(currentCoefficients: [ARFaceAnchor.BlendShapeLocation : ExerciseSession.Coefficient]) -> Float
+    func calculateProgress(currentCoefficients: [ARFaceAnchor.BlendShapeLocation : FacialExercise.Coefficient]) -> Float
     /**
      Should use the `calculateProgress` function
      - Author: Samantha Gatt
      - Parameter currentCoefficients: A dictionary containing each expression as a key and the user's current coefficient as the value
      - Returns: A boolean representing if the user has done the facial exercise sufficiently
      */
-    func calculateSuccess(currentCoefficients: [ARFaceAnchor.BlendShapeLocation : ExerciseSession.Coefficient]) -> Bool
+    func calculateSuccess(currentCoefficients: [ARFaceAnchor.BlendShapeLocation : FacialExercise.Coefficient]) -> Bool
 }

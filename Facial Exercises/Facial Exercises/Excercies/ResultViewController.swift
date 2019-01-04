@@ -29,6 +29,11 @@ class ResultViewController: UIViewController {
         return exerciseController?.exercises
     }
     var shouldCelebrate = false
+    var exercisesWithResults = [String: Float]() {
+        didSet {
+            print(exercisesWithResults)
+        }
+    }
     
     // MARK: - Private properties
     
@@ -82,6 +87,7 @@ class ResultViewController: UIViewController {
     // When the user dismisses the results summary page we'll save the exercise results to local persistence
     @objc func handleFinish() {
         saveExercises()
+        self.navigationController?.popToRootViewController(animated: true)
     }
     
     private func saveExercises(context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {

@@ -42,9 +42,9 @@ class FacialExercise {
     static let jawForwards = FacialExercise(title: "Jaw Forwards", description: "Move your jaw forward", expressions: [.jawForward], holdCount: 5.0, repeatCount: 5)
     
     /// The shared instance of the eyebrow raises exercise
-    static let eyeBlinkLeft = FacialExercise(title: "Eye Blink Left", description: "Blink left eye", expressions: [.eyeBlinkRight], holdCount: 1.0, repeatCount: 10)
+    static let eyeBlinkLeft = FacialExercise(title: "Eye Blink Left", description: "Blink left eye", expressions: [.eyeBlinkRight], holdCount: 1.0, repeatCount: 1)
     
-    static let eyeBlinkRight = FacialExercise(title: "Eye Blink Right", description: "Blink right eye", expressions: [.eyeBlinkLeft], holdCount: 1.0, repeatCount: 10)
+    static let eyeBlinkRight = FacialExercise(title: "Eye Blink Right", description: "Blink right eye", expressions: [.eyeBlinkLeft], holdCount: 1.0, repeatCount: 1)
 }
 
 class ExerciseController {

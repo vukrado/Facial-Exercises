@@ -20,7 +20,7 @@ class ExcerciseViewController: UIViewController {
     private var timer = Timer()
     private var timerIsRunning: Bool = false
     private var mask: Mask?
-    private var isPaused = false
+    private var isPaused = true
     //Will hold the ARFaceAnchor - which has information about the pose, topology, and expression of a face detected in a face-tracking AR session.
     private var faceNode: SCNNode?
     
@@ -34,9 +34,10 @@ class ExcerciseViewController: UIViewController {
         }
     }
     
+    var exerciseCopy = [FacialExercise]()
+    
     var exercisesWithResults = [String: Float]()
-    var result: Float = 0.0
-    var results = [Float]()
+    var highestResult: Float = 0.0
     
     
     
@@ -214,15 +215,15 @@ private extension ExcerciseViewController {
         isPaused = false
     }
     
-    @objc func handleRestart() {
-        let excerciseVc = ExcerciseViewController()
-        excerciseVc.exercises = exercises
-        present(excerciseVc, animated: true, completion: nil)
-    }
+//    @objc func handleRestart() {
+//        blurredEffectView?.removeFromSuperview()
+//        exercises = exerciseCopy
+//        resetProgressView()
+//        resetTracking()
+//    }
     
     @objc func handleQuit() {
-        let menuVc = MenuViewController()
-        self.present(menuVc, animated: true, completion: nil)
+        self.navigationController?.popViewController(animated: true)
     }
     
     @objc func handlePause() {
@@ -241,14 +242,14 @@ private extension ExcerciseViewController {
         resumeButton.tintColor = UIColor.black
         resumeButton.layer.cornerRadius = 10.0
 
-        let restartButton = UIButton(type: .system)
-        restartButton.titleLabel?.font = Appearance.appFont(style: .title1, size: 22)
-        restartButton.setTitle("RESTART", for: .normal)
-        restartButton.addTarget(self, action: #selector(handleRestart), for: .touchUpInside)
-        restartButton.titleLabel?.contentMode = .center
-        restartButton.backgroundColor = UIColor.white
-        restartButton.tintColor = UIColor.black
-        restartButton.layer.cornerRadius = 10.0
+//        let restartButton = UIButton(type: .system)
+//        restartButton.titleLabel?.font = Appearance.appFont(style: .title1, size: 22)
+//        restartButton.setTitle("RESTART", for: .normal)
+//        restartButton.addTarget(self, action: #selector(handleRestart), for: .touchUpInside)
+//        restartButton.titleLabel?.contentMode = .center
+//        restartButton.backgroundColor = UIColor.white
+//        restartButton.tintColor = UIColor.black
+//        restartButton.layer.cornerRadius = 10.0
         
         let quitButton = UIButton(type: .system)
         quitButton.titleLabel?.font = Appearance.appFont(style: .title1, size: 22)
@@ -264,9 +265,9 @@ private extension ExcerciseViewController {
         
         
         
-        resumeButton.frame = CGRect(x: view.center.x - 150, y: view.center.y - 100, width: 300, height: 40)
-        restartButton.frame = CGRect(x: view.center.x - 150, y: view.center.y - 20, width: 300, height: 40)
-        quitButton.frame = CGRect(x: view.center.x - 150, y: view.center.y + 60, width: 300, height: 40)
+        resumeButton.frame = CGRect(x: view.center.x - 150, y: view.center.y - 40, width: 300, height: 40)
+//        restartButton.frame = CGRect(x: view.center.x - 150, y: view.center.y - 20, width: 300, height: 40)
+        quitButton.frame = CGRect(x: view.center.x - 150, y: view.center.y + 40, width: 300, height: 40)
 
        
         let vibrancyEffect = UIVibrancyEffect(blurEffect: blurEffect)
@@ -274,7 +275,7 @@ private extension ExcerciseViewController {
         vibrancyEffectView.frame = view.bounds
         
         vibrancyEffectView.contentView.addSubview(resumeButton)
-        vibrancyEffectView.contentView.addSubview(restartButton)
+//        vibrancyEffectView.contentView.addSubview(restartButton)
         vibrancyEffectView.contentView.addSubview(quitButton)
         blurredEffectView?.contentView.addSubview(vibrancyEffectView)
         
@@ -320,10 +321,10 @@ private extension ExcerciseViewController {
         checkmarkAnimation.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
 
         view.addSubview(pauseButton)
-        pauseButton.anchor(top: view.topAnchor, leading: nil, bottom: nil, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: .init(top: 20, left: 0, bottom: 0, right: 20))
+        pauseButton.anchor(top: view.topAnchor, leading: nil, bottom: nil, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: .init(top: 30, left: 0, bottom: 0, right: 20))
         
 
-        
+         
         view.addSubview(statusTrackView)
         statusTrackView.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: containerView.topAnchor, trailing: nil, padding: UIEdgeInsets(top: 40.0, left: 30.0, bottom: 40.0, right: 0.0), size: CGSize(width: 5.0, height: 0.0))
         
@@ -448,8 +449,11 @@ private extension ExcerciseViewController {
                 } else if count == 0 {
                     exercise.repeatCount -= 1
                     if exercise.repeatCount == 0 {
+                        exercisesWithResults[exercise.title] = highestResult
+                        highestResult = 0.0
                         exercises.remove(at: 0)
                         if exercises.count > 0 {
+                            detectFaceLabel.text = "\(exercises[0].title)"
                             updateMessage(text: "\(exercises[0].description)")
                         }
                         resetProgressView()
@@ -492,6 +496,7 @@ extension ExcerciseViewController: ARSCNViewDelegate {
                 self.transitionAnimation()
             }
         }
+        isPaused = false
         return node
     }
     
@@ -534,13 +539,16 @@ extension ExcerciseViewController: ARSCNViewDelegate {
             }
             
             lastExpression = expression
-            
+            if expression > highestResult {
+                highestResult = expression
+            }
             //If the expression is above point 6 and the timer is not running, it starts the timer for the count, which is equal to the holdLength of the exercise
             checkExpressionSuccess(expression: expression, exercise: exercise)
         } else {
             DispatchQueue.main.async {
                 let resultsVc = ResultViewController()
-                self.present(resultsVc, animated: true, completion: nil)
+                resultsVc.exercisesWithResults = self.exercisesWithResults
+                self.navigationController?.pushViewController(resultsVc, animated: true)
             }
         }
 

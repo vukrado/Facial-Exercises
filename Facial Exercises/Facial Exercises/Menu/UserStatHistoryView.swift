@@ -16,7 +16,31 @@ struct UserRecord {
 
 public class UserStatHistoryView: UIView {
     
-    override public func draw(_ rect: CGRect) {
+    var userRecords : [UserRecord] = [] {
+        didSet {
+            self.userRecords = userRecords.sorted { $0.date < $1.date }
+            drawChart()
+            setNeedsDisplay()
+        }
+    }
+    
+//    override public func draw(_ rect: CGRect) {
+//        let path = UIBezierPath()
+//        if let first = userRecords.first {
+//            path.move(to: point(for: first, index: 0))
+//        }
+//        for (index, userRecord) in userRecords.dropFirst().enumerated() {
+//            path.addLine(to: point(for: userRecord, index: index + 1))
+//        }
+//
+//        UIColor.cyan.set()
+//        path.lineWidth = 5
+//        path.stroke()
+//    }
+    var shapeLayer: CAShapeLayer?
+    private func drawChart() {
+        self.shapeLayer?.removeFromSuperlayer()
+        
         let path = UIBezierPath()
         if let first = userRecords.first {
             path.move(to: point(for: first, index: 0))
@@ -25,9 +49,19 @@ public class UserStatHistoryView: UIView {
             path.addLine(to: point(for: userRecord, index: index + 1))
         }
         
-        UIColor.cyan.set()
-        path.lineWidth = 5
-        path.stroke()
+        let shapeLayer = CAShapeLayer()
+        shapeLayer.fillColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0).cgColor
+        shapeLayer.strokeColor = UIColor.cyan.cgColor
+        shapeLayer.lineWidth = 5
+        shapeLayer.path = path.cgPath
+        
+        layer.addSublayer(shapeLayer)
+        let animation = CABasicAnimation(keyPath: "strokeEnd")
+        animation.fromValue = 0
+        animation.duration = 1.5
+        shapeLayer.add(animation, forKey: "chartAnimation")
+        
+        self.shapeLayer = shapeLayer
     }
     
     private func point(for user: UserRecord, index: Int) -> CGPoint {
@@ -46,13 +80,6 @@ public class UserStatHistoryView: UIView {
         let yPosition = bounds.maxY - scoreStep * CGFloat(user.highScore - minScore)
         let xPosition = bounds.minX + CGFloat(index) * userRecordStep
         return CGPoint(x: xPosition, y: yPosition)
-    }
-    
-    var userRecords : [UserRecord] = [] {
-        didSet {
-            self.userRecords = userRecords.sorted { $0.date < $1.date }
-            setNeedsDisplay(bounds)
-        }
     }
 }
 

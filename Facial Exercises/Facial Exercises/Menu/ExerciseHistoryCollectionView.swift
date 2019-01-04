@@ -47,7 +47,6 @@ class ExerciseHistoryCollectionView: UICollectionView, UICollectionViewDataSourc
         let cell = dequeueReusableCell(withReuseIdentifier: ExerciseHistoryCollectionView.cellId, for: indexPath) as! ExerciseHistoryCell
         guard let exercises = exercises else { return cell }
         cell.exercise = exercises[indexPath.item]
-        
         return cell
     }
     

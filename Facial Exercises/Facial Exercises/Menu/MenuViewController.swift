@@ -105,7 +105,7 @@ class MenuViewController: UIViewController {
         for indexPath in selectedIndexPaths {
             selectedExercises.append(collectionView.exercises[indexPath.item])
         }
-        
+
         let excerciseViewController = ExcerciseViewController()
         excerciseViewController.exercises = selectedExercises
         self.present(excerciseViewController, animated: true, completion: nil)

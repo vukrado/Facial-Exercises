@@ -20,6 +20,7 @@ class ExcerciseViewController: UIViewController {
     private var timer = Timer()
     private var timerIsRunning: Bool = false
     private var mask: Mask?
+    private var isPaused = false
     //Will hold the ARFaceAnchor - which has information about the pose, topology, and expression of a face detected in a face-tracking AR session.
     private var faceNode: SCNNode?
     
@@ -32,6 +33,12 @@ class ExcerciseViewController: UIViewController {
             }
         }
     }
+    
+    var exercisesWithResults = [String: Float]()
+    var result: Float = 0.0
+    var results = [Float]()
+    
+    
     
     // MARK: - View Life Cycle
     override func viewDidLoad() {
@@ -76,6 +83,15 @@ class ExcerciseViewController: UIViewController {
         label.text = "Adjust the camera so your face is fully visible"
         label.sizeToFit()
         label.numberOfLines = 0
+        
+        return label
+    }()
+    
+    let repeatCountLabel: UILabel = {
+        let label = UILabel()
+        label.font = Appearance.appFont(style: .title1, size: 24)
+        label.textAlignment = .center
+        label.textColor = .white
         
         return label
     }()
@@ -131,13 +147,58 @@ class ExcerciseViewController: UIViewController {
     
     private let containerView: UIView = {
         let view = UIView()
-        view.backgroundColor = .selectedGreen
+        view.backgroundColor = .turquoise
         view.layer.cornerRadius = 16
         view.layer.masksToBounds = true
     
         return view
     }()
     
+    private let blurEffect = UIBlurEffect(style: .dark)
+    var blurredEffectView: UIVisualEffectView?
+    
+    private let pauseButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(named: "pause"), for: .normal)
+        button.tintColor = .white
+        button.addTarget(self, action: #selector(handlePause), for: .touchUpInside)
+        return button
+    }()
+    
+    private let resumeButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.titleLabel?.font = Appearance.appFont(style: .title1, size: 20)
+        button.setTitle("RESUME", for: .normal)
+        button.addTarget(self, action: #selector(handleResume), for: .touchUpInside)
+        
+        return button
+    }()
+    
+    private let statusTrackView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .rgb(red: 218, green: 231, blue: 236)
+        
+        return view
+    }()
+    
+    private let statusFillView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .red
+        
+        return view
+    }()
+    
+    private var statusFillViewHeightConstraint: NSLayoutConstraint?
+    
+    private let tickMark: UIView = {
+        let view = UIView()
+        view.backgroundColor = .lightGray
+        
+        return view
+    }()
+    
+    private var lastExpression: Float = 0.0
+
     var containerViewBottomAnchor: NSLayoutConstraint?
     var sceneViewTrailingAnchor: NSLayoutConstraint?
     var sceneViewLeadingAnchor: NSLayoutConstraint?
@@ -147,6 +208,78 @@ class ExcerciseViewController: UIViewController {
 
 // MARK: - Private Methods
 private extension ExcerciseViewController {
+    
+    @objc func handleResume() {
+        blurredEffectView?.removeFromSuperview()
+        isPaused = false
+    }
+    
+    @objc func handleRestart() {
+        let excerciseVc = ExcerciseViewController()
+        excerciseVc.exercises = exercises
+        present(excerciseVc, animated: true, completion: nil)
+    }
+    
+    @objc func handleQuit() {
+        let menuVc = MenuViewController()
+        self.present(menuVc, animated: true, completion: nil)
+    }
+    
+    @objc func handlePause() {
+        isPaused = true
+        blurredEffectView = UIVisualEffectView(effect: blurEffect)
+        blurredEffectView?.frame = view.frame
+        view.addSubview(blurredEffectView!)
+        
+     
+        let resumeButton = UIButton(type: .system)
+        resumeButton.titleLabel?.font = Appearance.appFont(style: .title1, size: 22)
+        resumeButton.setTitle("RESUME", for: .normal)
+        resumeButton.addTarget(self, action: #selector(handleResume), for: .touchUpInside)
+        resumeButton.titleLabel?.contentMode = .center
+        resumeButton.backgroundColor = UIColor.white
+        resumeButton.tintColor = UIColor.black
+        resumeButton.layer.cornerRadius = 10.0
+
+        let restartButton = UIButton(type: .system)
+        restartButton.titleLabel?.font = Appearance.appFont(style: .title1, size: 22)
+        restartButton.setTitle("RESTART", for: .normal)
+        restartButton.addTarget(self, action: #selector(handleRestart), for: .touchUpInside)
+        restartButton.titleLabel?.contentMode = .center
+        restartButton.backgroundColor = UIColor.white
+        restartButton.tintColor = UIColor.black
+        restartButton.layer.cornerRadius = 10.0
+        
+        let quitButton = UIButton(type: .system)
+        quitButton.titleLabel?.font = Appearance.appFont(style: .title1, size: 22)
+        quitButton.setTitle("QUIT", for: .normal)
+        quitButton.addTarget(self, action: #selector(handleQuit), for: .touchUpInside)
+        quitButton.titleLabel?.contentMode = .center
+        quitButton.backgroundColor = UIColor.white
+        quitButton.setTitleColor(.red, for: .normal)
+        quitButton.tintColor = UIColor.black
+        quitButton.layer.cornerRadius = 10.0
+        
+        
+        
+        
+        
+        resumeButton.frame = CGRect(x: view.center.x - 150, y: view.center.y - 100, width: 300, height: 40)
+        restartButton.frame = CGRect(x: view.center.x - 150, y: view.center.y - 20, width: 300, height: 40)
+        quitButton.frame = CGRect(x: view.center.x - 150, y: view.center.y + 60, width: 300, height: 40)
+
+       
+        let vibrancyEffect = UIVibrancyEffect(blurEffect: blurEffect)
+        let vibrancyEffectView = UIVisualEffectView(effect: vibrancyEffect)
+        vibrancyEffectView.frame = view.bounds
+        
+        vibrancyEffectView.contentView.addSubview(resumeButton)
+        vibrancyEffectView.contentView.addSubview(restartButton)
+        vibrancyEffectView.contentView.addSubview(quitButton)
+        blurredEffectView?.contentView.addSubview(vibrancyEffectView)
+        
+    }
+    
 
     func setupViews() {
         
@@ -185,6 +318,25 @@ private extension ExcerciseViewController {
         view.addSubview(checkmarkAnimation)
         checkmarkAnimation.anchor(top: sceneView.bottomAnchor, leading: nil, bottom: nil, trailing: nil, padding: .init(top: 12, left: 0, bottom: 0, right: 0), size: CGSize(width: 80, height: 80))
         checkmarkAnimation.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+
+        view.addSubview(pauseButton)
+        pauseButton.anchor(top: view.topAnchor, leading: nil, bottom: nil, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: .init(top: 20, left: 0, bottom: 0, right: 20))
+        
+
+        
+        view.addSubview(statusTrackView)
+        statusTrackView.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: containerView.topAnchor, trailing: nil, padding: UIEdgeInsets(top: 40.0, left: 30.0, bottom: 40.0, right: 0.0), size: CGSize(width: 5.0, height: 0.0))
+        
+        statusTrackView.addSubview(statusFillView)
+        statusFillView.anchor(top: nil, leading: statusFillView.superview?.leadingAnchor, bottom: statusFillView.superview?.bottomAnchor, trailing: statusFillView.superview?.trailingAnchor)
+        
+        statusFillViewHeightConstraint = statusFillView.heightAnchor.constraint(equalToConstant: 0.0)
+        statusFillViewHeightConstraint?.isActive = true
+        containerView.addSubview(repeatCountLabel)
+        repeatCountLabel.anchor(top: progressView.topAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor, padding: .init(top: 10, left: 10, bottom: 10, right: 10))
+        // view.addSubview(tickMark)
+        // tickMark.anchor(top: nil, leading: nil, bottom: nil, trailing: nil, padding: UIEdgeInsets(top: 0.0, left: 0.0, bottom: statusViewTrack.bounds.size.height * 0.6, right: 0.0), size: CGSize(width: statusViewTrack.bounds.size.width + 6.0, height: 4.0))
+        // tickMark.centerXAnchor.constraint(equalTo: statusViewTrack.centerXAnchor)
     }
     
     func transitionAnimation() {
@@ -244,7 +396,6 @@ private extension ExcerciseViewController {
         } else if count == 0 {
             timer.invalidate()
             DispatchQueue.main.async {
-//                self.progressView.progress = 0.0
                 self.exercises.remove(at: 0)
             }
         }
@@ -283,6 +434,34 @@ private extension ExcerciseViewController {
             updateMessage(text: "Hold for \(Int(count)) more seconds")
         }
     }
+    
+    func checkExpressionSuccess(expression: Float, exercise: FacialExercise) {
+        if expression > LevelHelper.getThreshold(for: exercise.expressions.first!) {
+            if !timer.isValid {
+                startTimer(for: count)
+            }
+        } else {
+            if timer.isValid {
+                timer.invalidate()
+                if count != 0 && count != exercise.holdCount {
+                    updateCountLabel()
+                } else if count == 0 {
+                    exercise.repeatCount -= 1
+                    if exercise.repeatCount == 0 {
+                        exercises.remove(at: 0)
+                        if exercises.count > 0 {
+                            updateMessage(text: "\(exercises[0].description)")
+                        }
+                        resetProgressView()
+                    } else {
+                        count = exercise.holdCount
+                        resetProgressView()
+                        updateMessage(text: exercise.description)
+                    }
+                }
+            }
+        }
+    }
 }
 
 
@@ -317,6 +496,10 @@ extension ExcerciseViewController: ARSCNViewDelegate {
     }
     
     func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
+        
+        if isPaused {
+            return
+        }
         guard let faceAnchor = anchor as? ARFaceAnchor,
             let faceGeometry = node.geometry as? ARSCNFaceGeometry else {
                 return
@@ -329,37 +512,38 @@ extension ExcerciseViewController: ARSCNViewDelegate {
         
         let blendShapes = faceAnchor.blendShapes
         
-        //Will crash when you are done with exercises need to present result view controller when done to stop from crashing
-        let exercise = exercises[0]
-        guard let expression = blendShapes[exercise.expressions.first!] as? Float else {return}
-        
-        //If the expression is above point 6 and the timer is not running, it starts the timer for the count, which is equal to the holdLength of the exercise
-        
-        if expression > 0.6 {
-            if !timer.isValid {
-                startTimer(for: count)
-            }
-        } else {
-            if timer.isValid {
-                timer.invalidate()
-                if count != 0 && count != exercise.holdCount {
-                    updateCountLabel()
-                } else if count == 0 {
-                    exercise.repeatCount -= 1
-                    if exercise.repeatCount == 0 {
-                        exercises.remove(at: 0)
-                        if exercises.count > 0 {
-                            updateMessage(text: exercises[0].description)
-                        }
-                        resetProgressView()
-                    } else {
-                        count = exercise.holdCount
-                        resetProgressView()
-                        updateMessage(text: exercise.description)
+        if exercises.count > 0 {
+            let exercise = exercises[0]
+            
+            guard let expression = blendShapes[exercise.expressions.first!] as? Float else {return}
+            
+            if expression - lastExpression >= 0.015 || expression - lastExpression <= -0.015 {
+                DispatchQueue.main.async {
+                    
+                    let statusFillHeight = self.statusTrackView.bounds.height * CGFloat(expression)
+                    self.statusFillViewHeightConstraint?.constant = statusFillHeight
+                    
+                    UIView.animate(withDuration: 0.5) {
+                        self.view.layoutIfNeeded()
                     }
+                    
+                    // let isAboveThreshold = expression >= LevelHelper.getThreshold(for: exercise.expressions.first!)
+                    let isAboveThreshold = expression > 0.6
+                    self.statusFillView.backgroundColor = isAboveThreshold ? .selectedGreen : .red
                 }
             }
+            
+            lastExpression = expression
+            
+            //If the expression is above point 6 and the timer is not running, it starts the timer for the count, which is equal to the holdLength of the exercise
+            checkExpressionSuccess(expression: expression, exercise: exercise)
+        } else {
+            DispatchQueue.main.async {
+                let resultsVc = ResultViewController()
+                self.present(resultsVc, animated: true, completion: nil)
+            }
         }
+
     }
 }
 

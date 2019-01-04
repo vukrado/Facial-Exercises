@@ -110,12 +110,18 @@ class MenuViewController: UIViewController {
         }
         
         var selectedExercises = [FacialExercise]()
-        for indexPath in selectedIndexPaths {
-            selectedExercises.append(collectionView.exercises[indexPath.item])
-        }
-
         let excerciseViewController = ExcerciseViewController()
+        
+        for indexPath in selectedIndexPaths {
+            let exercise = collectionView.exercises[indexPath.item]
+            selectedExercises.append(exercise)
+            excerciseViewController.exercisesWithResults[exercise.title] = 0.0
+        }
+        
         excerciseViewController.exercises = selectedExercises
+
+       
+       
         self.present(excerciseViewController, animated: true, completion: nil)
     }
     

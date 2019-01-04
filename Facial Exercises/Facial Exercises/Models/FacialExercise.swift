@@ -33,16 +33,18 @@ class FacialExercise {
     
     
     /// The shared instance of the eyebrow raises exercise
-    static let eyebrowRaises = FacialExercise(title: "Eyebrow Raises", description: "Lift your eyebrows and hold for 10 seconds", expressions: [.browInnerUp], holdCount: 5.0, repeatCount: 2)
+    static let eyebrowRaises = FacialExercise(title: "Eyebrow Raises", description: "Lift your eyebrows", expressions: [.browInnerUp], holdCount: 5.0, repeatCount: 2)
    
     /// The shared instance of the eyebrow raises exercise
-    static let tongueExtensions = FacialExercise(title: "Tongue Extensions", description: "Stick your tongue out for 2 seconds. Complete 5 repetitions.", expressions: [.tongueOut], holdCount: 2.0, repeatCount: 2)
+    static let tongueExtensions = FacialExercise(title: "Tongue Extensions", description: "Stick your tongue out", expressions: [.tongueOut], holdCount: 2.0, repeatCount: 2)
     
     /// The shared instance of the eyebrow raises exercise
-    static let jawForwards = FacialExercise(title: "Jaw Forwards", description: "Move your jaw forward for 5 seconds, then return it back to its resting position. Complete 5 repetitions.", expressions: [.jawForward], holdCount: 5.0, repeatCount: 5)
+    static let jawForwards = FacialExercise(title: "Jaw Forwards", description: "Move your jaw forward", expressions: [.jawForward], holdCount: 5.0, repeatCount: 5)
     
     /// The shared instance of the eyebrow raises exercise
-    static let eyeWinks = FacialExercise(title: "Eye Winks", description: "Close both eyes for 3 seconds. Then alternate eyelids 4 times.", expressions: [.eyeBlinkLeft, .eyeBlinkRight], holdCount: 2.0, repeatCount: 10)
+    static let eyeBlinkLeft = FacialExercise(title: "Eye Blink Left", description: "Blink left eye", expressions: [.eyeBlinkRight], holdCount: 1.0, repeatCount: 10)
+    
+    static let eyeBlinkRight = FacialExercise(title: "Eye Blink Right", description: "Blink right eye", expressions: [.eyeBlinkLeft], holdCount: 1.0, repeatCount: 10)
 }
 
 class ExerciseController {

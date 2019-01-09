@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		121FD5EECC7DB6912806BFB3 /* Pods_Facial_Exercises.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F573AD28E552FD36A6A0C9C /* Pods_Facial_Exercises.framework */; };
+		225FE1C121E6BE61001B2202 /* ExerciseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225FE1C021E6BE61001B2202 /* ExerciseController.swift */; };
 		2271C8CF21DE2C3700764C5E /* FacialExercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2271C8CE21DE2C3700764C5E /* FacialExercise.swift */; };
 		2271C8D721DE308900764C5E /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2271C8D321DE308800764C5E /* CoreDataStack.swift */; };
 		2271C8D821DE308900764C5E /* Exercise+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2271C8D421DE308800764C5E /* Exercise+Convenience.swift */; };
@@ -38,6 +39,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		225FE1C021E6BE61001B2202 /* ExerciseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseController.swift; sourceTree = "<group>"; };
 		2271C8CE21DE2C3700764C5E /* FacialExercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacialExercise.swift; sourceTree = "<group>"; };
 		2271C8D321DE308800764C5E /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		2271C8D421DE308800764C5E /* Exercise+Convenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Exercise+Convenience.swift"; sourceTree = "<group>"; };
@@ -84,13 +86,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2271C8CD21DE2C1400764C5E /* Models */ = {
+		225FE1BF21E6BE50001B2202 /* Model and Controller */ = {
 			isa = PBXGroup;
 			children = (
 				2271C8CE21DE2C3700764C5E /* FacialExercise.swift */,
-				3DEF492F21DF2881007D900A /* LevelHelper.swift */,
+				225FE1C021E6BE61001B2202 /* ExerciseController.swift */,
 			);
-			path = Models;
+			path = "Model and Controller";
+			sourceTree = "<group>";
+		};
+		225FE1C221E6BEDF001B2202 /* Stats View */ = {
+			isa = PBXGroup;
+			children = (
+				3DEF492A21DF0399007D900A /* ProgressViewController.swift */,
+				3DEF492921DF0399007D900A /* ChartsCollectionView.swift */,
+				3DEF492821DF0399007D900A /* ExerciseHistoryCollectionView.swift */,
+				228E6AB721DEB6B60060ED5E /* UserStatHistoryView.swift */,
+			);
+			path = "Stats View";
+			sourceTree = "<group>";
+		};
+		225FE1C521E6BF61001B2202 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				AC251F4621DD799E00A62718 /* Main Menu */,
+				225FE1C221E6BEDF001B2202 /* Stats View */,
+				BF7E0F0121DDCF3E004D278C /* Exercise View */,
+			);
+			path = "View Controllers";
 			sourceTree = "<group>";
 		};
 		2271C8D221DE308800764C5E /* CoreData */ = {
@@ -111,18 +134,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		AC251F4621DD799E00A62718 /* Menu */ = {
+		AC251F4621DD799E00A62718 /* Main Menu */ = {
 			isa = PBXGroup;
 			children = (
 				AC251F4021DD798D00A62718 /* MenuViewController.swift */,
 				AC251F4121DD798D00A62718 /* ExerciseCollectionView.swift */,
 				AC251F4B21DD7B0D00A62718 /* ExerciseCell.swift */,
-				3DEF492A21DF0399007D900A /* ProgressViewController.swift */,
-				3DEF492921DF0399007D900A /* ChartsCollectionView.swift */,
-				3DEF492821DF0399007D900A /* ExerciseHistoryCollectionView.swift */,
-				228E6AB721DEB6B60060ED5E /* UserStatHistoryView.swift */,
 			);
-			path = Menu;
+			path = "Main Menu";
 			sourceTree = "<group>";
 		};
 		AC251F4721DD79A200A62718 /* Utils */ = {
@@ -132,6 +151,7 @@
 				AC251F4421DD799B00A62718 /* AutoLayout.swift */,
 				AC251F5221DD81AA00A62718 /* UIColor+Theme.swift */,
 				AC9BD0D521DEC5D700467B57 /* AlertHelper.swift */,
+				3DEF492F21DF2881007D900A /* LevelHelper.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -182,23 +202,22 @@
 			isa = PBXGroup;
 			children = (
 				2271C8D221DE308800764C5E /* CoreData */,
-				2271C8CD21DE2C1400764C5E /* Models */,
-				AC251F4621DD799E00A62718 /* Menu */,
-				BF7E0F0121DDCF3E004D278C /* Excercies */,
+				225FE1BF21E6BE50001B2202 /* Model and Controller */,
+				225FE1C521E6BF61001B2202 /* View Controllers */,
 				AC251F4721DD79A200A62718 /* Utils */,
 				AC251F4821DD79A600A62718 /* Resources */,
 			);
 			path = "Facial Exercises";
 			sourceTree = "<group>";
 		};
-		BF7E0F0121DDCF3E004D278C /* Excercies */ = {
+		BF7E0F0121DDCF3E004D278C /* Exercise View */ = {
 			isa = PBXGroup;
 			children = (
 				BF7E0F0221DDE2C2004D278C /* ExcerciseViewController.swift */,
 				3D94188221DE601A0000FAD0 /* ResultViewController.swift */,
 				ACBE169421DF9570009DE54C /* ExerciseCompleteView.swift */,
 			);
-			path = Excercies;
+			path = "Exercise View";
 			sourceTree = "<group>";
 		};
 		E2612F27135F2961720A24A0 /* Pods */ = {
@@ -353,6 +372,7 @@
 				2271C8D821DE308900764C5E /* Exercise+Convenience.swift in Sources */,
 				AC251F4C21DD7B0D00A62718 /* ExerciseCell.swift in Sources */,
 				BF7E0EEB21DD77A8004D278C /* AppDelegate.swift in Sources */,
+				225FE1C121E6BE61001B2202 /* ExerciseController.swift in Sources */,
 				3D94188321DE601A0000FAD0 /* ResultViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

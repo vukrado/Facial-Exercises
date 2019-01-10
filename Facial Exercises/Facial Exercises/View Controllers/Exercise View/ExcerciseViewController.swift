@@ -11,42 +11,13 @@ import ARKit
 import Lottie
 
 class ExcerciseViewController: UIViewController {
-
-    // MARK: - Properties
-    private var session: ARSession {
-        return sceneView.session
-    }
-    private var count: Float = 0.0
-    private var timer = Timer()
-    private var timerIsRunning: Bool = false
-    private var mask: Mask?
-    private var isPaused = true
-    private var isDisplayingMask = true
-    //Will hold the ARFaceAnchor - which has information about the pose, topology, and expression of a face detected in a face-tracking AR session.
-    private var faceNode: SCNNode?
-    
-    var exercises = [FacialExercise]() {
-        didSet {
-            if exercises.count > 0 {
-                count = exercises[0].holdCount
-            } else {
-                updateMessage(text: "Successfully completed exercises for today!")
-            }
-        }
-    }
-    
-    var exerciseCopy = [FacialExercise]()
-    
-    var exercisesWithResults = [String: Float]()
-    var highestResult: Float = 0.0
-    
-    
     
     // MARK: - View Life Cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         resetTracking()
-//        view.backgroundColor = UIColor.rgb(red: 163, green: 215, blue: 255)
         view.setGradientBackground(colors: [UIColor.grayBlue.cgColor, UIColor.extraLightGray.cgColor], locations: [0.0, 1.0], startPoint: CGPoint(x: 1, y: 0), endPoint: CGPoint(x: 0, y: 1))
         setupViews()
     }
@@ -61,21 +32,49 @@ class ExcerciseViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        //Prevents the device from going to sleep
+        
+        // Prevents the device from going to sleep
         UIApplication.shared.isIdleTimerDisabled = true
         resetTracking()
     }
-    
-//    override func viewDidLayoutSubviews() {
-//        containerView.setGradientBackground(colors: [UIColor.turquoise.cgColor, UIColor.waveBlue.cgColor], locations: [0.0, 1.0], startPoint: CGPoint(x: 0, y: 0.5), endPoint: CGPoint(x: 1, y: 0.5))
-//
-//    }
     
     override var prefersStatusBarHidden: Bool {
         return true
     }
     
-    //MARK: - UI Objects
+
+    // MARK: - Private properties
+    
+    private var session: ARSession {
+        return sceneView.session
+    }
+    private var count: Float = 0.0
+    private var timer = Timer()
+    private var timerIsRunning: Bool = false
+    private var mask: Mask?
+    private var isPaused = true
+    private var isDisplayingMask = true
+    /// Holds the ARFaceAnchor, which has information about the pose, topology, and expression of a face detected in a face-tracking AR session.
+    private var faceNode: SCNNode?
+    var exercises = [FacialExercise]() {
+        didSet {
+            if exercises.count > 0 {
+                count = exercises[0].holdCount
+            } else {
+                updateMessage(text: "Successfully completed exercises for today!")
+            }
+        }
+    }
+    private var highestResult: Float = 0.0
+    
+    
+    // MARK: - Public properties
+    
+    var exerciseCopy = [FacialExercise]()
+    var exercisesWithResults = [String: Float]()
+    
+    
+    // MARK: - UI Objects
     
     let exerciseCompleteView = ExerciseCompleteView()
     
@@ -229,7 +228,9 @@ class ExcerciseViewController: UIViewController {
     var maskViewTopAnchor: NSLayoutConstraint?
 }
 
+
 // MARK: - Private Methods
+
 private extension ExcerciseViewController {
     
     @objc func handleResume() {
@@ -283,14 +284,9 @@ private extension ExcerciseViewController {
         quitButton.tintColor = UIColor.black
         quitButton.layer.cornerRadius = 10.0
         
-        
-        
-        
-        
         resumeButton.frame = CGRect(x: view.center.x - 150, y: view.center.y - 40, width: 300, height: 40)
 //        restartButton.frame = CGRect(x: view.center.x - 150, y: view.center.y - 20, width: 300, height: 40)
         quitButton.frame = CGRect(x: view.center.x - 150, y: view.center.y + 40, width: 300, height: 40)
-
        
         let vibrancyEffect = UIVibrancyEffect(blurEffect: blurEffect)
         let vibrancyEffectView = UIVisualEffectView(effect: vibrancyEffect)
@@ -300,12 +296,9 @@ private extension ExcerciseViewController {
 //        vibrancyEffectView.contentView.addSubview(restartButton)
         vibrancyEffectView.contentView.addSubview(quitButton)
         blurredEffectView?.contentView.addSubview(vibrancyEffectView)
-        
     }
     
-
     func setupViews() {
-        
         view.addSubview(detectFaceLabel)
         detectFaceLabel.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 50, left: 30, bottom: 0, right: 30))
         
@@ -347,7 +340,6 @@ private extension ExcerciseViewController {
         maskViewBottomAnchor?.isActive = true
 //        maskSceneView.anchor(top: nil, leading: view.leadingAnchor, bottom: containerView.topAnchor, trailing: view.trailingAnchor, padding: .init(top: 0, left: 35, bottom: 70, right: 35), size: CGSize(width: 0, height: 350))
 
-        
         view.addSubview(checkmarkAnimation)
         checkmarkAnimation.anchor(top: sceneView.bottomAnchor, leading: nil, bottom: nil, trailing: nil, padding: .init(top: 12, left: 0, bottom: 0, right: 0), size: CGSize(width: 80, height: 80))
         checkmarkAnimation.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
@@ -385,11 +377,8 @@ private extension ExcerciseViewController {
         sceneViewBottomAnchor?.constant = isDisplayingMask ? -280 : -220
         
         UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-            
             self.view.layoutIfNeeded()
-            
         }) { (completed) in
-            
             self.isDisplayingMask = self.isDisplayingMask ? false : true
         }
     }
@@ -406,9 +395,7 @@ private extension ExcerciseViewController {
         self.sceneViewBottomAnchor?.constant = -220
         
         UIView.animate(withDuration: 0.8, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-            
             self.view.layoutIfNeeded()
-            
         }, completion: nil)
         
         UIView.animate(withDuration: 1.0, delay: 0, options: [.curveEaseIn], animations: {
@@ -423,7 +410,7 @@ private extension ExcerciseViewController {
         })
     }
     
-    // Tag: ARFaceTrackingConfiguration
+    /// ARFaceTrackingConfiguration
     func resetTracking() {
         guard ARFaceTrackingConfiguration.isSupported else {
             fatalError("Face Tracking not supported on this device")
@@ -431,11 +418,11 @@ private extension ExcerciseViewController {
         
         let configuration = ARFaceTrackingConfiguration()
         
-        //Default Settings
+        // Default Settings
         configuration.isLightEstimationEnabled = true
         configuration.providesAudioData = false
         
-        //Resets the tracking and removes any exisiting anchors anytime the session is started
+        // Resets the tracking and removes any exisiting anchors anytime the session is started
         session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
     }
     
@@ -470,14 +457,14 @@ private extension ExcerciseViewController {
         mask?.position = SCNVector3(0.0, 0.0, 0.0)
     }
     
-    // Tag: Update UI
+    /// Updates description UI
     func updateMessage(text: String) {
         DispatchQueue.main.async {
             self.descriptionLabel.text = text
         }
     }
     
-    //Resets the progress view back to 1 on the main queue, used for begining a new exercise or repeating an exercise from the beginning
+    /// Resets the progress view back to 1 on the main queue, used for begining a new exercise or repeating an exercise from the beginning
     func resetProgressView() {
         DispatchQueue.main.async {
             self.progressView.progress = 1
@@ -532,8 +519,11 @@ private extension ExcerciseViewController {
 }
 
 
+// MARK: - ARSCNViewDelegate
+
 extension ExcerciseViewController: ARSCNViewDelegate {
-    // Tag: ARNodeTrackin
+    
+    // MARK: ARNodeTracking
 
     func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
         guard let device = sceneView.device else {
@@ -572,7 +562,7 @@ extension ExcerciseViewController: ARSCNViewDelegate {
         faceGeometry.update(from: faceAnchor.geometry)
         mask?.update(withFaceAnchor: faceAnchor)
         
-        //Test for Raising eyebrows
+        // Test for Raising eyebrows
         
         let blendShapes = faceAnchor.blendShapes
         
@@ -601,7 +591,7 @@ extension ExcerciseViewController: ARSCNViewDelegate {
             if expression > highestResult {
                 highestResult = expression
             }
-            //If the expression is above point 6 and the timer is not running, it starts the timer for the count, which is equal to the holdLength of the exercise
+            // If the expression is above point 6 and the timer is not running, it starts the timer for the count, which is equal to the holdLength of the exercise
             DispatchQueue.main.async {
                 self.checkExpressionSuccess(expression: expression, exercise: exercise)
             }

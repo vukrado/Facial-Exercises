@@ -45,13 +45,16 @@ class ExcerciseViewController: UIViewController {
 
     // MARK: - Private properties
     
+    /// Current sceneView session
     private var session: ARSession {
         return sceneView.session
     }
     private var count: Float = 0.0
     private var timer = Timer()
     private var timerIsRunning: Bool = false
+    /// Mask that represents user's face / facial feature orientation
     private var mask: Mask?
+    /// Bool representing if the exercises have been paused / set on hold
     private var isPaused = true
     private var isDisplayingMask = true
     /// Holds the ARFaceAnchor, which has information about the pose, topology, and expression of a face detected in a face-tracking AR session.
@@ -65,12 +68,17 @@ class ExcerciseViewController: UIViewController {
             }
         }
     }
+    
+    /// Holds the highest coefficient of a facial expression
+    /// - Note: Should be reset after each exercise
     private var highestResult: Float = 0.0
     
     
     // MARK: - Public properties
     
+    /// Copy of all the exercises the user has selected to perform
     var exerciseCopy = [FacialExercise]()
+    /// Dictionary of completed exercise names with their respective highest scores
     var exercisesWithResults = [String: Float]()
     
     

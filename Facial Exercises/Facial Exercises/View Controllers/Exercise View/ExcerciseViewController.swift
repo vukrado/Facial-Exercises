@@ -18,7 +18,6 @@ class ExcerciseViewController: UIViewController {
         super.viewDidLoad()
         
         resetTracking()
-        view.setGradientBackground(colors: [UIColor.grayBlue.cgColor, UIColor.extraLightGray.cgColor], locations: [0.0, 1.0], startPoint: CGPoint(x: 1, y: 0), endPoint: CGPoint(x: 0, y: 1))
         setupViews()
     }
     
@@ -38,10 +37,6 @@ class ExcerciseViewController: UIViewController {
         resetTracking()
     }
     
-    override var prefersStatusBarHidden: Bool {
-        return true
-    }
-    
 
     // MARK: - Private properties
     
@@ -56,9 +51,11 @@ class ExcerciseViewController: UIViewController {
     private var mask: Mask?
     /// Bool representing if the exercises have been paused / set on hold
     private var isPaused = true
+    /// Bool representing if the filled in mask is the current main view of the user
     private var isDisplayingMask = true
     /// Holds the ARFaceAnchor, which has information about the pose, topology, and expression of a face detected in a face-tracking AR session.
     private var faceNode: SCNNode?
+    /// Array of FacialExercises (chosen by the user) to be completed
     var exercises = [FacialExercise]() {
         didSet {
             if exercises.count > 0 {
@@ -76,6 +73,9 @@ class ExcerciseViewController: UIViewController {
     
     // MARK: - Public properties
     
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
     /// Copy of all the exercises the user has selected to perform
     var exerciseCopy = [FacialExercise]()
     /// Dictionary of completed exercise names with their respective highest scores
@@ -84,6 +84,7 @@ class ExcerciseViewController: UIViewController {
     
     // MARK: - UI Objects
     
+    /// Displayed after each exercise is complete. Handles success animation.
     let exerciseCompleteView = ExerciseCompleteView()
     
     let detectFaceLabel: UILabel = {
@@ -98,6 +99,7 @@ class ExcerciseViewController: UIViewController {
         return label
     }()
     
+    /// Displays the number of repetitions required to complete the exercise
     let repeatCountLabel: UILabel = {
         let label = UILabel()
         label.font = Appearance.appFont(style: .title1, size: 24)
@@ -116,6 +118,7 @@ class ExcerciseViewController: UIViewController {
         return view
     }()
     
+    /// Animates when face is detected and synced
     private let checkmarkAnimation: LOTAnimationView = {
         let view = LOTAnimationView(name: "checkmark")
         view.contentMode = .scaleAspectFit
@@ -124,6 +127,7 @@ class ExcerciseViewController: UIViewController {
         return view
     }()
     
+    /// Main label at bottom of view controller
     private let descriptionLabel: UILabel = {
         let label = UILabel()
         label.textColor = .white
@@ -135,6 +139,7 @@ class ExcerciseViewController: UIViewController {
         return label
     }()
     
+    /// View representing the duration of the current exercise that is left
     private let progressView: UIProgressView = {
         let pv = UIProgressView(progressViewStyle: .bar)
         pv.progress = 1
@@ -143,6 +148,7 @@ class ExcerciseViewController: UIViewController {
         return pv
     }()
     
+    /// The button in control of swapping the main view of the user.
     private let swapButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(#imageLiteral(resourceName: "refresh").withRenderingMode(.alwaysTemplate), for: .normal)
@@ -306,7 +312,10 @@ private extension ExcerciseViewController {
         blurredEffectView?.contentView.addSubview(vibrancyEffectView)
     }
     
+    /// Sets layout of UI elements
+    /// - Note: Only used for initial set up in viewDidLoad()
     func setupViews() {
+        view.setGradientBackground(colors: [UIColor.grayBlue.cgColor, UIColor.extraLightGray.cgColor], locations: [0.0, 1.0], startPoint: CGPoint(x: 1, y: 0), endPoint: CGPoint(x: 0, y: 1))
         view.addSubview(detectFaceLabel)
         detectFaceLabel.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 50, left: 30, bottom: 0, right: 30))
         
@@ -373,6 +382,7 @@ private extension ExcerciseViewController {
         // tickMark.centerXAnchor.constraint(equalTo: statusViewTrack.centerXAnchor)
     }
     
+    /// Swaps the main view of user being displayed (filled in mask view or camera view with mesh mask)
     @objc func swap() {
         maskViewLeadingAnchor?.constant = isDisplayingMask ? self.view.frame.width - 80 : 40
         maskViewTrailingAnchor?.constant = isDisplayingMask ? -20 : -40

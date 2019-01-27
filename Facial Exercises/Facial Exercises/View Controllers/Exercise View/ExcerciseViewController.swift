@@ -499,41 +499,6 @@ private extension ExcerciseViewController {
             updateMessage(text: "Hold for \(Int(count)) more seconds")
         }
     }
-    
-    func checkExpressionSuccess(expression: Float, exercise: FacialExercise) {
-        if expression > LevelHelper.getThreshold(for: exercise.expressions.first!) {
-            if !timer.isValid {
-                startTimer(for: count)
-            }
-        } else {
-            if timer.isValid {
-                timer.invalidate()
-                if count != 0 && count != exercise.holdCount {
-                    updateCountLabel()
-                } else if count == 0 {
-                    exercise.repeatCount -= 1
-                    if exercise.repeatCount == 0 {
-                        isPaused = true
-                        exercisesWithResults[exercise.title] = highestResult
-                        highestResult = 0.0
-                        exercises.remove(at: 0)
-                        if exercises.count > 0 {
-                            exerciseCompleteView.showCelebrationView()
-                            detectFaceLabel.text = "\(exercises[0].title)"
-                            updateMessage(text: "\(exercises[0].description)")
-                            detectFaceLabel.text = exercises[0].title
-                        }
-                        resetProgressView()
-                        isPaused = false
-                    } else {
-                        count = exercise.holdCount
-                        resetProgressView()
-                        updateMessage(text: exercise.description)
-                    }
-                }
-            }
-        }
-    }
 }
 
 
@@ -611,7 +576,7 @@ extension ExcerciseViewController: ARSCNViewDelegate {
             }
             // If the expression is above point 6 and the timer is not running, it starts the timer for the count, which is equal to the holdLength of the exercise
             DispatchQueue.main.async {
-                self.checkExpressionSuccess(expression: expression, exercise: exercise)
+//                self.checkExpressionSuccess(expression: expression, exercise: exercise)
             }
         } else {
             DispatchQueue.main.async {

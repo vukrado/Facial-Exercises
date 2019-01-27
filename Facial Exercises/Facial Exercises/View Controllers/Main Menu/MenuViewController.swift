@@ -84,6 +84,11 @@ class MenuViewController: UIViewController {
         return button
     }()
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        collectionView.exercises = [.eyebrowRaises, .tongueExtensions, .jawForwards, .eyeBlinkLeft, .eyeBlinkRight]
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.setGradientBackground(colors: [UIColor.rgb(red: 67, green: 206, blue: 162).cgColor, UIColor.rgb(red: 24, green: 90, blue: 157).cgColor], locations: [0.0, 1.0], startPoint: CGPoint(x: 1, y: 0), endPoint: CGPoint(x: 0, y: 1))

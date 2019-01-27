@@ -26,6 +26,8 @@
 		AC251F4F21DD814D00A62718 /* Merriweather-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AC251F4D21DD814D00A62718 /* Merriweather-Bold.ttf */; };
 		AC251F5021DD814D00A62718 /* Merriweather-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AC251F4E21DD814D00A62718 /* Merriweather-Regular.ttf */; };
 		AC251F5321DD81AA00A62718 /* UIColor+Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC251F5221DD81AA00A62718 /* UIColor+Theme.swift */; };
+		AC9B5E7421FE5786000FC149 /* ExerciseLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9B5E7321FE5786000FC149 /* ExerciseLogic.swift */; };
+		AC9B5E7621FE606C000FC149 /* ExerciseTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9B5E7521FE606C000FC149 /* ExerciseTimer.swift */; };
 		AC9BD0D621DEC5D700467B57 /* AlertHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9BD0D521DEC5D700467B57 /* AlertHelper.swift */; };
 		AC9BD0D821DECFA500467B57 /* checkmark.json in Resources */ = {isa = PBXBuildFile; fileRef = AC9BD0D721DECFA500467B57 /* checkmark.json */; };
 		ACBE169321DF951E009DE54C /* star_success.json in Resources */ = {isa = PBXBuildFile; fileRef = ACBE169221DF951E009DE54C /* star_success.json */; };
@@ -59,6 +61,8 @@
 		AC251F4D21DD814D00A62718 /* Merriweather-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Merriweather-Bold.ttf"; sourceTree = "<group>"; };
 		AC251F4E21DD814D00A62718 /* Merriweather-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Merriweather-Regular.ttf"; sourceTree = "<group>"; };
 		AC251F5221DD81AA00A62718 /* UIColor+Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Theme.swift"; sourceTree = "<group>"; };
+		AC9B5E7321FE5786000FC149 /* ExerciseLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseLogic.swift; sourceTree = "<group>"; };
+		AC9B5E7521FE606C000FC149 /* ExerciseTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseTimer.swift; sourceTree = "<group>"; };
 		AC9BD0D521DEC5D700467B57 /* AlertHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertHelper.swift; sourceTree = "<group>"; };
 		AC9BD0D721DECFA500467B57 /* checkmark.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = checkmark.json; sourceTree = "<group>"; };
 		ACBE169221DF951E009DE54C /* star_success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = star_success.json; sourceTree = "<group>"; };
@@ -178,6 +182,15 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		AC9B5E7221FE5770000FC149 /* Exercise Logic */ = {
+			isa = PBXGroup;
+			children = (
+				AC9B5E7321FE5786000FC149 /* ExerciseLogic.swift */,
+				AC9B5E7521FE606C000FC149 /* ExerciseTimer.swift */,
+			);
+			path = "Exercise Logic";
+			sourceTree = "<group>";
+		};
 		BF7E0EDE21DD77A8004D278C = {
 			isa = PBXGroup;
 			children = (
@@ -201,6 +214,7 @@
 		BF7E0EE921DD77A8004D278C /* Facial Exercises */ = {
 			isa = PBXGroup;
 			children = (
+				AC9B5E7221FE5770000FC149 /* Exercise Logic */,
 				2271C8D221DE308800764C5E /* CoreData */,
 				225FE1BF21E6BE50001B2202 /* Model and Controller */,
 				225FE1C521E6BF61001B2202 /* View Controllers */,
@@ -359,6 +373,7 @@
 				3DEF492D21DF0399007D900A /* ProgressViewController.swift in Sources */,
 				3DEF492B21DF0399007D900A /* ExerciseHistoryCollectionView.swift in Sources */,
 				AC251F4321DD798E00A62718 /* ExerciseCollectionView.swift in Sources */,
+				AC9B5E7421FE5786000FC149 /* ExerciseLogic.swift in Sources */,
 				BF7E0F0321DDE2C2004D278C /* ExcerciseViewController.swift in Sources */,
 				3DEF493021DF2881007D900A /* LevelHelper.swift in Sources */,
 				AC9BD0D621DEC5D700467B57 /* AlertHelper.swift in Sources */,
@@ -373,6 +388,7 @@
 				AC251F4C21DD7B0D00A62718 /* ExerciseCell.swift in Sources */,
 				BF7E0EEB21DD77A8004D278C /* AppDelegate.swift in Sources */,
 				225FE1C121E6BE61001B2202 /* ExerciseController.swift in Sources */,
+				AC9B5E7621FE606C000FC149 /* ExerciseTimer.swift in Sources */,
 				3D94188321DE601A0000FAD0 /* ResultViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -521,7 +537,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = NB32394B2A;
+				DEVELOPMENT_TEAM = SPRLQ9JET8;
 				INFOPLIST_FILE = "$(SRCROOT)/Facial Exercises/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -540,7 +556,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = NB32394B2A;
+				DEVELOPMENT_TEAM = SPRLQ9JET8;
 				INFOPLIST_FILE = "$(SRCROOT)/Facial Exercises/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

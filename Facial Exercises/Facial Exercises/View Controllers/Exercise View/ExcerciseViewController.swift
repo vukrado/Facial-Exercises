@@ -552,7 +552,7 @@ extension ExcerciseViewController: ARSCNViewDelegate {
         if exercises.count > 0 {
             let exercise = exercises[0]
             
-            guard let expression = blendShapes[exercise.expressions.first!] as? Float else {return}
+            guard let expression = blendShapes[exercise.expression] as? Float else {return}
             
             if expression - lastExpression >= 0.015 || expression - lastExpression <= -0.015 {
                 DispatchQueue.main.async {
